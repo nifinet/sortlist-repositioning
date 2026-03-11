@@ -304,6 +304,30 @@
       margin-top: 6px;
     }
 
+    /* ---- CREDITS CALLOUT ---- */
+    .credits-callout {
+      margin-top: 20px;
+      background: var(--primary-50);
+      border: 1px solid var(--primary-100);
+      border-radius: 10px;
+      padding: 16px 20px;
+      text-align: center;
+    }
+
+    .credits-callout-number {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary-500);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .credits-callout-detail {
+      font-size: 13px;
+      color: var(--secondary-600);
+      line-height: 1.5;
+    }
+
     /* ---- FEATURES ---- */
     .plan-features {
       padding: 32px 40px;
@@ -409,6 +433,20 @@
       color: var(--secondary-600);
       line-height: 1.6;
       margin: 0;
+    }
+
+    /* ---- INTENT SCREENSHOT ---- */
+    .intent-screenshot {
+      margin-top: 12px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--secondary-200);
+    }
+
+    .intent-screenshot img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
     /* ---- ALSO INCLUDED ---- */
@@ -928,7 +966,7 @@
   <section class="hero">
     <div class="container">
       <h1>Everything to acquire clients. Pay as you grow. From &euro;199/month<span class="dot">.</span></h1>
-      <p class="hero-sub">Marketplace leads, outbound campaigns, visitor identification, buyer intelligence. No lock-in, cancel anytime.</p>
+      <p class="hero-sub">Marketplace leads, outbound campaigns, visitor identification, buyer intelligence. One annual plan. All tools included.</p>
     </div>
   </section>
 
@@ -946,7 +984,12 @@
             <span class="amount">199</span>
             <span class="period">/month</span>
           </div>
-          <p class="plan-annual-note">Billed annually. Credits included. Need more? Buy on demand.</p>
+          <p class="plan-annual-note">&euro;2,388 billed once, annually.</p>
+
+          <div class="credits-callout">
+            <div class="credits-callout-number">2,400 credits</div>
+            <div class="credits-callout-detail">Delivered upfront. Use them at your pace. Need more? Buy on demand.</div>
+          </div>
         </div>
 
         <div class="plan-features">
@@ -969,6 +1012,9 @@
             <div class="feature-hero-content">
               <strong>Intent signals</strong>
               <p>See which companies visit your website (Radar), who's browsing your profile on Sortlist directories, and get hiring signals, funding alerts, and marketplace search intent. Know who needs you before they post a brief.</p>
+              <div class="intent-screenshot">
+                <img src="intent-signals-screenshot.png" alt="Intent signals dashboard showing real company visits" />
+              </div>
             </div>
           </div>
 
@@ -1007,7 +1053,7 @@
 
         <div class="plan-cta">
           <a href="#" class="btn-primary">Book a demo &rarr;</a>
-          <p class="no-risk">No long-term lock-in. Cancel anytime. Configured in 48 hours.</p>
+          <p class="no-risk">Annual plan. 2,400 credits upfront. Configured in 48 hours.</p>
         </div>
 
       </div>
