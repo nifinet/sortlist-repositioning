@@ -206,7 +206,7 @@
       font-style: normal;
       line-height: 1.1;
       color: var(--secondary-950);
-      max-width: 820px;
+      max-width: 780px;
       margin: 0 auto 24px;
       letter-spacing: -1px;
     }
@@ -216,7 +216,8 @@
       position: relative;
       overflow: hidden;
       vertical-align: bottom;
-      height: 1.1em;
+      /* height set by JS based on actual rendered line height */
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .rotator-track {
@@ -226,11 +227,9 @@
     }
 
     .rotator-item {
-      height: 1.1em;
-      display: flex;
-      align-items: baseline;
       color: var(--primary-500);
       white-space: nowrap;
+      line-height: inherit;
     }
 
     .hero-sub {
@@ -1158,7 +1157,6 @@
       .hero { padding: 120px 0 64px; }
       .hero h1 { font-size: clamp(30px, 8vw, 38px); }
       .hero h1 br { display: none; }
-      .rotator-item { white-space: normal; }
 
       .problem-section, .pillar, .compare, .testimonials, .trust, .final-cta, .buyer-section {
         padding: 80px 0 48px;
@@ -1221,7 +1219,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <h1>Sortlist finds clients<br>for your <span class="rotator-wrapper"><span class="rotator-track"><span class="rotator-item">digital marketing agency</span><span class="rotator-item">branding agency</span><span class="rotator-item">web development agency</span><span class="rotator-item">SEO agency</span><span class="rotator-item">design studio</span><span class="rotator-item">advertising agency</span><span class="rotator-item">e-commerce agency</span><span class="rotator-item">consulting firm</span></span></span><span class="dot">.</span></h1>
+      <h1>Sortlist finds clients<br>for your <span class="rotator-wrapper"><span class="rotator-track"><span class="rotator-item">digital marketing agency<span class="dot">.</span></span><span class="rotator-item">branding agency<span class="dot">.</span></span><span class="rotator-item">web development agency<span class="dot">.</span></span><span class="rotator-item">SEO agency<span class="dot">.</span></span><span class="rotator-item">design studio<span class="dot">.</span></span><span class="rotator-item">advertising agency<span class="dot">.</span></span><span class="rotator-item">e-commerce agency<span class="dot">.</span></span><span class="rotator-item">consulting firm<span class="dot">.</span></span></span></span></h1>
       <p class="hero-sub">Every day, we show you who's searching for your services, visiting your site, and ready to buy. Then we help you reach them. 600,000+ monthly buyer searches. 10 years of agency data. Your pipeline is never empty.</p>
       <div class="hero-ctas">
         <a href="#" class="btn-primary">Book a demo &rarr;</a>
@@ -1569,14 +1567,45 @@
 
   <script>
     (function() {
-      const track = document.querySelector('.rotator-track');
-      const items = track.querySelectorAll('.rotator-item');
-      const total = items.length;
-      let current = 0;
+      var wrapper = document.querySelector('.rotator-wrapper');
+      var track = document.querySelector('.rotator-track');
+      var items = track.querySelectorAll('.rotator-item');
+      var total = items.length;
+      var current = 0;
+
+      function measure() {
+        // Get the actual rendered height of one line
+        var lineH = items[0].getBoundingClientRect().height;
+        wrapper.style.height = lineH + 'px';
+
+        // Set each item height explicitly
+        for (var i = 0; i < items.length; i++) {
+          items[i].style.height = lineH + 'px';
+        }
+
+        // Set initial width to first item
+        wrapper.style.width = items[0].scrollWidth + 'px';
+
+        return lineH;
+      }
+
+      var lineH = measure();
+
+      // Remeasure on resize (font size changes with clamp)
+      window.addEventListener('resize', function() {
+        lineH = measure();
+        track.style.transition = 'none';
+        track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
+        // Re-enable transition on next frame
+        requestAnimationFrame(function() {
+          track.style.transition = '';
+        });
+      });
 
       setInterval(function() {
         current = (current + 1) % total;
-        track.style.transform = 'translateY(-' + (current * 1.1) + 'em)';
+        track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
+        wrapper.style.width = items[current].scrollWidth + 'px';
       }, 2500);
     })();
   </script>
