@@ -220,15 +220,24 @@
     }
 
     .rotator-track {
+      position: relative;
       will-change: transform;
       transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .rotator-item {
-      display: block;
       color: var(--primary-500);
       white-space: nowrap;
-      line-height: 1.15;
+    }
+
+    /* Hidden measurer: render all items off-screen to get true widths */
+    .rotator-measure {
+      position: absolute;
+      visibility: hidden;
+      white-space: nowrap;
+      pointer-events: none;
+      top: 0;
+      left: 0;
     }
 
     .hero-sub {
@@ -1570,40 +1579,49 @@
       var items = track.querySelectorAll('.rotator-item');
       var total = items.length;
       var current = 0;
-      var lineH = 0;
-      var widths = [];
 
-      function init() {
-        // Reset inline styles so we can measure natural sizes
-        wrapper.style.height = '';
-        wrapper.style.width = '';
+      // Create a hidden measurer span inside the H1 to get true text dimensions
+      var h1 = wrapper.closest('h1');
+      var measurer = document.createElement('span');
+      measurer.className = 'rotator-measure';
+      h1.appendChild(measurer);
+
+      function getWidths() {
+        var w = [];
         for (var i = 0; i < items.length; i++) {
-          items[i].style.height = '';
+          measurer.textContent = items[i].textContent;
+          w.push(Math.ceil(measurer.getBoundingClientRect().width));
         }
-
-        // Measure natural height of first item
-        lineH = Math.ceil(items[0].getBoundingClientRect().height);
-
-        // Measure natural width of each item
-        widths = [];
-        for (var i = 0; i < items.length; i++) {
-          widths.push(Math.ceil(items[i].scrollWidth));
-        }
-
-        // Now apply fixed dimensions
-        wrapper.style.height = lineH + 'px';
-        wrapper.style.width = widths[current] + 'px';
-        for (var i = 0; i < items.length; i++) {
-          items[i].style.height = lineH + 'px';
-        }
+        return w;
       }
 
-      init();
+      function setup() {
+        // Get line height from computed style of h1
+        var h1Style = window.getComputedStyle(h1);
+        var fontSize = parseFloat(h1Style.fontSize);
+        var lineH = Math.ceil(fontSize * 1.15);
+
+        // Set wrapper and item heights
+        wrapper.style.height = lineH + 'px';
+        for (var i = 0; i < items.length; i++) {
+          items[i].style.display = 'block';
+          items[i].style.height = lineH + 'px';
+          items[i].style.lineHeight = lineH + 'px';
+        }
+
+        // Measure widths and set initial
+        var widths = getWidths();
+        wrapper.style.width = widths[current] + 'px';
+
+        return { lineH: lineH, widths: widths };
+      }
+
+      var state = setup();
 
       window.addEventListener('resize', function() {
-        init();
+        state = setup();
         track.style.transition = 'none';
-        track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
+        track.style.transform = 'translateY(-' + (current * state.lineH) + 'px)';
         requestAnimationFrame(function() {
           track.style.transition = '';
         });
@@ -1611,8 +1629,8 @@
 
       setInterval(function() {
         current = (current + 1) % total;
-        track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
-        wrapper.style.width = widths[current] + 'px';
+        track.style.transform = 'translateY(-' + (current * state.lineH) + 'px)';
+        wrapper.style.width = state.widths[current] + 'px';
       }, 2500);
     })();
   </script>
