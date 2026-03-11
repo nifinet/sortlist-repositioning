@@ -1571,27 +1571,40 @@
       var items = track.querySelectorAll('.rotator-item');
       var total = items.length;
       var current = 0;
+      var lineH = 0;
+      var widths = [];
 
-      function measure() {
-        var lineH = Math.ceil(items[0].getBoundingClientRect().height);
+      function init() {
+        // Reset inline styles so we can measure natural sizes
+        wrapper.style.height = '';
+        wrapper.style.width = '';
+        for (var i = 0; i < items.length; i++) {
+          items[i].style.height = '';
+        }
+
+        // Measure natural height of first item
+        lineH = Math.ceil(items[0].getBoundingClientRect().height);
+
+        // Measure natural width of each item
+        widths = [];
+        for (var i = 0; i < items.length; i++) {
+          widths.push(Math.ceil(items[i].scrollWidth));
+        }
+
+        // Now apply fixed dimensions
         wrapper.style.height = lineH + 'px';
-
+        wrapper.style.width = widths[current] + 'px';
         for (var i = 0; i < items.length; i++) {
           items[i].style.height = lineH + 'px';
         }
-
-        wrapper.style.width = Math.ceil(items[0].getBoundingClientRect().width) + 'px';
-        return lineH;
       }
 
-      var lineH = measure();
+      init();
 
-      // Remeasure on resize (font size changes with clamp)
       window.addEventListener('resize', function() {
-        lineH = measure();
+        init();
         track.style.transition = 'none';
         track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
-        // Re-enable transition on next frame
         requestAnimationFrame(function() {
           track.style.transition = '';
         });
@@ -1600,7 +1613,7 @@
       setInterval(function() {
         current = (current + 1) % total;
         track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
-        wrapper.style.width = Math.ceil(items[current].getBoundingClientRect().width) + 'px';
+        wrapper.style.width = widths[current] + 'px';
       }, 2500);
     })();
   </script>
