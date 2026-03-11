@@ -212,32 +212,30 @@
     }
 
     .rotator-wrapper {
-      display: inline-block;
+      display: inline;
       position: relative;
-      overflow: hidden;
-      vertical-align: bottom;
-      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .rotator-track {
-      position: relative;
-      will-change: transform;
-      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .rotator-item {
       color: var(--primary-500);
       white-space: nowrap;
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      transform: translateY(0.3em);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
-    /* Hidden measurer: render all items off-screen to get true widths */
-    .rotator-measure {
-      position: absolute;
-      visibility: hidden;
-      white-space: nowrap;
-      pointer-events: none;
-      top: 0;
-      left: 0;
+    .rotator-item.active {
+      position: relative;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .rotator-item.out {
+      opacity: 0;
+      transform: translateY(-0.3em);
     }
 
     .hero-sub {
@@ -517,6 +515,105 @@
       font-size: 14px;
       color: var(--secondary-400);
       text-align: center;
+    }
+
+    /* ---- VISUAL CARDS (Pillar mockups) ---- */
+    .pillar-visual-inner {
+      width: 100%;
+    }
+
+    .v-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid var(--secondary-300);
+    }
+
+    .v-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .v-card-avatar {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-50);
+      border-radius: 8px;
+    }
+
+    .v-card-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--secondary-950);
+    }
+
+    .v-card-sub {
+      font-size: 12px;
+      color: var(--secondary-500);
+    }
+
+    .v-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .v-tag-promoted { background: var(--primary-50); color: var(--primary-500); }
+    .v-tag-verified { background: var(--secondary-200); color: var(--secondary-700); }
+    .v-tag-service { background: var(--secondary-200); color: var(--secondary-700); }
+    .v-tag-linkedin { background: #e8f4fd; color: #0a66c2; }
+
+    /* Signal cards */
+    .signal-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .signal-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 16px 20px;
+      border: 1px solid var(--secondary-300);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-left: 3px solid;
+    }
+
+    .signal-card.website { border-left-color: var(--primary-500); }
+    .signal-card.search { border-left-color: var(--success-500); }
+    .signal-card.intent { border-left-color: var(--danger-500); }
+
+    .signal-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .signal-card.website .signal-icon { background: var(--primary-50); }
+    .signal-card.search .signal-icon { background: var(--success-200); }
+    .signal-card.intent .signal-icon { background: var(--danger-200); }
+
+    .signal-text strong {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--secondary-950);
+    }
+
+    .signal-text span {
+      font-size: 12px;
+      color: var(--secondary-500);
     }
 
     /* ---- COMPARE SECTION ---- */
@@ -1226,7 +1323,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <h1>Sortlist finds clients<br>for your <span class="rotator-wrapper"><span class="rotator-track"><span class="rotator-item">digital marketing agency<span class="dot">.</span></span><span class="rotator-item">branding agency<span class="dot">.</span></span><span class="rotator-item">web development agency<span class="dot">.</span></span><span class="rotator-item">SEO agency<span class="dot">.</span></span><span class="rotator-item">design studio<span class="dot">.</span></span><span class="rotator-item">advertising agency<span class="dot">.</span></span><span class="rotator-item">e-commerce agency<span class="dot">.</span></span><span class="rotator-item">consulting firm<span class="dot">.</span></span></span></span></h1>
+      <h1>Sortlist finds clients<br>for your <span class="rotator-wrapper"><span class="rotator-item active">digital marketing agency<span class="dot">.</span></span><span class="rotator-item">branding agency<span class="dot">.</span></span><span class="rotator-item">web development agency<span class="dot">.</span></span><span class="rotator-item">SEO agency<span class="dot">.</span></span><span class="rotator-item">design studio<span class="dot">.</span></span><span class="rotator-item">advertising agency<span class="dot">.</span></span><span class="rotator-item">e-commerce agency<span class="dot">.</span></span><span class="rotator-item">consulting firm<span class="dot">.</span></span></span></h1>
       <p class="hero-sub">Every day, we show you who's searching for your services, visiting your site, and ready to buy. Then we help you reach them. 600,000+ monthly buyer searches. 10 years of agency data. Your pipeline is never empty.</p>
       <div class="hero-ctas">
         <a href="#" class="btn-primary">Book a demo &rarr;</a>
@@ -1305,7 +1402,40 @@
         </ul>
         <div class="pillar-result"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 98% of website visitors identified that would otherwise leave anonymously</div>
       </div>
-      <div class="pillar-visual"><span class="pillar-visual-placeholder">[Intent Signals visual: visitor dashboard, company identification, intent score cards]</span></div>
+      <div class="pillar-visual">
+        <div class="pillar-visual-inner">
+          <div class="signal-grid">
+            <div class="signal-card website">
+              <div class="signal-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
+              <div class="signal-text">
+                <strong>FinServ Ltd visited your website 3 times this week</strong>
+                <span>London &middot; Viewed pricing page &middot; Hot</span>
+              </div>
+            </div>
+            <div class="signal-card search">
+              <div class="signal-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--success-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+              <div class="signal-text">
+                <strong>LogiCorp SA searching "SEO agency Berlin"</strong>
+                <span>Marketplace signal &middot; Active now</span>
+              </div>
+            </div>
+            <div class="signal-card intent">
+              <div class="signal-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--danger-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+              <div class="signal-text">
+                <strong>MedTech AG scored "Hot" - ready to buy</strong>
+                <span>Munich &middot; 4 page views, 2 return visits &middot; Intent: high</span>
+              </div>
+            </div>
+            <div class="signal-card website">
+              <div class="signal-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--primary-500)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+              <div class="signal-text">
+                <strong>PayFlow BV is hiring a Head of Marketing</strong>
+                <span>Amsterdam &middot; Series A funded &middot; Warm</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1324,7 +1454,34 @@
         </ul>
         <div class="pillar-result"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Avg. 3.2 qualified leads/month from marketplace alone</div>
       </div>
-      <div class="pillar-visual"><span class="pillar-visual-placeholder">[Marketplace visual: search results, agency profile card, buyer journey]</span></div>
+      <div class="pillar-visual">
+        <div class="pillar-visual-inner">
+          <div class="v-card" style="border-color: var(--primary-50);">
+            <div class="v-card-header">
+              <div class="v-card-avatar"></div>
+              <div>
+                <div class="v-card-name">Your Agency</div>
+                <div class="v-card-sub">Digital Marketing &middot; Brussels</div>
+              </div>
+              <div style="margin-left:auto; font-size:13px; color: var(--secondary-500);">&#9733;&#9733;&#9733;&#9733;&#9733; 5.0 (42)</div>
+            </div>
+            <div style="height:8px; background: var(--secondary-200); border-radius:4px; margin-bottom:8px;"></div>
+            <div style="height:8px; background: var(--secondary-200); border-radius:4px; width:75%; margin-bottom:16px;"></div>
+            <div style="display:flex; gap:6px; flex-wrap:wrap;">
+              <span class="v-tag v-tag-promoted">Promoted</span>
+              <span class="v-tag v-tag-verified">Verified</span>
+              <span class="v-tag v-tag-service">SEO</span>
+              <span class="v-tag v-tag-service">Content Marketing</span>
+              <span class="v-tag v-tag-service">Social Media</span>
+            </div>
+            <div style="margin-top:20px; padding-top:16px; border-top:1px solid var(--secondary-200); display:flex; gap:32px;">
+              <div style="text-align:center;"><div style="font-size:20px; font-weight:700; color:var(--primary-500);">47</div><div style="font-size:11px; color:var(--secondary-500);">Profile views this week</div></div>
+              <div style="text-align:center;"><div style="font-size:20px; font-weight:700; color:var(--success-500);">5</div><div style="font-size:11px; color:var(--secondary-500);">New introductions</div></div>
+              <div style="text-align:center;"><div style="font-size:20px; font-weight:700; color:var(--secondary-400);">2</div><div style="font-size:11px; color:var(--secondary-500);">Proposals sent</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1343,7 +1500,31 @@
         </ul>
         <div class="pillar-result"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> 15-25% reply rate vs. 2% industry average</div>
       </div>
-      <div class="pillar-visual"><span class="pillar-visual-placeholder">[Outbound visual: LinkedIn message preview, email sequence, approval flow]</span></div>
+      <div class="pillar-visual">
+        <div class="pillar-visual-inner">
+          <div class="v-card">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:16px;">
+              <div style="width:8px; height:8px; background:var(--success-500); border-radius:50%;"></div>
+              <span style="font-size:12px; font-weight:500; color: var(--success-500);">Campaign active</span>
+            </div>
+            <div style="font-weight:700; font-size:15px; color:var(--secondary-950); margin-bottom:4px;">SEO agencies &rarr; SaaS companies</div>
+            <div style="font-size:13px; color: var(--secondary-600); margin-bottom:20px;">Targeting CMOs at B2B SaaS startups (50-200 employees)</div>
+            <div style="display:flex; gap:32px; flex-wrap:wrap;">
+              <div style="text-align:center;"><div style="font-size:24px; font-weight:700; color: var(--primary-500);">312</div><div style="font-size:11px; color: var(--secondary-500);">Contacted</div></div>
+              <div style="text-align:center;"><div style="font-size:24px; font-weight:700; color: var(--primary-500);">42%</div><div style="font-size:11px; color: var(--secondary-500);">Open rate</div></div>
+              <div style="text-align:center;"><div style="font-size:24px; font-weight:700; color: var(--primary-500);">18</div><div style="font-size:11px; color: var(--secondary-500);">Replies</div></div>
+              <div style="text-align:center;"><div style="font-size:24px; font-weight:700; color: var(--success-500);">6</div><div style="font-size:11px; color: var(--secondary-500);">Meetings booked</div></div>
+            </div>
+            <div style="margin-top:16px; padding-top:16px; border-top:1px solid var(--secondary-200); display:flex; gap:6px; flex-wrap:wrap;">
+              <span class="v-tag v-tag-promoted">Email</span>
+              <span class="v-tag v-tag-linkedin">LinkedIn</span>
+              <span class="v-tag v-tag-service">4 steps</span>
+              <span class="v-tag v-tag-service">EN language</span>
+              <span class="v-tag v-tag-verified">Human approved</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1573,87 +1754,25 @@
   </footer>
 
   <script>
-    function initRotator() {
-      var wrapper = document.querySelector('.rotator-wrapper');
-      var track = document.querySelector('.rotator-track');
-      var items = track.querySelectorAll('.rotator-item');
-      var total = items.length;
+    (function() {
+      var items = document.querySelectorAll('.rotator-item');
       var current = 0;
-      var lineH = 0;
-      var widths = [];
-      var interval = null;
+      var total = items.length;
 
-      function measure() {
-        // Temporarily make wrapper auto-sized to measure natural dimensions
-        wrapper.style.width = 'auto';
-        wrapper.style.height = 'auto';
-        for (var i = 0; i < total; i++) {
-          items[i].style.height = 'auto';
-          items[i].style.lineHeight = '';
-          items[i].style.display = 'block';
-        }
+      setInterval(function() {
+        items[current].classList.add('out');
+        items[current].classList.remove('active');
 
-        // Measure first item height (they all share the same font)
-        var rect = items[0].getBoundingClientRect();
-        lineH = Math.ceil(rect.height);
-        if (lineH < 10) return false; // fonts not loaded yet
+        current = (current + 1) % total;
 
-        // Measure each item width using scrollWidth
-        widths = [];
-        for (var i = 0; i < total; i++) {
-          widths.push(items[i].scrollWidth);
-        }
-
-        // Lock dimensions
-        wrapper.style.height = lineH + 'px';
-        wrapper.style.width = widths[current] + 'px';
-        for (var i = 0; i < total; i++) {
-          items[i].style.height = lineH + 'px';
-          items[i].style.lineHeight = lineH + 'px';
-        }
-
-        // Re-apply current position
-        track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
-        return true;
-      }
-
-      function start() {
-        if (!measure()) {
-          // Fonts not ready, retry
-          setTimeout(start, 100);
-          return;
-        }
-
-        if (interval) clearInterval(interval);
-        interval = setInterval(function() {
-          current = (current + 1) % total;
-          track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
-          wrapper.style.width = widths[current] + 'px';
-        }, 2500);
-      }
-
-      start();
-
-      // Remeasure on resize
-      var resizeTimer;
-      window.addEventListener('resize', function() {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-          track.style.transition = 'none';
-          measure();
-          requestAnimationFrame(function() {
-            track.style.transition = '';
-          });
-        }, 150);
-      });
-    }
-
-    // Wait for fonts then init
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(initRotator);
-    } else {
-      window.addEventListener('load', initRotator);
-    }
+        // Small delay so the out animation plays before the new one enters
+        setTimeout(function() {
+          // Remove out class from all
+          for (var i = 0; i < total; i++) items[i].classList.remove('out');
+          items[current].classList.add('active');
+        }, 300);
+      }, 2500);
+    })();
   </script>
 
 </body>
