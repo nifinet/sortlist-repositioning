@@ -216,20 +216,19 @@
       position: relative;
       overflow: hidden;
       vertical-align: bottom;
-      /* height set by JS based on actual rendered line height */
       transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .rotator-track {
-      display: flex;
-      flex-direction: column;
+      will-change: transform;
       transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     .rotator-item {
+      display: block;
       color: var(--primary-500);
       white-space: nowrap;
-      line-height: inherit;
+      line-height: 1.15;
     }
 
     .hero-sub {
@@ -1574,18 +1573,14 @@
       var current = 0;
 
       function measure() {
-        // Get the actual rendered height of one line
-        var lineH = items[0].getBoundingClientRect().height;
+        var lineH = Math.ceil(items[0].getBoundingClientRect().height);
         wrapper.style.height = lineH + 'px';
 
-        // Set each item height explicitly
         for (var i = 0; i < items.length; i++) {
           items[i].style.height = lineH + 'px';
         }
 
-        // Set initial width to first item
-        wrapper.style.width = items[0].scrollWidth + 'px';
-
+        wrapper.style.width = Math.ceil(items[0].getBoundingClientRect().width) + 'px';
         return lineH;
       }
 
@@ -1605,7 +1600,7 @@
       setInterval(function() {
         current = (current + 1) % total;
         track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
-        wrapper.style.width = items[current].scrollWidth + 'px';
+        wrapper.style.width = Math.ceil(items[current].getBoundingClientRect().width) + 'px';
       }, 2500);
     })();
   </script>
