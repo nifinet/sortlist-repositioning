@@ -643,53 +643,54 @@
       color: rgba(255,255,255,0.45);
     }
 
-    .compare-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      border-radius: 12px;
-      overflow: hidden;
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+
+    .compare-card {
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .compare-card-old {
+      background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.1);
     }
 
-    .compare-table th,
-    .compare-table td {
-      padding: 16px 24px;
-      text-align: left;
-      font-size: 14px;
+    .compare-card-new {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--primary-500);
     }
 
-    .compare-table thead th {
-      background: rgba(255,255,255,0.06);
-      font-weight: 500;
-      color: rgba(255,255,255,0.45);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-    }
-
-    .compare-table thead th:last-child {
-      color: var(--white);
+    .compare-card h4 {
+      font-size: 16px;
       font-weight: 700;
+      margin-bottom: 20px;
     }
 
-    .compare-table tbody td {
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.6);
+    .compare-card-old h4 { color: rgba(255,255,255,0.5); }
+    .compare-card-new h4 { color: var(--white); }
+
+    .compare-card ul {
+      list-style: none;
     }
 
-    .compare-table tbody tr:last-child td { border-bottom: none; }
-
-    .compare-table tbody td:first-child {
-      font-weight: 500;
-      color: rgba(255,255,255,0.75);
+    .compare-card li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 6px 0;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
-    .compare-table tbody td:last-child {
-      color: var(--white);
-      font-weight: 500;
-    }
+    .compare-card-old li { color: rgba(255,255,255,0.4); }
+    .compare-card-new li { color: rgba(255,255,255,0.85); }
 
-    .check { color: var(--success-500); font-weight: 700; }
-    .cross { color: rgba(255,255,255,0.25); }
+    .compare-icon-x { color: var(--danger-500); flex-shrink: 0; margin-top: 2px; }
+    .compare-icon-check { color: var(--success-500); flex-shrink: 0; margin-top: 2px; }
 
     /* ---- STATS ---- */
     .stats {
@@ -1256,6 +1257,7 @@
       }
       .pillar-reverse .pillar-visual { order: 0; }
       .problem-grid { grid-template-columns: 1fr; }
+      .compare-grid { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 768px) {
@@ -1532,24 +1534,33 @@
   <section class="compare" id="compare">
     <div class="container">
       <div class="compare-header">
-        <h2>Stop stitching tools together<span class="dot">.</span></h2>
-        <p>Here's what it takes to do this yourself vs. letting Sortlist handle it.</p>
+        <h2>One system replaces your entire tool stack<span class="dot">.</span></h2>
+        <p>Stop stitching together 4 different tools that weren't built for agencies.</p>
       </div>
-      <table class="compare-table">
-        <thead>
-          <tr><th>Capability</th><th>DIY (5+ tools)</th><th>Sortlist+</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Marketplace visibility (600K searches/mo)</td><td class="cross">Not possible</td><td class="check">Included</td></tr>
-          <tr><td>Website visitor identification</td><td>Separate tool, $200+/mo</td><td class="check">Included</td></tr>
-          <tr><td>Decision-maker contact enrichment</td><td>Separate tool, $150+/mo</td><td class="check">Included</td></tr>
-          <tr><td>LinkedIn + Email outbound sequences</td><td>Separate tool, $100+/mo</td><td class="check">Included</td></tr>
-          <tr><td>CRM integration (HubSpot, Pipedrive)</td><td>Manual setup, each tool</td><td class="check">Native sync</td></tr>
-          <tr><td>GDPR compliance</td><td>Your responsibility, per tool</td><td class="check">Built in</td></tr>
-          <tr><td>Setup time</td><td>Weeks of integration work</td><td class="check">Configured in 48 hours</td></tr>
-          <tr><td>Total monthly cost</td><td>$500-1,500+/mo</td><td class="check">From &euro;199/mo</td></tr>
-        </tbody>
-      </table>
+      <div class="compare-grid">
+        <div class="compare-card compare-card-old">
+          <h4>DIY with generic tools</h4>
+          <ul>
+            <li><span class="compare-icon-x">&#10007;</span> 2-4 weeks to set up workflows</li>
+            <li><span class="compare-icon-x">&#10007;</span> Import your own contact data</li>
+            <li><span class="compare-icon-x">&#10007;</span> Write all sequences from scratch</li>
+            <li><span class="compare-icon-x">&#10007;</span> No marketplace demand included</li>
+            <li><span class="compare-icon-x">&#10007;</span> GDPR compliance is your problem</li>
+            <li><span class="compare-icon-x">&#10007;</span> 3-4 separate tools, $800+/month</li>
+          </ul>
+        </div>
+        <div class="compare-card compare-card-new">
+          <h4>With Sortlist</h4>
+          <ul>
+            <li><span class="compare-icon-check">&#10003;</span> First campaign configured in 48 hours</li>
+            <li><span class="compare-icon-check">&#10003;</span> 10 years of agency market data built in</li>
+            <li><span class="compare-icon-check">&#10003;</span> LinkedIn + Email sequences for your niche</li>
+            <li><span class="compare-icon-check">&#10003;</span> 600K+ monthly marketplace searches included</li>
+            <li><span class="compare-icon-check">&#10003;</span> GDPR compliant, built in</li>
+            <li><span class="compare-icon-check">&#10003;</span> One system, one bill: &euro;199/month</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </section>
 
