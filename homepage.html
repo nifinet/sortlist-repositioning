@@ -1573,66 +1573,87 @@
   </footer>
 
   <script>
-    (function() {
+    function initRotator() {
       var wrapper = document.querySelector('.rotator-wrapper');
       var track = document.querySelector('.rotator-track');
       var items = track.querySelectorAll('.rotator-item');
       var total = items.length;
       var current = 0;
+      var lineH = 0;
+      var widths = [];
+      var interval = null;
 
-      // Create a hidden measurer span inside the H1 to get true text dimensions
-      var h1 = wrapper.closest('h1');
-      var measurer = document.createElement('span');
-      measurer.className = 'rotator-measure';
-      h1.appendChild(measurer);
-
-      function getWidths() {
-        var w = [];
-        for (var i = 0; i < items.length; i++) {
-          measurer.textContent = items[i].textContent;
-          w.push(Math.ceil(measurer.getBoundingClientRect().width));
-        }
-        return w;
-      }
-
-      function setup() {
-        // Get line height from computed style of h1
-        var h1Style = window.getComputedStyle(h1);
-        var fontSize = parseFloat(h1Style.fontSize);
-        var lineH = Math.ceil(fontSize * 1.15);
-
-        // Set wrapper and item heights
-        wrapper.style.height = lineH + 'px';
-        for (var i = 0; i < items.length; i++) {
+      function measure() {
+        // Temporarily make wrapper auto-sized to measure natural dimensions
+        wrapper.style.width = 'auto';
+        wrapper.style.height = 'auto';
+        for (var i = 0; i < total; i++) {
+          items[i].style.height = 'auto';
+          items[i].style.lineHeight = '';
           items[i].style.display = 'block';
+        }
+
+        // Measure first item height (they all share the same font)
+        var rect = items[0].getBoundingClientRect();
+        lineH = Math.ceil(rect.height);
+        if (lineH < 10) return false; // fonts not loaded yet
+
+        // Measure each item width using scrollWidth
+        widths = [];
+        for (var i = 0; i < total; i++) {
+          widths.push(items[i].scrollWidth);
+        }
+
+        // Lock dimensions
+        wrapper.style.height = lineH + 'px';
+        wrapper.style.width = widths[current] + 'px';
+        for (var i = 0; i < total; i++) {
           items[i].style.height = lineH + 'px';
           items[i].style.lineHeight = lineH + 'px';
         }
 
-        // Measure widths and set initial
-        var widths = getWidths();
-        wrapper.style.width = widths[current] + 'px';
-
-        return { lineH: lineH, widths: widths };
+        // Re-apply current position
+        track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
+        return true;
       }
 
-      var state = setup();
+      function start() {
+        if (!measure()) {
+          // Fonts not ready, retry
+          setTimeout(start, 100);
+          return;
+        }
 
+        if (interval) clearInterval(interval);
+        interval = setInterval(function() {
+          current = (current + 1) % total;
+          track.style.transform = 'translateY(-' + (current * lineH) + 'px)';
+          wrapper.style.width = widths[current] + 'px';
+        }, 2500);
+      }
+
+      start();
+
+      // Remeasure on resize
+      var resizeTimer;
       window.addEventListener('resize', function() {
-        state = setup();
-        track.style.transition = 'none';
-        track.style.transform = 'translateY(-' + (current * state.lineH) + 'px)';
-        requestAnimationFrame(function() {
-          track.style.transition = '';
-        });
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function() {
+          track.style.transition = 'none';
+          measure();
+          requestAnimationFrame(function() {
+            track.style.transition = '';
+          });
+        }, 150);
       });
+    }
 
-      setInterval(function() {
-        current = (current + 1) % total;
-        track.style.transform = 'translateY(-' + (current * state.lineH) + 'px)';
-        wrapper.style.width = state.widths[current] + 'px';
-      }, 2500);
-    })();
+    // Wait for fonts then init
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(initRotator);
+    } else {
+      window.addEventListener('load', initRotator);
+    }
   </script>
 
 </body>
