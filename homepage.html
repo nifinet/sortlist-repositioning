@@ -213,29 +213,21 @@
 
     .rotator-wrapper {
       display: inline;
-      position: relative;
     }
 
     .rotator-item {
+      display: none;
       color: var(--primary-500);
-      white-space: nowrap;
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0;
-      transform: translateY(0.3em);
-      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .rotator-item.active {
-      position: relative;
-      opacity: 1;
-      transform: translateY(0);
+      display: inline;
+      animation: rotator-fade 0.5s ease;
     }
 
-    .rotator-item.out {
-      opacity: 0;
-      transform: translateY(-0.3em);
+    @keyframes rotator-fade {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
 
     .hero-sub {
@@ -1771,17 +1763,9 @@
       var total = items.length;
 
       setInterval(function() {
-        items[current].classList.add('out');
         items[current].classList.remove('active');
-
         current = (current + 1) % total;
-
-        // Small delay so the out animation plays before the new one enters
-        setTimeout(function() {
-          // Remove out class from all
-          for (var i = 0; i < total; i++) items[i].classList.remove('out');
-          items[current].classList.add('active');
-        }, 300);
+        items[current].classList.add('active');
       }, 2500);
     })();
   </script>
