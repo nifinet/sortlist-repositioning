@@ -206,9 +206,31 @@
       font-style: normal;
       line-height: 1.1;
       color: var(--secondary-950);
-      max-width: 720px;
+      max-width: 820px;
       margin: 0 auto 24px;
       letter-spacing: -1px;
+    }
+
+    .rotator-wrapper {
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+      vertical-align: bottom;
+      height: 1.1em;
+    }
+
+    .rotator-track {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .rotator-item {
+      height: 1.1em;
+      display: flex;
+      align-items: baseline;
+      color: var(--primary-500);
+      white-space: nowrap;
     }
 
     .hero-sub {
@@ -1119,6 +1141,8 @@
     @media (max-width: 768px) {
       .hero { padding: 120px 0 64px; }
       .hero h1 { font-size: clamp(30px, 8vw, 38px); }
+      .hero h1 br { display: none; }
+      .rotator-item { white-space: normal; }
 
       .problem-section, .pillar, .compare, .testimonials, .trust, .final-cta, .buyer-section {
         padding: 80px 0 48px;
@@ -1181,7 +1205,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <h1>Sortlist finds clients for your agency<span class="dot">.</span></h1>
+      <h1>Sortlist finds clients<br>for your <span class="rotator-wrapper"><span class="rotator-track"><span class="rotator-item">digital marketing agency</span><span class="rotator-item">branding agency</span><span class="rotator-item">web development agency</span><span class="rotator-item">SEO agency</span><span class="rotator-item">design studio</span><span class="rotator-item">advertising agency</span><span class="rotator-item">e-commerce agency</span><span class="rotator-item">consulting firm</span></span></span><span class="dot">.</span></h1>
       <p class="hero-sub">Every day, we show you who's searching for your services, visiting your site, and ready to buy. Then we help you reach them. 600,000+ monthly buyer searches. 10 years of agency data. Your pipeline is never empty.</p>
       <div class="hero-ctas">
         <a href="#" class="btn-primary">Book a demo &rarr;</a>
@@ -1525,6 +1549,20 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    (function() {
+      const track = document.querySelector('.rotator-track');
+      const items = track.querySelectorAll('.rotator-item');
+      const total = items.length;
+      let current = 0;
+
+      setInterval(function() {
+        current = (current + 1) % total;
+        track.style.transform = 'translateY(-' + (current * 1.1) + 'em)';
+      }, 2500);
+    })();
+  </script>
 
 </body>
 </html>
