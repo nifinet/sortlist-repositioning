@@ -790,6 +790,128 @@
       color: var(--secondary-500);
     }
 
+    /* ---- BUYER SECTION ---- */
+    .buyer-section {
+      padding: 128px 0 64px;
+      background: var(--white);
+    }
+
+    .buyer-section .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .buyer-content h2 {
+      font-family: var(--font-serif);
+      font-size: 40px;
+      font-weight: 700;
+      font-style: normal;
+      line-height: 1.2;
+      color: var(--secondary-950);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .buyer-content > p {
+      font-size: 17px;
+      color: var(--secondary-600);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .buyer-benefits {
+      list-style: none;
+      margin-bottom: 32px;
+    }
+
+    .buyer-benefits li {
+      font-size: 15px;
+      color: var(--secondary-700);
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .buyer-benefits li svg {
+      flex-shrink: 0;
+      color: var(--success-500);
+    }
+
+    .buyer-ctas {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .buyer-visual {
+      background: var(--secondary-100);
+      border: 1px solid var(--secondary-300);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .buyer-visual-search {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--white);
+      border: 1px solid var(--secondary-300);
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-size: 14px;
+      color: var(--secondary-400);
+      margin-bottom: 24px;
+    }
+
+    .buyer-visual-results {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .buyer-result-card {
+      background: var(--white);
+      border: 1px solid var(--secondary-300);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .buyer-result-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .buyer-result-name {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--secondary-950);
+    }
+
+    .buyer-result-meta {
+      font-size: 12px;
+      color: var(--secondary-500);
+    }
+
+    .buyer-result-score {
+      margin-left: auto;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--success-500);
+      background: var(--success-200);
+      padding: 4px 10px;
+      border-radius: 40px;
+      white-space: nowrap;
+    }
+
     /* ---- BUYER SEARCH BAR ---- */
     .buyer-bar {
       padding: 64px 0;
@@ -985,7 +1107,8 @@
 
     /* ---- RESPONSIVE ---- */
     @media (max-width: 960px) {
-      .pillar .container {
+      .pillar .container,
+      .buyer-section .container {
         grid-template-columns: 1fr;
         gap: 48px;
       }
@@ -997,7 +1120,7 @@
       .hero { padding: 120px 0 64px; }
       .hero h1 { font-size: clamp(30px, 8vw, 38px); }
 
-      .problem-section, .pillar, .compare, .testimonials, .trust, .final-cta {
+      .problem-section, .pillar, .compare, .testimonials, .trust, .final-cta, .buyer-section {
         padding: 80px 0 48px;
       }
 
@@ -1006,7 +1129,8 @@
       .compare-header h2,
       .testimonials-header h2,
       .trust-header h2,
-      .final-cta h2 {
+      .final-cta h2,
+      .buyer-content h2 {
         font-size: 28px;
       }
 
@@ -1281,6 +1405,58 @@
         <span>Configured in 48 hours</span><span>&bull;</span>
         <span>Cancel anytime</span><span>&bull;</span>
         <span>GDPR compliant</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUYER SECTION: FOR COMPANIES -->
+  <section class="buyer-section" id="find-agencies">
+    <div class="container">
+      <div class="buyer-content">
+        <h2>Looking for an agency<span class="dot">?</span></h2>
+        <p>Tell us what you need. Sortlist matches you with pre-vetted agencies that fit your project, budget, and industry. Free for companies, always.</p>
+        <ul class="buyer-benefits">
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 80,000+ agencies across every service and city</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Curated shortlists based on your exact requirements</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Verified reviews, portfolios, and case studies</li>
+          <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> 100% free. No fees, no commissions</li>
+        </ul>
+        <div class="buyer-ctas">
+          <a href="#" class="btn-primary">Post a project &rarr;</a>
+          <a href="#" class="btn-secondary">Browse agencies</a>
+        </div>
+      </div>
+      <div class="buyer-visual">
+        <div class="buyer-visual-search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          SEO agency, mid-size, tech industry...
+        </div>
+        <div class="buyer-visual-results">
+          <div class="buyer-result-card">
+            <div class="buyer-result-avatar" style="background: var(--primary-50);"></div>
+            <div>
+              <div class="buyer-result-name">Digital Growth Co.</div>
+              <div class="buyer-result-meta">SEO &middot; Amsterdam &middot; &#9733; 4.9 (38 reviews)</div>
+            </div>
+            <div class="buyer-result-score">97% match</div>
+          </div>
+          <div class="buyer-result-card">
+            <div class="buyer-result-avatar" style="background: var(--success-200);"></div>
+            <div>
+              <div class="buyer-result-name">Rankster Agency</div>
+              <div class="buyer-result-meta">SEO &middot; Brussels &middot; &#9733; 4.8 (52 reviews)</div>
+            </div>
+            <div class="buyer-result-score">94% match</div>
+          </div>
+          <div class="buyer-result-card">
+            <div class="buyer-result-avatar" style="background: var(--danger-200);"></div>
+            <div>
+              <div class="buyer-result-name">SearchLab</div>
+              <div class="buyer-result-meta">SEO &middot; London &middot; &#9733; 4.7 (29 reviews)</div>
+            </div>
+            <div class="buyer-result-score">91% match</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
