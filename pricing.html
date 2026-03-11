@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sortlist+ Pricing | From &euro;199/month</title>
-  <meta name="description" content="Sortlist+ pricing: one plan, credits included, pay as you grow. Marketplace leads, outbound prospecting, buyer intelligence, CRM integrations. From euro199/month.">
+  <meta name="description" content="Sortlist+ pricing: everything to acquire clients. Marketplace leads, outbound campaigns, visitor identification, buyer intelligence. One plan, from 199/month. Pay as you grow.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
@@ -304,17 +304,6 @@
       margin-top: 6px;
     }
 
-    .plan-roi {
-      margin-top: 16px;
-      background: var(--success-200);
-      color: var(--success-500);
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      display: inline-block;
-    }
-
     /* ---- FEATURES ---- */
     .plan-features {
       padding: 32px 40px;
@@ -382,6 +371,80 @@
       vertical-align: middle;
     }
 
+    /* ---- FEATURE HERO ITEMS (Top 3) ---- */
+    .feature-hero-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--secondary-200);
+    }
+
+    .feature-hero-item:last-of-type { border-bottom: none; }
+
+    .feature-hero-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .feature-hero-content {
+      flex: 1;
+    }
+
+    .feature-hero-content strong {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--secondary-950);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .feature-hero-content p {
+      font-size: 14px;
+      color: var(--secondary-600);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* ---- ALSO INCLUDED ---- */
+    .also-included {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--secondary-200);
+    }
+
+    .also-included-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--secondary-500);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .also-included-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 24px;
+    }
+
+    .also-included-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--secondary-700);
+    }
+
+    .also-included-item svg {
+      flex-shrink: 0;
+    }
+
     /* ---- PLAN CTA ---- */
     .plan-cta {
       padding: 0 40px 40px;
@@ -402,96 +465,6 @@
       font-size: 12px;
       color: var(--secondary-500);
       margin-top: 4px;
-    }
-
-    /* ---- CREDITS SECTION ---- */
-    .credits-section {
-      padding: 128px 0 64px;
-      background: var(--white);
-    }
-
-    .credits-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .credits-header h2 {
-      font-family: var(--font-serif);
-      font-size: 40px;
-      font-weight: 700;
-      font-style: normal;
-      line-height: 1.2;
-      color: var(--secondary-950);
-      letter-spacing: -1px;
-      margin-bottom: 12px;
-    }
-
-    .credits-header p {
-      font-size: 17px;
-      color: var(--secondary-600);
-      max-width: 520px;
-      margin: 0 auto;
-    }
-
-    .credits-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      max-width: 780px;
-      margin: 0 auto;
-    }
-
-    .credit-card {
-      background: var(--white);
-      border: 1px solid var(--secondary-300);
-      border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
-    }
-
-    .credit-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 16px;
-    }
-
-    .credit-card h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--secondary-950);
-      margin-bottom: 6px;
-    }
-
-    .credit-card .credit-desc {
-      font-size: 13px;
-      color: var(--secondary-500);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .credit-cost {
-      display: inline-block;
-      background: var(--primary-50);
-      color: var(--primary-500);
-      font-size: 14px;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 40px;
-    }
-
-    .credits-note {
-      text-align: center;
-      margin-top: 28px;
-      font-size: 13px;
-      color: var(--secondary-500);
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.6;
     }
 
     /* ---- VALUE STACK ---- */
@@ -906,13 +879,12 @@
     /* ---- RESPONSIVE ---- */
     @media (max-width: 768px) {
       .hero { padding: 120px 0 80px; }
-      .hero h1 { font-size: clamp(30px, 8vw, 38px); }
+      .hero h1 { font-size: clamp(26px, 7vw, 34px); }
 
-      .credits-section, .value-stack, .testimonials, .faq-section, .final-cta {
+      .value-stack, .testimonials, .faq-section, .final-cta {
         padding: 80px 0 48px;
       }
 
-      .credits-header h2,
       .value-stack-header h2,
       .testimonials-header h2,
       .faq-header h2,
@@ -920,13 +892,14 @@
         font-size: 28px;
       }
 
-      .credits-grid { grid-template-columns: 1fr; max-width: 320px; margin: 0 auto; }
       .testimonial-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
       .plan-header, .plan-features, .plan-cta { padding-left: 24px; padding-right: 24px; }
       .plan-price-row .amount { font-size: 48px; }
       .stack-total { flex-direction: column; text-align: center; gap: 8px; }
       .nav-links { display: none; }
       .nav-cta-secondary { display: none; }
+
+      .also-included-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -954,8 +927,8 @@
   <!-- HERO -->
   <section class="hero">
     <div class="container">
-      <h1>One plan. Credits included. Pay as you grow<span class="dot">.</span></h1>
-      <p class="hero-sub">Start at &euro;199/month with 200 credits included to identify visitors, access opportunities, and run outbound. Use more? Buy more. Most agencies stay within the base plan.</p>
+      <h1>Everything to acquire clients. Pay as you grow. From &euro;199/month<span class="dot">.</span></h1>
+      <p class="hero-sub">Marketplace leads, outbound campaigns, visitor identification, buyer intelligence. No lock-in, cancel anytime.</p>
     </div>
   </section>
 
@@ -965,155 +938,88 @@
       <div class="plan-card">
 
         <div class="plan-header">
-          <span class="plan-badge">Credits included</span>
+          <span class="plan-badge">One plan. Everything included.</span>
           <div class="plan-name">Sortlist+</div>
-          <p class="plan-tagline">Marketplace leads, outbound prospecting, visitor identification, SEO visibility, and buyer intelligence. Credits included in your plan.</p>
+          <p class="plan-tagline">The complete client acquisition system for agencies.</p>
           <div class="plan-price-row">
             <span class="currency">&euro;</span>
             <span class="amount">199</span>
             <span class="period">/month</span>
           </div>
-          <p class="plan-annual-note">Billed annually. <strong>200 credits included every month.</strong></p>
-          <div class="plan-roi">One new client = 10-50x return on your annual investment</div>
+          <p class="plan-annual-note">Billed annually. Credits included. Need more? Buy on demand.</p>
         </div>
 
         <div class="plan-features">
-          <p class="plan-features-label">Everything included</p>
+          <p class="plan-features-label">The three engines that drive your pipeline</p>
 
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>Marketplace leads</strong>
-              <span>Get introduced to companies actively searching for your services. 600,000+ searches/month.</span>
+          <div class="feature-hero-item">
+            <div class="feature-hero-icon" style="background: var(--primary-50); color: var(--primary-500);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <div class="feature-hero-content">
+              <strong>Marketplace leads + visibility</strong>
+              <p>600,000+ companies search Sortlist every month. Get listed at the top of results, remove competitor suggestions from your profile, and get introduced to buyers looking for your exact services. Average: 3-8 qualified introductions per month.</p>
             </div>
           </div>
 
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>Radar: Website visitor identification</strong>
-              <span>See which companies visit your site. Average: 47 companies identified per month.</span>
+          <div class="feature-hero-item">
+            <div class="feature-hero-icon" style="background: var(--danger-200); color: var(--danger-500);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
-            <span class="feature-value">Worth &euro;150+/mo</span>
-          </div>
-
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>Outbound prospecting sequences</strong>
-              <span>Email + LinkedIn campaigns. Pre-built blueprints for agencies. Configured in 48 hours. You review and approve every message before it sends.</span>
-            </div>
-            <span class="feature-value">Worth &euro;99+/mo</span>
-          </div>
-
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>Visibility module</strong>
-              <span>Get listed on top of directories. Stand out from competitors. Drive traffic to your profile.</span>
+            <div class="feature-hero-content">
+              <strong>Intent signals</strong>
+              <p>See which companies visit your website (Radar), who's browsing your profile on Sortlist directories, and get hiring signals, funding alerts, and marketplace search intent. Know who needs you before they post a brief.</p>
             </div>
           </div>
 
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>AEO/GEO package</strong>
-              <span>Answer Engine Optimization. Get recommended by AI assistants when prospects ask for agencies like yours.</span>
+          <div class="feature-hero-item">
+            <div class="feature-hero-icon" style="background: var(--success-200); color: var(--success-500);">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
             </div>
-            <span class="feature-value">Worth &euro;500+/mo</span>
-          </div>
-
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>SEO backlinks from Sortlist</strong>
-              <span>High-authority backlinks to boost your domain ranking.</span>
-            </div>
-            <span class="feature-value">Worth &euro;200+/link</span>
-          </div>
-
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>Verified badge + remove competitors</strong>
-              <span>Build trust instantly. Remove competitor suggestions from your profile page.</span>
+            <div class="feature-hero-content">
+              <strong>Outbound campaigns</strong>
+              <p>Access 450M+ verified contacts. Email + LinkedIn sequences built for agencies. Pre-configured blueprints for your niche. First campaign live in 48 hours. You approve every message before it sends.</p>
             </div>
           </div>
 
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>CRM integrations</strong> <span class="feature-popular">Popular</span>
-              <span>Push leads directly to HubSpot, Pipedrive, or Teamleader. Your pipeline stays updated automatically.</span>
-            </div>
-          </div>
-
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>Buyer intelligence</strong>
-              <span>Hiring signals, funding alerts, marketplace search intent. Know who needs you before they post a brief.</span>
-            </div>
-          </div>
-
-          <div class="feature-item">
-            <svg class="feature-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-            <div class="feature-text">
-              <strong>Market insights</strong>
-              <span>See which companies are actively searching for the services you provide. Updated weekly.</span>
+          <div class="also-included">
+            <p class="also-included-label">Also included</p>
+            <div class="also-included-grid">
+              <div class="also-included-item">
+                <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>AEO/GEO optimization</span>
+              </div>
+              <div class="also-included-item">
+                <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>SEO backlinks from Sortlist</span>
+              </div>
+              <div class="also-included-item">
+                <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>CRM integrations (HubSpot, Pipedrive, Teamleader)</span>
+              </div>
+              <div class="also-included-item">
+                <svg class="feature-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Verified badge + remove competitors</span>
+              </div>
             </div>
           </div>
         </div>
 
         <div class="plan-cta">
           <a href="#" class="btn-primary">Book a demo &rarr;</a>
-          <p class="no-risk">No long-term lock-in. Cancel anytime. Most agencies stay within the base plan.</p>
+          <p class="no-risk">No long-term lock-in. Cancel anytime. Configured in 48 hours.</p>
         </div>
 
       </div>
     </div>
   </section>
 
-  <!-- HOW CREDITS WORK -->
-  <section class="credits-section">
-    <div class="container">
-      <div class="credits-header">
-        <h2>How credits work<span class="dot">.</span></h2>
-        <p>Your plan includes credits. Every action in Sortlist costs a small number of credits. Most agencies never need to buy more.</p>
-      </div>
-
-      <div class="credits-grid">
-        <div class="credit-card">
-          <div class="credit-icon" style="background: var(--primary-50); color: var(--primary-500);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg></div>
-          <h3>Identify a company visiting your site</h3>
-          <p class="credit-desc">A SaaS company from Munich lands on your portfolio page. You see their name, pages visited, and time spent.</p>
-          <span class="credit-cost">~20 credits</span>
-        </div>
-
-        <div class="credit-card">
-          <div class="credit-icon" style="background: var(--secondary-200); color: var(--secondary-700);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
-          <h3>View an opportunity brief</h3>
-          <p class="credit-desc">A company posts a brief looking for a branding agency. You open the brief to see budget, timeline, and requirements.</p>
-          <span class="credit-cost">~20 credits</span>
-        </div>
-
-        <div class="credit-card">
-          <div class="credit-icon" style="background: var(--success-200); color: var(--success-500);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-          <h3>Get introduced to a hot lead</h3>
-          <p class="credit-desc">A qualified prospect is ready to talk. Sortlist makes the introduction. You pitch directly to a decision-maker.</p>
-          <span class="credit-cost">Up to 600 credits</span>
-        </div>
-      </div>
-
-      <p class="credits-note">Your plan includes 200 credits/month to cover typical usage. If you want to go further, additional credits are available on demand. No surprises, no hidden fees.</p>
-    </div>
-  </section>
 
   <!-- VALUE STACK -->
   <section class="value-stack">
     <div class="container">
       <div class="value-stack-header">
-        <h2>What your credits unlock<span class="dot">.</span></h2>
+        <h2>Stop paying for 6 tools that weren't built for agencies<span class="dot">.</span></h2>
         <p>One subscription replaces your entire acquisition tool stack.</p>
       </div>
 
@@ -1128,7 +1034,7 @@
         <div class="stack-item">
           <div class="stack-item-left">
             <div class="stack-icon" style="background: var(--danger-200); color: var(--danger-500);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-            <div><strong>Outbound sequences</strong><span class="stack-desc">Outbound sequence platforms</span></div>
+            <div><strong>Outbound sequences + 450M+ contacts</strong><span class="stack-desc">Outbound platforms + lead databases</span></div>
           </div>
           <span class="stack-value">&euro;99+/mo</span>
         </div>
@@ -1169,7 +1075,7 @@
         </div>
         <div style="text-align:right;">
           <span class="total-new">&euro;199/mo</span><br>
-          <span class="total-period">Everything. Credits included. One bill.</span>
+          <span class="total-period">Everything included. One bill.</span>
         </div>
       </div>
     </div>
@@ -1184,9 +1090,9 @@
       </div>
       <div class="testimonial-grid">
         <div class="testimonial-card">
-          <p class="testimonial-quote">"We launched our first outbound campaign on a Tuesday. By Friday we had 3 replies. Two months later, 4 signed clients. The ROI paid for 3 years of Sortlist."</p>
+          <p class="testimonial-quote">"We launched our first outbound campaign on a Tuesday. By Friday we had 3 replies. Two months later, 4 signed clients worth over &euro;60K in new revenue."</p>
           <div class="testimonial-author"><div class="testimonial-avatar">AV</div><div><div class="testimonial-name">Anne-Mie V.</div><div class="testimonial-role">Managing Partner, Living Stone</div></div></div>
-          <div class="testimonial-metric"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> 4 new clients in 90 days</div>
+          <div class="testimonial-metric"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> 4 clients, &euro;60K+ revenue in 90 days</div>
         </div>
         <div class="testimonial-card">
           <p class="testimonial-quote">"Before Sortlist, our pipeline was feast or famine. Now we have a steady flow of inbound leads plus outbound running in the background. We finally sleep at night."</p>
@@ -1194,9 +1100,9 @@
           <div class="testimonial-metric"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> Pipeline never empty since joining</div>
         </div>
         <div class="testimonial-card">
-          <p class="testimonial-quote">"The buyer intelligence told us a prospect was hiring a marketing manager. We reached out that same day. Signed a &euro;25K project two weeks later."</p>
+          <p class="testimonial-quote">"Buyer intelligence told us a prospect was hiring a marketing manager. We reached out that same day. Signed a &euro;25K project two weeks later. One signal paid for the year."</p>
           <div class="testimonial-author"><div class="testimonial-avatar">MW</div><div><div class="testimonial-name">Marc W.</div><div class="testimonial-role">MD &amp; Founder, Duval Branding</div></div></div>
-          <div class="testimonial-metric"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> 12 qualified meetings in first month</div>
+          <div class="testimonial-metric"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> &euro;25K deal from one signal</div>
         </div>
       </div>
     </div>
@@ -1206,40 +1112,62 @@
   <section class="faq-section">
     <div class="container">
       <div class="faq-header">
-        <h2>Common questions<span class="dot">.</span></h2>
+        <h2>Your questions, answered<span class="dot">.</span></h2>
       </div>
 
       <div class="faq-card">
         <div class="faq-item open">
           <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            <span>How fast will I see results?</span>
+            <span>What if I don't get results in the first 3 months?</span>
             <span class="faq-arrow">&#9662;</span>
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              Most agencies launch their first campaign within 48 hours and see qualified responses within the first two weeks. Marketplace leads can come in from day one since your profile is immediately live. The average time to first qualified lead is 11 days.
+              Most agencies see their first qualified lead within 11 days. Your marketplace profile goes live immediately, outbound campaigns launch within 48 hours, and Radar starts identifying website visitors from day one. If you're not seeing results, your dedicated account manager works with you to adjust targeting, messaging, and strategy until you do.
             </div>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            <span>I already use Sortlist. What changes?</span>
+            <span>How long is the commitment?</span>
             <span class="faq-arrow">&#9662;</span>
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              Everything you already have stays. Your profile, your reviews, your ranking, your marketplace leads. You gain: outbound prospecting, Radar visitor identification, buyer intelligence, AEO/GEO optimization, and CRM integrations (HubSpot, Pipedrive, Teamleader). You go from a passive listing to an active client acquisition engine.
+              Sortlist+ is an annual plan, billed at &euro;199/month. Most agencies sign their first client within 90 days, which covers the full year's cost. Your dedicated account manager works with you throughout to make sure you get results.
             </div>
           </div>
         </div>
         <div class="faq-item">
           <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            <span>Why is this cheaper than buying separate tools?</span>
+            <span>We're a small agency (under 10 people). Is this for us?</span>
             <span class="faq-arrow">&#9662;</span>
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              Because generic sales tools are built for any industry and sold separately. Sortlist is built specifically for agencies and bundles everything into one system. No integration headaches, no duplicate data, no paying 4 vendors. One tool, one bill, one login.
+              Absolutely. Sortlist+ was designed for agencies of all sizes. For small teams, it's especially valuable because it replaces the need to hire a dedicated salesperson or invest in multiple tools. You get a complete acquisition system that runs while you focus on delivery.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>What happens during onboarding?</span>
+            <span class="faq-arrow">&#9662;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Your account manager configures everything for you: marketplace profile optimization, outbound campaign setup with niche-specific blueprints, Radar installation (one script tag on your site), and CRM integration. Most agencies are fully set up within 48 hours. You review and approve everything before it goes live.
+            </div>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+            <span>How is this different from other directories?</span>
+            <span class="faq-arrow">&#9662;</span>
+          </button>
+          <div class="faq-answer">
+            <div class="faq-answer-inner">
+              Directories give you a listing and hope someone finds you. Sortlist is an active acquisition system: marketplace leads, outbound prospecting, website visitor identification, and buyer intelligence working together. It's the difference between a billboard and a sales team.
             </div>
           </div>
         </div>
@@ -1250,18 +1178,7 @@
           </button>
           <div class="faq-answer">
             <div class="faq-answer-inner">
-              Your Sortlist+ plan includes 200 credits every month. Credits are consumed when you take actions like identifying website visitors (~20 credits), viewing opportunity briefs (~20 credits), or getting introduced to a qualified lead (up to 600 credits). Most agencies stay comfortably within their 200 included credits. If you need more, you can buy additional credits on demand with no commitment.
-            </div>
-          </div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
-            <span>Is my data safe? Are you GDPR compliant?</span>
-            <span class="faq-arrow">&#9662;</span>
-          </button>
-          <div class="faq-answer">
-            <div class="faq-answer-inner">
-              100%. Sortlist is fully GDPR compliant. All data processing follows strict privacy standards. Visitor identification works at the company level, not at the individual level. Regular audits and DPO oversight.
+              Your plan includes 200 credits every month. Credits are consumed when you take actions like identifying website visitors, viewing opportunity briefs, or getting introduced to a qualified lead. Most agencies stay comfortably within their included credits. If you need more, you can buy additional credits on demand with no commitment.
             </div>
           </div>
         </div>
@@ -1272,14 +1189,15 @@
   <!-- RISK REVERSAL CTA -->
   <section class="final-cta">
     <div class="container">
-      <h2>See it in action before you commit<span class="dot">.</span></h2>
-      <p>Book a 30-minute demo. We'll show you live signals for your agency: who's visiting your site, who's searching for your services, and where your next client is hiding. No commitment, no credit card.</p>
+      <h2>See it working for your agency before you commit<span class="dot">.</span></h2>
+      <p>Book a 30-minute demo. We'll show you live data: which companies are visiting your site right now, who's searching for your services, and where your next client is. No commitment, no credit card.</p>
       <div class="final-cta-buttons">
         <a href="#" class="btn-primary" style="background: var(--secondary-950); box-shadow: none;">Book a demo &rarr;</a>
       </div>
       <div class="final-trust">
         <span>Configured in 48 hours</span><span>&bull;</span>
         <span>Cancel anytime</span><span>&bull;</span>
+        <span>Dedicated account manager</span><span>&bull;</span>
         <span>GDPR compliant</span>
       </div>
     </div>
