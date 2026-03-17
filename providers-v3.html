@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sortlist for Agencies | The Client Acquisition Engine</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --color-primary-100: #f6f8fe;
+      --color-primary-200: #e8edfc;
+      --color-primary-500: #200df2;
+      --color-primary-900: #050A3F;
+      --color-secondary-50: #f8f7f6;
+      --color-secondary-100: #fbfaf9;
+      --color-secondary-200: #f1edea;
+      --color-secondary-300: #e7dfda;
+      --color-secondary-500: #7e7367;
+      --color-secondary-700: #43403C;
+      --color-secondary-900: #0f0d0a;
+      --color-neutral-50: #ffffff;
+      --color-neutral-100: #f5f5f5;
+      --color-success-200: #d4e9c9;
+      --color-success-500: #337055;
+      --color-danger-200: #fde8e8;
+      --color-danger-500: #d32f2f;
+      --color-supply-200: #e2f0db;
+      --color-supply-700: #3d6e34;
+      --color-supply-900: #2f5926;
+      --color-warning-500: #f9af1f;
+      --shadow-2: 0 2px 4px rgba(15,13,10,.1), 0 0 20px rgba(15,13,10,.08);
+      --shadow-3: 0 4px 8px rgba(15,13,10,.125), 0 0 25px rgba(15,13,10,.1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); color: var(--color-secondary-900); background: var(--color-neutral-50); -webkit-font-smoothing: antialiased; }
+    a { color: var(--color-primary-500); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container-lg { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .container-md { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+    .text-center { text-align: center; }
+
+    /* Navbar */
+    .navbar { position: sticky; top: 0; z-index: 100; background: var(--color-neutral-50); border-bottom: 1px solid var(--color-secondary-300); }
+    .navbar-inner { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0; }
+    .navbar-links { display: flex; align-items: center; gap: 2rem; }
+    .navbar-links a { color: var(--color-secondary-700); font-size: 0.875rem; font-weight: 500; text-decoration: none; }
+    .navbar-links a:hover { color: var(--color-secondary-900); }
+    .btn-primary { background: var(--color-primary-500); color: white; border: none; padding: 0.625rem 1.25rem; border-radius: 0.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-block; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: var(--shadow-2); }
+    .btn-secondary { background: transparent; color: var(--color-secondary-900); border: 1px solid var(--color-secondary-300); padding: 0.625rem 1.25rem; border-radius: 0.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; display: inline-block; }
+    .btn-secondary:hover { border-color: var(--color-secondary-700); }
+    .btn-lg { padding: 0.875rem 1.75rem; font-size: 1rem; }
+    .btn-md { padding: 0.75rem 1.5rem; font-size: 0.9375rem; }
+    .btn-light { background: white; color: var(--color-primary-500); border: 1px solid white; }
+    .btn-light:hover { background: var(--color-primary-100); text-decoration: none; }
+
+    /* Hero */
+    .hero { background: var(--color-secondary-900); padding: 5rem 0 4rem; text-align: center; }
+    .hero h1 { font-family: var(--font-serif); font-size: 3.5rem; font-weight: 700; color: var(--color-neutral-50); line-height: 1.12; max-width: 760px; margin: 0 auto; }
+    .hero .subtitle { color: var(--color-secondary-300); font-size: 1.125rem; margin-top: 1.25rem; line-height: 1.6; max-width: 600px; margin-left: auto; margin-right: auto; }
+    .hero .hero-ctas { margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .hero .hero-note { font-size: 0.8125rem; color: rgba(255,255,255,0.45); margin-top: 1rem; }
+
+    /* Problem section */
+    .problem-section { background: var(--color-secondary-50); padding: 5rem 0; }
+    .problem-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-top: 2.5rem; }
+    .problem-card { flex: 1; min-width: 220px; max-width: 260px; background: white; border-radius: 1rem; padding: 1.75rem; box-shadow: var(--shadow-2); }
+    .problem-icon { width: 2.5rem; height: 2.5rem; background: var(--color-danger-200); color: var(--color-danger-500); border-radius: 0.625rem; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; margin-bottom: 1rem; }
+    .problem-card h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.5rem; line-height: 1.3; }
+    .problem-card p { font-size: 0.8125rem; color: var(--color-secondary-700); line-height: 1.5; }
+
+    /* Pillars */
+    .pillar-section { padding: 5rem 0; }
+    .pillar-section.alt { background: var(--color-secondary-50); }
+    .pillar-row { display: flex; align-items: center; gap: 4rem; flex-wrap: wrap; }
+    .pillar-row.reverse { flex-direction: row-reverse; }
+    .pillar-text { flex: 1; min-width: 320px; }
+    .pillar-visual { flex: 1; min-width: 320px; }
+
+    .pillar-badge { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.375rem 1rem; border-radius: 2rem; font-size: 0.8125rem; font-weight: 600; margin-bottom: 1.25rem; }
+    .pillar-badge.inbound { background: var(--color-primary-200); color: var(--color-primary-500); }
+    .pillar-badge.outbound { background: var(--color-danger-200); color: var(--color-danger-500); }
+    .pillar-badge.signals { background: var(--color-success-200); color: var(--color-success-500); }
+    .pillar-badge .badge-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; }
+    .pillar-badge.inbound .badge-dot { background: var(--color-primary-500); }
+    .pillar-badge.outbound .badge-dot { background: var(--color-danger-500); }
+    .pillar-badge.signals .badge-dot { background: var(--color-success-500); }
+
+    .pillar-text h2 { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; line-height: 1.15; margin-bottom: 0.75rem; }
+    .pillar-text .lead { font-size: 1.0625rem; color: var(--color-secondary-700); line-height: 1.6; margin-bottom: 1.5rem; }
+    .pillar-text ul { list-style: none; margin-bottom: 1.5rem; }
+    .pillar-text li { display: flex; align-items: flex-start; gap: 0.625rem; padding: 0.5rem 0; font-size: 0.9375rem; color: var(--color-secondary-700); line-height: 1.5; }
+    .pillar-text li .check { flex-shrink: 0; color: var(--color-success-500); margin-top: 0.15rem; }
+    .pillar-result { display: inline-block; background: var(--color-success-200); color: var(--color-success-500); font-size: 0.8125rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 0.5rem; margin-bottom: 1.5rem; }
+
+    /* Visual cards */
+    .visual-card-stack { position: relative; min-height: 380px; }
+    .v-card { background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: var(--shadow-2); }
+    .v-card-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem; }
+    .v-card-avatar { width: 2.5rem; height: 2.5rem; background: var(--color-secondary-200); border-radius: 0.5rem; }
+    .v-card-name { font-weight: 600; font-size: 0.875rem; }
+    .v-card-sub { font-size: 0.75rem; color: var(--color-secondary-500); }
+    .v-card-tags { display: flex; gap: 0.375rem; flex-wrap: wrap; margin-top: 0.75rem; }
+    .v-tag { padding: 0.25rem 0.625rem; border-radius: 0.25rem; font-size: 0.6875rem; font-weight: 500; }
+    .v-tag.promoted { background: var(--color-primary-200); color: var(--color-primary-500); }
+    .v-tag.verified { background: var(--color-secondary-200); color: var(--color-secondary-700); }
+    .v-tag.service { background: var(--color-secondary-200); color: var(--color-secondary-700); }
+
+    /* Signal cards */
+    .signal-grid { display: flex; flex-direction: column; gap: 0.75rem; }
+    .signal-card { background: white; border-radius: 0.75rem; padding: 1rem 1.25rem; box-shadow: var(--shadow-2); display: flex; align-items: center; gap: 1rem; border-left: 3px solid; }
+    .signal-card.hiring { border-color: var(--color-primary-500); }
+    .signal-card.funding { border-color: var(--color-success-500); }
+    .signal-card.intent { border-color: var(--color-warning-500); }
+    .signal-icon { width: 2rem; height: 2rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; font-size: 0.875rem; flex-shrink: 0; }
+    .signal-card.hiring .signal-icon { background: var(--color-primary-200); }
+    .signal-card.funding .signal-icon { background: var(--color-success-200); }
+    .signal-card.intent .signal-icon { background: #fff3d6; }
+    .signal-text strong { display: block; font-size: 0.8125rem; font-weight: 600; }
+    .signal-text span { font-size: 0.75rem; color: var(--color-secondary-500); }
+
+    /* Compare section */
+    .compare-section { background: var(--color-primary-900); padding: 5rem 0; color: white; }
+    .compare-section h2 { font-family: var(--font-serif); font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 0.75rem; }
+    .compare-section .lead { text-align: center; color: rgba(255,255,255,0.7); font-size: 1.0625rem; max-width: 600px; margin: 0 auto 3rem; line-height: 1.6; }
+    .compare-grid { display: flex; gap: 2rem; flex-wrap: wrap; justify-content: center; }
+    .compare-card { flex: 1; min-width: 280px; max-width: 420px; border-radius: 1rem; padding: 2rem; }
+    .compare-card.old { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); }
+    .compare-card.new { background: rgba(255,255,255,0.1); border: 1px solid var(--color-primary-500); }
+    .compare-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+    .compare-card.old h4 { color: rgba(255,255,255,0.5); }
+    .compare-card ul { list-style: none; }
+    .compare-card li { display: flex; align-items: flex-start; gap: 0.5rem; padding: 0.375rem 0; font-size: 0.875rem; line-height: 1.5; }
+    .compare-card.old li { color: rgba(255,255,255,0.4); }
+    .compare-card.new li { color: rgba(255,255,255,0.85); }
+    .compare-icon-x { color: var(--color-danger-500); flex-shrink: 0; margin-top: 0.1rem; }
+    .compare-icon-check { color: #5cdb6f; flex-shrink: 0; margin-top: 0.1rem; }
+
+    /* Testimonials */
+    .testimonials { padding: 5rem 0; background: var(--color-secondary-50); }
+    .testimonials h2 { font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; text-align: center; margin-bottom: 2.5rem; }
+    .test-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    .test-card { flex: 1; min-width: 260px; max-width: 360px; background: white; border-radius: 1rem; padding: 2rem; box-shadow: var(--shadow-2); }
+    .test-stars { color: var(--color-warning-500); margin-bottom: 0.75rem; }
+    .test-result { background: var(--color-success-200); color: var(--color-success-500); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.625rem; border-radius: 0.25rem; display: inline-block; margin-bottom: 0.75rem; }
+    .test-quote { font-size: 0.9375rem; color: var(--color-secondary-700); line-height: 1.6; margin-bottom: 1rem; }
+    .test-author { font-weight: 600; font-size: 0.875rem; }
+    .test-role { font-size: 0.75rem; color: var(--color-secondary-500); }
+
+    /* GDPR / Trust */
+    .trust-section { padding: 5rem 0; }
+    .trust-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; margin-top: 2.5rem; }
+    .trust-card { flex: 1; min-width: 200px; max-width: 260px; text-align: center; padding: 1.75rem; }
+    .trust-icon { width: 3rem; height: 3rem; background: var(--color-success-200); color: var(--color-success-500); border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; font-size: 1.375rem; margin: 0 auto 1rem; }
+    .trust-card h4 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 0.375rem; }
+    .trust-card p { font-size: 0.8125rem; color: var(--color-secondary-700); line-height: 1.5; }
+
+    /* Risk reversal CTA */
+    .risk-cta { padding: 2rem 0 5rem; }
+    .risk-card { background: var(--color-supply-200); border-radius: 1rem; padding: 3.5rem 2rem; text-align: center; }
+    .risk-card h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--color-supply-900); margin-bottom: 0.5rem; }
+    .risk-card p { color: var(--color-supply-700); margin-bottom: 0.375rem; font-size: 1rem; line-height: 1.5; }
+    .risk-card .risk-sub { font-size: 0.875rem; color: var(--color-supply-700); opacity: 0.8; margin-bottom: 2rem; }
+
+    /* Footer */
+    .footer { background: var(--color-secondary-50); padding: 3rem 0 1.5rem; border-top: 1px solid var(--color-secondary-300); }
+    .footer-grid { display: flex; gap: 3rem; flex-wrap: wrap; }
+    .footer-brand { flex: 2; min-width: 240px; }
+    .footer-brand .tagline { font-size: 1rem; color: var(--color-secondary-700); margin: 0.75rem 0; font-weight: 500; }
+    .footer-brand .desc { font-size: 0.8125rem; color: var(--color-secondary-500); line-height: 1.6; max-width: 320px; }
+    .footer-col { flex: 1; min-width: 140px; }
+    .footer-col h4 { font-size: 0.8125rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--color-secondary-900); }
+    .footer-col a { display: block; font-size: 0.8125rem; color: var(--color-secondary-500); margin-bottom: 0.5rem; text-decoration: none; }
+    .footer-col a:hover { color: var(--color-secondary-900); }
+    .footer-bottom { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--color-secondary-300); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.75rem; color: var(--color-secondary-500); }
+    .social-icons { display: flex; gap: 0.75rem; margin-top: 1rem; }
+    .social-icons a { display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background: var(--color-secondary-300); border-radius: 50%; color: var(--color-secondary-700); text-decoration: none; font-size: 0.75rem; }
+
+    .check-svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 0.15rem; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.25rem; }
+      .pillar-row, .pillar-row.reverse { flex-direction: column; }
+      .pillar-text, .pillar-visual { min-width: 100%; }
+      .compare-grid { flex-direction: column; }
+      .test-grid { flex-direction: column; align-items: center; }
+      .navbar-links { display: none; }
+      .footer-grid { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container-lg navbar-inner">
+    <a href="homepage.html">
+      <svg viewBox="0 0 105 24" fill="none" xmlns="http://www.w3.org/2000/svg" height="24">
+        <path d="M10.02 18.66c-1.68 0-3.15-.33-4.41-.99a7.35 7.35 0 01-2.97-2.76l2.52-2.16c.54.9 1.26 1.59 2.16 2.07.9.48 1.86.72 2.88.72.84 0 1.5-.15 1.98-.45.48-.3.72-.72.72-1.26 0-.48-.21-.87-.63-1.17-.42-.3-1.17-.57-2.25-.81l-1.68-.36c-1.74-.36-3.03-.96-3.87-1.8-.84-.84-1.26-1.89-1.26-3.15 0-.9.24-1.71.72-2.43a4.98 4.98 0 012.07-1.71c.9-.42 1.95-.63 3.15-.63 1.5 0 2.82.33 3.96.99 1.14.66 2.01 1.53 2.61 2.61l-2.52 2.07a4.82 4.82 0 00-1.74-1.8c-.72-.48-1.53-.72-2.43-.72-.72 0-1.29.15-1.71.45-.42.3-.63.69-.63 1.17 0 .48.21.87.63 1.17.42.3 1.14.54 2.16.72l1.68.36c1.86.36 3.21.99 4.05 1.89.84.9 1.26 1.98 1.26 3.24 0 .9-.24 1.71-.72 2.43a5.16 5.16 0 01-2.1 1.71c-.9.42-1.98.63-3.24.63zM23.88 18.66c-1.44 0-2.73-.33-3.87-.99a7.05 7.05 0 01-2.67-2.73c-.66-1.14-.99-2.46-.99-3.96s.33-2.82.99-3.96a7.05 7.05 0 012.67-2.73c1.14-.66 2.43-.99 3.87-.99s2.73.33 3.87.99a7.05 7.05 0 012.67 2.73c.66 1.14.99 2.46.99 3.96s-.33 2.82-.99 3.96a7.05 7.05 0 01-2.67 2.73c-1.14.66-2.43.99-3.87.99zm0-3.24c.78 0 1.47-.18 2.07-.54.6-.36 1.08-.87 1.44-1.53.36-.66.54-1.44.54-2.34 0-.9-.18-1.68-.54-2.34a3.76 3.76 0 00-1.44-1.53c-.6-.36-1.29-.54-2.07-.54-.78 0-1.47.18-2.07.54-.6.36-1.08.87-1.44 1.53-.36.66-.54 1.44-.54 2.34 0 .9.18 1.68.54 2.34.36.66.84 1.17 1.44 1.53.6.36 1.29.54 2.07.54zM33.3 18.36V4.56h3.42v2.16c.36-.72.9-1.29 1.62-1.71.72-.42 1.53-.63 2.43-.63v3.6h-.9c-.84 0-1.56.18-2.16.54-.6.36-.9 1.02-.9 1.98v7.86H33.3zM47.28 18.36c-1.08 0-1.92-.3-2.52-.9-.6-.6-.9-1.44-.9-2.52V7.68h-2.1V4.56h2.1V1.2h3.48v3.36h3.18v3.12h-3.18v6.72c0 .42.12.72.36.9.24.18.57.27.99.27h1.56v2.79h-2.97zM53.16 18.36V0h3.48v18.36h-3.48zM59.94 3.24c-.66 0-1.2-.21-1.62-.63-.42-.42-.63-.93-.63-1.53s.21-1.11.63-1.53c.42-.42.96-.63 1.62-.63.66 0 1.2.21 1.62.63.42.42.63.93.63 1.53s-.21 1.11-.63 1.53c-.42.42-.96.63-1.62.63zm-1.74 15.12V4.56h3.48v13.8h-3.48zM68.76 18.66c-1.68 0-3.15-.33-4.41-.99a7.35 7.35 0 01-2.97-2.76l2.52-2.16c.54.9 1.26 1.59 2.16 2.07.9.48 1.86.72 2.88.72.84 0 1.5-.15 1.98-.45.48-.3.72-.72.72-1.26 0-.48-.21-.87-.63-1.17-.42-.3-1.17-.57-2.25-.81l-1.68-.36c-1.74-.36-3.03-.96-3.87-1.8-.84-.84-1.26-1.89-1.26-3.15 0-.9.24-1.71.72-2.43a4.98 4.98 0 012.07-1.71c.9-.42 1.95-.63 3.15-.63 1.5 0 2.82.33 3.96.99 1.14.66 2.01 1.53 2.61 2.61l-2.52 2.07a4.82 4.82 0 00-1.74-1.8c-.72-.48-1.53-.72-2.43-.72-.72 0-1.29.15-1.71.45-.42.3-.63.69-.63 1.17 0 .48.21.87.63 1.17.42.3 1.14.54 2.16.72l1.68.36c1.86.36 3.21.99 4.05 1.89.84.9 1.26 1.98 1.26 3.24 0 .9-.24 1.71-.72 2.43a5.16 5.16 0 01-2.1 1.71c-.9.42-1.98.63-3.24.63z" fill="#0f0d0a"/>
+        <path d="M79.74 18.36V4.56h3.42v2.16c.36-.72.9-1.29 1.62-1.71.72-.42 1.53-.63 2.43-.63v3.6h-.9c-.84 0-1.56.18-2.16.54-.6.36-.9 1.02-.9 1.98v7.86h-3.51zM97.56 18.36c-1.08 0-1.92-.3-2.52-.9-.6-.6-.9-1.44-.9-2.52V7.68h-2.1V4.56h2.1V1.2h3.48v3.36h3.18v3.12h-3.18v6.72c0 .42.12.72.36.9.24.18.57.27.99.27h1.56v2.79h-2.97z" fill="#0f0d0a"/>
+      </svg>
+    </a>
+    <div class="navbar-links">
+      <a href="homepage.html">Find providers</a>
+      <a href="providers.html" style="font-weight:600;">Get clients</a>
+      <a href="#">Resources</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="#" class="btn-primary" style="text-decoration:none; margin-left:0.5rem;">Book a demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container-md">
+    <h1>Word of mouth built your agency. It won't scale it.</h1>
+    <p class="subtitle">Whether you're starting from zero or ready to grow what's already working, Sortlist gives your agency one system to generate clients on demand. Marketplace demand, AI outbound, and intent signals working while you deliver.</p>
+    <div class="hero-ctas">
+      <a href="pricing.html" class="btn-primary btn-lg" style="text-decoration:none;">See pricing</a>
+      <a href="#" class="btn-light btn-lg" style="text-decoration:none;">Book a demo</a>
+    </div>
+    <p class="hero-note">Trusted by 5,000+ agencies. One signed client pays for 2+ years.</p>
+  </div>
+</section>
+
+<!-- PROBLEM SECTION -->
+<section class="problem-section">
+  <div class="container-lg text-center">
+    <p style="font-size: 0.8125rem; font-weight: 600; color: var(--color-primary-500); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Sound familiar?</p>
+    <h2 style="font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; max-width: 600px; margin: 0 auto;">Your best month and your worst month are three phone calls apart</h2>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="problem-icon">&#128556;</div>
+        <h4>Pipeline lives in the founder's head</h4>
+        <p>One person holds all the relationships. When they're busy delivering, new business stops. No system, just hope.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">&#128295;</div>
+        <h4>Generic tools, zero results</h4>
+        <p>You tried generic sales tools. Weeks of setup, wrong audience, templates that sound like everyone else. Back to square one.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">&#128200;</div>
+        <h4>Feast or famine pipeline</h4>
+        <p>Three great months, then nothing. You can't forecast, you can't hire confidently, and it keeps you up at night.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">&#9200;</div>
+        <h4>No time to fix it</h4>
+        <p>You run an agency, not a sales ops team. You need a pipeline that works while you deliver for clients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLAR 1: MARKETPLACE (Inbound) -->
+<section class="pillar-section">
+  <div class="container-lg">
+    <div class="pillar-row">
+      <div class="pillar-text">
+        <span class="pillar-badge inbound"><span class="badge-dot"></span> Marketplace</span>
+        <h2>600,000 companies search Sortlist every month. They're looking for you.</h2>
+        <p class="lead">Get introduced to companies actively searching for your exact services. Not a directory listing that collects dust. A demand engine that sends you qualified buyers.</p>
+        <div class="pillar-result">Average agency: 3-8 qualified introductions per month</div>
+        <ul>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Verified profile with portfolio, reviews, and trust signals</span>
+          </li>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Smart matching connects you with buyers in your niche and geography</span>
+          </li>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Remove competitor suggestions from your profile page</span>
+          </li>
+        </ul>
+      </div>
+      <div class="pillar-visual">
+        <div class="v-card" style="border: 1px solid var(--color-primary-200);">
+          <div class="v-card-header">
+            <div class="v-card-avatar" style="background: var(--color-primary-200);"></div>
+            <div>
+              <div class="v-card-name">Your Agency</div>
+              <div class="v-card-sub">Software Development &middot; Amsterdam, NL</div>
+            </div>
+            <div style="margin-left:auto; display:flex; gap:0.125rem; color: var(--color-warning-500); font-size:0.75rem;">&#9733;&#9733;&#9733;&#9733;&#9733; <span style="color: var(--color-secondary-500); margin-left:0.25rem;">5.0 (42)</span></div>
+          </div>
+          <div style="height:0.5rem; background: var(--color-secondary-200); border-radius:0.25rem; margin-bottom:0.5rem;"></div>
+          <div style="height:0.5rem; background: var(--color-secondary-200); border-radius:0.25rem; width:75%; margin-bottom:1rem;"></div>
+          <div class="v-card-tags">
+            <span class="v-tag promoted">Promoted</span>
+            <span class="v-tag verified">Verified</span>
+            <span class="v-tag service">Web Development</span>
+            <span class="v-tag service">Mobile Apps</span>
+            <span class="v-tag service">UX/UI</span>
+          </div>
+          <div style="margin-top:1.25rem; padding-top:1rem; border-top:1px solid var(--color-secondary-200);">
+            <div style="display:flex; gap:1.5rem;">
+              <div style="text-align:center;">
+                <div style="font-size:1.25rem; font-weight:700; color:var(--color-primary-500);">47</div>
+                <div style="font-size:0.6875rem; color:var(--color-secondary-500);">Profile views this week</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:1.25rem; font-weight:700; color:var(--color-success-500);">5</div>
+                <div style="font-size:0.6875rem; color:var(--color-secondary-500);">New introductions</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:1.25rem; font-weight:700; color:var(--color-warning-500);">2</div>
+                <div style="font-size:0.6875rem; color:var(--color-secondary-500);">Proposals sent</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLAR 2: OUTBOUND (AI Prospecting) -->
+<section class="pillar-section alt">
+  <div class="container-lg">
+    <div class="pillar-row reverse">
+      <div class="pillar-text">
+        <span class="pillar-badge outbound"><span class="badge-dot"></span> AI Outbound</span>
+        <h2>Your first campaign configured in 48 hours. Not 4 weeks.</h2>
+        <p class="lead">Pre-built outbound blueprints designed specifically for agencies. Pick your niche, customize your message, and let AI handle the rest. Full deliverability ramps up during your first week. No SDR hire, no setup headache.</p>
+        <div class="pillar-result">Average: 12 qualified meetings from first 3 campaigns</div>
+        <ul>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Email + LinkedIn multichannel sequences, AI-personalized at scale</span>
+          </li>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Agency-specific blueprints: "SEO agency targeting e-commerce," "Dev studio targeting fintech," "PR agency targeting health &amp; wellness," and more</span>
+          </li>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Native in 6 languages: FR, NL, DE, ES, IT, EN</span>
+          </li>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>You review and approve every message before it sends. Your tone, your rules.</span>
+          </li>
+        </ul>
+      </div>
+      <div class="pillar-visual">
+        <div style="background: white; border-radius: 1rem; padding: 1.5rem; box-shadow: var(--shadow-2); border: 1px solid var(--color-secondary-300);">
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:1rem;">
+            <div style="width:8px; height:8px; background:#5cdb6f; border-radius:50%;"></div>
+            <span style="font-size:0.75rem; font-weight:600; color: var(--color-success-500);">Campaign active</span>
+          </div>
+          <div style="font-weight:600; font-size:0.9375rem; margin-bottom:0.25rem;">Blueprint: Dev agencies &rarr; Fintech</div>
+          <div style="font-size:0.8125rem; color: var(--color-secondary-700); margin-bottom:1.25rem;">Targeting CTOs at fintech startups in Benelux</div>
+          <div style="display:flex; gap:1.5rem; flex-wrap:wrap;">
+            <div style="text-align:center;">
+              <div style="font-size:1.5rem; font-weight:700; color: var(--color-primary-500);">247</div>
+              <div style="font-size:0.6875rem; color: var(--color-secondary-500);">Contacted</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:1.5rem; font-weight:700; color: var(--color-primary-500);">38%</div>
+              <div style="font-size:0.6875rem; color: var(--color-secondary-500);">Open rate</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:1.5rem; font-weight:700; color: var(--color-primary-500);">12</div>
+              <div style="font-size:0.6875rem; color: var(--color-secondary-500);">Replies</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-size:1.5rem; font-weight:700; color: var(--color-success-500);">4</div>
+              <div style="font-size:0.6875rem; color: var(--color-secondary-500);">Meetings booked</div>
+            </div>
+          </div>
+          <div style="margin-top:1rem; padding-top:1rem; border-top:1px solid var(--color-secondary-200); display:flex; gap:0.375rem;">
+            <span style="font-size:0.6875rem; padding:0.25rem 0.5rem; background:var(--color-primary-200); color:var(--color-primary-500); border-radius:0.25rem; font-weight:500;">Email</span>
+            <span style="font-size:0.6875rem; padding:0.25rem 0.5rem; background:#e8f4fd; color:#0a66c2; border-radius:0.25rem; font-weight:500;">LinkedIn</span>
+            <span style="font-size:0.6875rem; padding:0.25rem 0.5rem; background:var(--color-secondary-200); color:var(--color-secondary-700); border-radius:0.25rem; font-weight:500;">3 steps</span>
+            <span style="font-size:0.6875rem; padding:0.25rem 0.5rem; background:var(--color-secondary-200); color:var(--color-secondary-700); border-radius:0.25rem; font-weight:500;">DE language</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PILLAR 3: INTENT SIGNALS -->
+<section class="pillar-section">
+  <div class="container-lg">
+    <div class="pillar-row">
+      <div class="pillar-text">
+        <span class="pillar-badge signals"><span class="badge-dot"></span> Intent Signals</span>
+        <h2>Know who needs you before they post a brief</h2>
+        <p class="lead">See which companies visit your website, who's searching for your services on the marketplace, and which prospects just raised funding or hired a marketing lead. Act on intelligence, not cold lists.</p>
+        <div class="pillar-result">Average: 47 companies identified visiting your site per month</div>
+        <ul>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Radar: identify companies browsing your website (GDPR compliant, company-level only)</span>
+          </li>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Hiring and funding signals: spot companies ready to invest in your services</span>
+          </li>
+          <li>
+            <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Marketplace intent: see who's searching for your services right now</span>
+          </li>
+        </ul>
+      </div>
+      <div class="pillar-visual">
+        <div class="signal-grid">
+          <div class="signal-card hiring">
+            <div class="signal-icon">&#128188;</div>
+            <div class="signal-text">
+              <strong>MedTech AG is hiring a Head of Communications</strong>
+              <span>Munich, DE &middot; 2 hours ago &middot; Series B funded</span>
+            </div>
+          </div>
+          <div class="signal-card funding">
+            <div class="signal-icon">&#128176;</div>
+            <div class="signal-text">
+              <strong>PayFlow BV raised &euro;8M Series A</strong>
+              <span>Amsterdam, NL &middot; 1 day ago &middot; Looking for dev agency</span>
+            </div>
+          </div>
+          <div class="signal-card intent">
+            <div class="signal-icon">&#128161;</div>
+            <div class="signal-text">
+              <strong>LogiCorp SA is searching "PR agency Milan"</strong>
+              <span>Marketplace intent signal &middot; Active now</span>
+            </div>
+          </div>
+          <div class="signal-card hiring">
+            <div class="signal-icon">&#128065;</div>
+            <div class="signal-text">
+              <strong>FinServ Ltd visited your website 3 times this week</strong>
+              <span>London, UK &middot; Radar signal &middot; Viewed pricing page</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARE: DIY vs SORTLIST -->
+<section class="compare-section">
+  <div class="container-lg">
+    <h2>One system replaces your entire tool stack</h2>
+    <p class="lead">Stop stitching together 4 different tools that weren't built for agencies. Sortlist was built for agencies from day one.</p>
+
+    <div class="compare-grid">
+      <div class="compare-card old">
+        <h4>DIY with generic tools</h4>
+        <ul>
+          <li><span class="compare-icon-x">&#10007;</span> 2-4 weeks to set up workflows</li>
+          <li><span class="compare-icon-x">&#10007;</span> Import your own contact data</li>
+          <li><span class="compare-icon-x">&#10007;</span> Write all sequences from scratch</li>
+          <li><span class="compare-icon-x">&#10007;</span> No marketplace demand included</li>
+          <li><span class="compare-icon-x">&#10007;</span> 3-4 separate tools, 800+/month</li>
+        </ul>
+      </div>
+      <div class="compare-card new">
+        <h4>With Sortlist</h4>
+        <ul>
+          <li><span class="compare-icon-check">&#10003;</span> First campaign configured in 48 hours</li>
+          <li><span class="compare-icon-check">&#10003;</span> 10 years of agency market data built in</li>
+          <li><span class="compare-icon-check">&#10003;</span> AI-generated sequences for your niche</li>
+          <li><span class="compare-icon-check">&#10003;</span> 600K+ monthly marketplace searches included</li>
+          <li><span class="compare-icon-check">&#10003;</span> CRM sync: leads pushed to HubSpot, Pipedrive, or Teamleader automatically</li>
+          <li><span class="compare-icon-check">&#10003;</span> One system, one bill: &euro;199/month</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container-lg">
+    <h2>Agencies that stopped hoping and started closing</h2>
+    <p style="text-align:center; font-size:0.8125rem; color:var(--color-secondary-500); margin-bottom:0.5rem;">Representative results based on Sortlist+ agency outcomes</p>
+
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span class="test-result">4 new clients in 90 days</span>
+        <p class="test-quote">"We launched our first outbound campaign on a Tuesday. By Friday we had 3 replies. Two months later, 4 signed clients. The ROI paid for 3 years of Sortlist."</p>
+        <p class="test-author">Anne-Mie Vansteelant</p>
+        <p class="test-role">Managing Partner, Living Stone</p>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span class="test-result">Pipeline never empty since joining</span>
+        <p class="test-quote">"Before Sortlist, our pipeline was feast or famine. Now we have a steady flow of inbound leads plus outbound running in the background. We finally sleep at night."</p>
+        <p class="test-author">Alexandra Leunen</p>
+        <p class="test-role">New Business, Anais Digital</p>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span class="test-result">25K project from one signal</span>
+        <p class="test-quote">"The intent signals told us a prospect was hiring a marketing manager. We reached out that same day. Signed a 25K project two weeks later. That one signal paid for the year."</p>
+        <p class="test-author">Marc Wellens</p>
+        <p class="test-role">MD &amp; Founder, Duval Branding</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST / GDPR SECTION -->
+<section class="trust-section">
+  <div class="container-lg text-center">
+    <p style="font-size: 0.8125rem; font-weight: 600; color: var(--color-success-500); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem;">Built for trust</p>
+    <h2 style="font-family: var(--font-serif); font-size: 2.25rem; font-weight: 700; max-width: 560px; margin: 0 auto;">Privacy-first by design, not by afterthought</h2>
+    <p style="font-size: 1.0625rem; color: var(--color-secondary-700); max-width: 520px; margin: 0.75rem auto 0; line-height: 1.6;">Your data stays safe. Your prospects' data stays safe. Every feature is built with GDPR compliance at its core.</p>
+
+    <div class="trust-grid">
+      <div class="trust-card">
+        <div class="trust-icon">&#128274;</div>
+        <h4>Fully GDPR compliant</h4>
+        <p>Infrastructure hosted in the EU. Data processed under strict DPA agreements. Regular audits. No data sold to third parties, ever.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">&#127760;</div>
+        <h4>6 native languages</h4>
+        <p>Campaigns, templates, and support in FR, NL, DE, ES, IT, EN. Reach prospects in their language.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">&#128202;</div>
+        <h4>10 years of agency data</h4>
+        <p>80,000 agencies, millions of data points. Buyer behavior insights no generic tool can match.</p>
+      </div>
+      <div class="trust-card">
+        <div class="trust-icon">&#128101;</div>
+        <h4>Company-level identification only</h4>
+        <p>Radar identifies visiting companies, never individuals. No cookies tracking personal browsing. IP-to-company resolution only, fully compliant by design.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISK REVERSAL CTA -->
+<section class="risk-cta">
+  <div class="container-md">
+    <div class="risk-card">
+      <h2>See it working for your agency before you commit</h2>
+      <p>Book a 15-minute demo. We'll show you live signals: who's visiting your site, who's searching for your services, and where your next client is hiding.</p>
+      <p class="risk-sub">No commitment. No credit card. Just proof that it works for you.</p>
+      <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+        <a href="#" class="btn-primary btn-lg" style="text-decoration:none;">Book a demo</a>
+        <a href="pricing.html" class="btn-secondary btn-lg" style="text-decoration:none; background:white;">See pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container-lg">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg viewBox="0 0 105 24" fill="none" xmlns="http://www.w3.org/2000/svg" height="22">
+          <path d="M10.02 18.66c-1.68 0-3.15-.33-4.41-.99a7.35 7.35 0 01-2.97-2.76l2.52-2.16c.54.9 1.26 1.59 2.16 2.07.9.48 1.86.72 2.88.72.84 0 1.5-.15 1.98-.45.48-.3.72-.72.72-1.26 0-.48-.21-.87-.63-1.17-.42-.3-1.17-.57-2.25-.81l-1.68-.36c-1.74-.36-3.03-.96-3.87-1.8-.84-.84-1.26-1.89-1.26-3.15 0-.9.24-1.71.72-2.43a4.98 4.98 0 012.07-1.71c.9-.42 1.95-.63 3.15-.63 1.5 0 2.82.33 3.96.99 1.14.66 2.01 1.53 2.61 2.61l-2.52 2.07a4.82 4.82 0 00-1.74-1.8c-.72-.48-1.53-.72-2.43-.72-.72 0-1.29.15-1.71.45-.42.3-.63.69-.63 1.17 0 .48.21.87.63 1.17.42.3 1.14.54 2.16.72l1.68.36c1.86.36 3.21.99 4.05 1.89.84.9 1.26 1.98 1.26 3.24 0 .9-.24 1.71-.72 2.43a5.16 5.16 0 01-2.1 1.71c-.9.42-1.98.63-3.24.63zM23.88 18.66c-1.44 0-2.73-.33-3.87-.99a7.05 7.05 0 01-2.67-2.73c-.66-1.14-.99-2.46-.99-3.96s.33-2.82.99-3.96a7.05 7.05 0 012.67-2.73c1.14-.66 2.43-.99 3.87-.99s2.73.33 3.87.99a7.05 7.05 0 012.67 2.73c.66 1.14.99 2.46.99 3.96s-.33 2.82-.99 3.96a7.05 7.05 0 01-2.67 2.73c-1.14.66-2.43.99-3.87.99zm0-3.24c.78 0 1.47-.18 2.07-.54.6-.36 1.08-.87 1.44-1.53.36-.66.54-1.44.54-2.34 0-.9-.18-1.68-.54-2.34a3.76 3.76 0 00-1.44-1.53c-.6-.36-1.29-.54-2.07-.54-.78 0-1.47.18-2.07.54-.6.36-1.08.87-1.44 1.53-.36.66-.54 1.44-.54 2.34 0 .9.18 1.68.54 2.34.36.66.84 1.17 1.44 1.53.6.36 1.29.54 2.07.54zM33.3 18.36V4.56h3.42v2.16c.36-.72.9-1.29 1.62-1.71.72-.42 1.53-.63 2.43-.63v3.6h-.9c-.84 0-1.56.18-2.16.54-.6.36-.9 1.02-.9 1.98v7.86H33.3zM47.28 18.36c-1.08 0-1.92-.3-2.52-.9-.6-.6-.9-1.44-.9-2.52V7.68h-2.1V4.56h2.1V1.2h3.48v3.36h3.18v3.12h-3.18v6.72c0 .42.12.72.36.9.24.18.57.27.99.27h1.56v2.79h-2.97zM53.16 18.36V0h3.48v18.36h-3.48zM59.94 3.24c-.66 0-1.2-.21-1.62-.63-.42-.42-.63-.93-.63-1.53s.21-1.11.63-1.53c.42-.42.96-.63 1.62-.63.66 0 1.2.21 1.62.63.42.42.63.93.63 1.53s-.21 1.11-.63 1.53c-.42.42-.96.63-1.62.63zm-1.74 15.12V4.56h3.48v13.8h-3.48zM68.76 18.66c-1.68 0-3.15-.33-4.41-.99a7.35 7.35 0 01-2.97-2.76l2.52-2.16c.54.9 1.26 1.59 2.16 2.07.9.48 1.86.72 2.88.72.84 0 1.5-.15 1.98-.45.48-.3.72-.72.72-1.26 0-.48-.21-.87-.63-1.17-.42-.3-1.17-.57-2.25-.81l-1.68-.36c-1.74-.36-3.03-.96-3.87-1.8-.84-.84-1.26-1.89-1.26-3.15 0-.9.24-1.71.72-2.43a4.98 4.98 0 012.07-1.71c.9-.42 1.95-.63 3.15-.63 1.5 0 2.82.33 3.96.99 1.14.66 2.01 1.53 2.61 2.61l-2.52 2.07a4.82 4.82 0 00-1.74-1.8c-.72-.48-1.53-.72-2.43-.72-.72 0-1.29.15-1.71.45-.42.3-.63.69-.63 1.17 0 .48.21.87.63 1.17.42.3 1.14.54 2.16.72l1.68.36c1.86.36 3.21.99 4.05 1.89.84.9 1.26 1.98 1.26 3.24 0 .9-.24 1.71-.72 2.43a5.16 5.16 0 01-2.1 1.71c-.9.42-1.98.63-3.24.63z" fill="#0f0d0a"/>
+          <path d="M79.74 18.36V4.56h3.42v2.16c.36-.72.9-1.29 1.62-1.71.72-.42 1.53-.63 2.43-.63v3.6h-.9c-.84 0-1.56.18-2.16.54-.6.36-.9 1.02-.9 1.98v7.86h-3.51zM97.56 18.36c-1.08 0-1.92-.3-2.52-.9-.6-.6-.9-1.44-.9-2.52V7.68h-2.1V4.56h2.1V1.2h3.48v3.36h3.18v3.12h-3.18v6.72c0 .42.12.72.36.9.24.18.57.27.99.27h1.56v2.79h-2.97z" fill="#0f0d0a"/>
+        </svg>
+        <p class="tagline">The client acquisition engine for agencies.</p>
+        <p class="desc">Marketplace demand, AI outbound, and intent signals in one system. Built for agencies. GDPR compliant.</p>
+        <div class="social-icons">
+          <a href="#">X</a><a href="#">f</a><a href="#">in</a><a href="#">ig</a><a href="#">yt</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>For clients</h4>
+        <a href="#">Post a project</a>
+        <a href="#">Explore agencies</a>
+      </div>
+      <div class="footer-col">
+        <h4>For agencies</h4>
+        <a href="providers.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="#">Get started</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Blog</a>
+        <a href="#">Data Hub</a>
+        <a href="#">Help &amp; Support</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Jobs</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>2026 &copy; Sortlist. All rights reserved.</span>
+      <span>Terms of Use &middot; Privacy Policy &middot; Manage cookies</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

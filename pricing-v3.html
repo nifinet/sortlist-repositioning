@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sortlist+ Pricing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, sans-serif;
+      --color-primary-100: #f6f8fe;
+      --color-primary-200: #e8edfc;
+      --color-primary-500: #200df2;
+      --color-primary-900: #050A3F;
+      --color-secondary-50: #f8f7f6;
+      --color-secondary-200: #f1edea;
+      --color-secondary-300: #e7dfda;
+      --color-secondary-500: #7e7367;
+      --color-secondary-700: #43403C;
+      --color-secondary-900: #0f0d0a;
+      --color-neutral-50: #ffffff;
+      --color-neutral-100: #f5f5f5;
+      --color-success-200: #d4e9c9;
+      --color-success-500: #337055;
+      --color-danger-500: #d32f2f;
+      --color-supply-200: #e2f0db;
+      --color-supply-700: #3d6e34;
+      --color-supply-900: #2f5926;
+      --color-warning-500: #f9af1f;
+      --shadow-2: 0 2px 4px rgba(15,13,10,.1), 0 0 20px rgba(15,13,10,.08);
+      --shadow-3: 0 4px 8px rgba(15,13,10,.125), 0 0 25px rgba(15,13,10,.1);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: var(--font-sans); color: var(--color-secondary-900); background: var(--color-neutral-50); -webkit-font-smoothing: antialiased; }
+    a { color: var(--color-primary-500); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container-lg { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+    .container-md { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+    .container-sm { max-width: 640px; margin: 0 auto; padding: 0 1.5rem; }
+    .text-center { text-align: center; }
+
+    /* Navbar */
+    .navbar { position: sticky; top: 0; z-index: 100; background: var(--color-neutral-50); border-bottom: 1px solid var(--color-secondary-300); }
+    .navbar-inner { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 0; }
+    .navbar-links { display: flex; align-items: center; gap: 2rem; }
+    .navbar-links a { color: var(--color-secondary-700); font-size: 0.875rem; font-weight: 500; text-decoration: none; }
+    .navbar-links a:hover { color: var(--color-secondary-900); }
+    .btn-primary { background: var(--color-primary-500); color: white; border: none; padding: 0.625rem 1.25rem; border-radius: 0.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600; cursor: pointer; transition: all 0.2s; display: inline-block; }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: var(--shadow-2); }
+    .btn-secondary { background: transparent; color: var(--color-secondary-900); border: 1px solid var(--color-secondary-300); padding: 0.625rem 1.25rem; border-radius: 0.5rem; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.2s; display: inline-block; }
+    .btn-secondary:hover { border-color: var(--color-secondary-700); }
+    .btn-lg { padding: 0.875rem 2rem; font-size: 1rem; }
+    .btn-md { padding: 0.75rem 1.5rem; font-size: 0.9375rem; }
+
+    /* Hero */
+    .hero { background: var(--color-primary-900); padding: 5rem 0 8rem; text-align: center; }
+    .hero h1 { font-family: var(--font-serif); font-size: 3.25rem; font-weight: 700; color: white; line-height: 1.12; max-width: 700px; margin: 0 auto; }
+    .hero .subtitle { color: rgba(255,255,255,0.7); font-size: 1.125rem; margin-top: 1.25rem; line-height: 1.6; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .hero-curve { height: 80px; background: var(--color-primary-900); border-radius: 0 0 50% 50% / 0 0 100% 100%; margin-top: -1px; }
+
+    /* Plan card */
+    .plan-section { margin-top: -7rem; padding-bottom: 4rem; position: relative; z-index: 2; }
+    .plan-card { max-width: 580px; margin: 0 auto; background: white; border: 2px solid var(--color-primary-500); border-radius: 1.25rem; box-shadow: var(--shadow-3); overflow: hidden; }
+    .plan-header { padding: 2.5rem 2.5rem 2rem; text-align: center; border-bottom: 1px solid var(--color-neutral-100); }
+    .plan-badge { display: inline-block; background: var(--color-primary-200); color: var(--color-primary-500); font-size: 0.75rem; font-weight: 700; padding: 0.3rem 0.875rem; border-radius: 1rem; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 1rem; }
+    .plan-name { font-size: 1.5rem; font-weight: 700; }
+    .plan-tagline { font-size: 0.9375rem; color: var(--color-secondary-700); margin-top: 0.375rem; line-height: 1.5; }
+    .plan-price-row { margin-top: 1.5rem; display: flex; align-items: baseline; justify-content: center; gap: 0.25rem; }
+    .plan-price-row .currency { font-size: 1.5rem; font-weight: 700; }
+    .plan-price-row .amount { font-size: 4rem; font-weight: 700; line-height: 1; }
+    .plan-price-row .period { font-size: 1rem; color: var(--color-secondary-500); }
+    .plan-annual-note { font-size: 0.8125rem; color: var(--color-secondary-500); margin-top: 0.375rem; }
+    .plan-roi { margin-top: 1rem; background: var(--color-success-200); color: var(--color-success-500); padding: 0.625rem 1rem; border-radius: 0.5rem; font-size: 0.8125rem; font-weight: 600; display: inline-block; }
+
+    /* Features */
+    .plan-features { padding: 2rem 2.5rem; }
+    .plan-features-label { font-size: 0.75rem; font-weight: 700; color: var(--color-secondary-500); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 1rem; }
+    .feature-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.625rem 0; border-bottom: 1px solid var(--color-neutral-100); }
+    .feature-item:last-child { border-bottom: none; }
+    .feature-check { width: 1.25rem; height: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; color: var(--color-success-500); }
+    .feature-text { flex: 1; }
+    .feature-text strong { font-size: 0.9375rem; font-weight: 600; display: block; color: var(--color-secondary-900); }
+    .feature-text span { font-size: 0.8125rem; color: var(--color-secondary-500); line-height: 1.4; }
+    .feature-value { font-size: 0.6875rem; color: var(--color-secondary-500); background: var(--color-secondary-200); padding: 0.2rem 0.5rem; border-radius: 0.25rem; white-space: nowrap; flex-shrink: 0; margin-top: 0.15rem; }
+
+    /* CTA */
+    .plan-cta { padding: 0 2.5rem 2.5rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; }
+    .plan-cta .btn-primary { width: 100%; text-align: center; font-size: 1rem; padding: 1rem; }
+    .plan-cta .demo-link { font-size: 0.875rem; color: var(--color-primary-500); font-weight: 500; }
+    .plan-cta .no-risk { font-size: 0.75rem; color: var(--color-secondary-500); margin-top: 0.25rem; }
+
+    /* Value stack */
+    /* Credits section */
+    .credits-section { padding: 4rem 0 3rem; }
+    .credits-section h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 0.5rem; }
+    .credits-section .credits-sub { text-align: center; color: var(--color-secondary-700); font-size: 1rem; margin-bottom: 2.5rem; max-width: 520px; margin-left: auto; margin-right: auto; }
+    .credits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; max-width: 780px; margin: 0 auto; }
+    .credit-card { background: white; border: 1px solid var(--color-secondary-300); border-radius: 1rem; padding: 2rem 1.5rem; text-align: center; transition: box-shadow 0.2s; }
+    .credit-card:hover { box-shadow: var(--shadow-2); }
+    .credit-icon { width: 3.5rem; height: 3.5rem; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin: 0 auto 1rem; }
+    .credit-card h3 { font-size: 0.9375rem; font-weight: 700; margin-bottom: 0.375rem; }
+    .credit-card .credit-desc { font-size: 0.8125rem; color: var(--color-secondary-500); line-height: 1.5; margin-bottom: 1rem; }
+    .credit-cost { display: inline-block; background: var(--color-primary-100); color: var(--color-primary-500); font-size: 0.875rem; font-weight: 700; padding: 0.375rem 0.875rem; border-radius: 2rem; }
+    .credit-cost.included { background: var(--color-success-200); color: var(--color-success-500); }
+    .credits-note { text-align: center; margin-top: 1.75rem; font-size: 0.8125rem; color: var(--color-secondary-500); max-width: 480px; margin-left: auto; margin-right: auto; line-height: 1.6; }
+    @media (max-width: 768px) { .credits-grid { grid-template-columns: 1fr; max-width: 320px; } }
+
+    .value-stack { padding: 4rem 0; background: var(--color-secondary-50); }
+    .value-stack h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 0.5rem; }
+    .value-stack .sub { text-align: center; color: var(--color-secondary-700); font-size: 1rem; margin-bottom: 2.5rem; }
+    .stack-grid { display: flex; flex-direction: column; gap: 0.75rem; max-width: 580px; margin: 0 auto; }
+    .stack-item { display: flex; align-items: center; justify-content: space-between; background: white; border-radius: 0.75rem; padding: 1rem 1.25rem; box-shadow: var(--shadow-2); }
+    .stack-item-left { display: flex; align-items: center; gap: 0.75rem; }
+    .stack-icon { width: 2.25rem; height: 2.25rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+    .stack-item strong { font-size: 0.875rem; display: block; }
+    .stack-item .stack-desc { font-size: 0.75rem; color: var(--color-secondary-500); }
+    .stack-value { font-size: 0.8125rem; color: var(--color-secondary-500); text-decoration: line-through; white-space: nowrap; }
+    .stack-total { max-width: 580px; margin: 1.5rem auto 0; background: var(--color-primary-900); border-radius: 0.75rem; padding: 1.5rem; display: flex; align-items: center; justify-content: space-between; color: white; }
+    .stack-total .total-label { font-size: 0.875rem; opacity: 0.7; }
+    .stack-total .total-old { font-size: 1.125rem; text-decoration: line-through; opacity: 0.5; }
+    .stack-total .total-new { font-size: 2rem; font-weight: 700; }
+    .stack-total .total-period { font-size: 0.875rem; opacity: 0.7; }
+
+    /* Testimonials */
+    .testimonials { padding: 4rem 0; }
+    .testimonials h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2rem; }
+    .test-grid { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
+    .test-card { flex: 1; min-width: 260px; max-width: 360px; background: white; border-radius: 1rem; padding: 2rem; box-shadow: var(--shadow-2); }
+    .test-stars { color: var(--color-warning-500); margin-bottom: 0.75rem; }
+    .test-result { background: var(--color-success-200); color: var(--color-success-500); font-size: 0.75rem; font-weight: 700; padding: 0.25rem 0.625rem; border-radius: 0.25rem; display: inline-block; margin-bottom: 0.75rem; }
+    .test-quote { font-size: 0.9375rem; color: var(--color-secondary-700); line-height: 1.6; margin-bottom: 1rem; }
+    .test-author { font-weight: 600; font-size: 0.875rem; }
+    .test-role { font-size: 0.75rem; color: var(--color-secondary-500); }
+
+    /* FAQ */
+    .faq-section { padding: 4rem 0; background: var(--color-secondary-50); }
+    .faq-section h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; text-align: center; margin-bottom: 2rem; }
+    .faq-card { border: 1px solid var(--color-secondary-900); border-radius: 0.75rem; overflow: hidden; box-shadow: var(--shadow-2); background: white; }
+    .faq-item { border-bottom: 1px solid var(--color-secondary-300); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question { width: 100%; display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; background: var(--color-secondary-50); border: none; font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 600; color: var(--color-secondary-900); cursor: pointer; text-align: left; transition: background 0.15s; }
+    .faq-question:hover { background: var(--color-secondary-200); }
+    .faq-arrow { font-size: 1.25rem; transition: transform 0.2s; color: var(--color-secondary-700); }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
+    .faq-answer-inner { padding: 1rem 1.5rem 1.5rem; font-size: 0.875rem; color: var(--color-secondary-700); line-height: 1.7; background: white; }
+    .faq-item.open .faq-answer { max-height: 500px; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+    /* Risk reversal CTA */
+    .risk-cta { padding: 2rem 0 5rem; }
+    .risk-card { background: var(--color-supply-200); border-radius: 1rem; padding: 3.5rem 2rem; text-align: center; }
+    .risk-card h2 { font-family: var(--font-serif); font-size: 2rem; font-weight: 700; color: var(--color-supply-900); margin-bottom: 0.5rem; }
+    .risk-card p { color: var(--color-supply-700); margin-bottom: 0.375rem; font-size: 1rem; line-height: 1.5; }
+    .risk-card .risk-sub { font-size: 0.875rem; color: var(--color-supply-700); opacity: 0.8; margin-bottom: 2rem; }
+
+    /* Footer */
+    .footer { background: var(--color-secondary-50); padding: 3rem 0 1.5rem; border-top: 1px solid var(--color-secondary-300); }
+    .footer-grid { display: flex; gap: 3rem; flex-wrap: wrap; }
+    .footer-brand { flex: 2; min-width: 240px; }
+    .footer-brand .tagline { font-size: 1rem; color: var(--color-secondary-700); margin: 0.75rem 0; font-weight: 500; }
+    .footer-brand .desc { font-size: 0.8125rem; color: var(--color-secondary-500); line-height: 1.6; max-width: 320px; }
+    .footer-col { flex: 1; min-width: 140px; }
+    .footer-col h4 { font-size: 0.8125rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--color-secondary-900); }
+    .footer-col a { display: block; font-size: 0.8125rem; color: var(--color-secondary-500); margin-bottom: 0.5rem; text-decoration: none; }
+    .footer-col a:hover { color: var(--color-secondary-900); }
+    .footer-bottom { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--color-secondary-300); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; font-size: 0.75rem; color: var(--color-secondary-500); }
+    .social-icons { display: flex; gap: 0.75rem; margin-top: 1rem; }
+    .social-icons a { display: flex; align-items: center; justify-content: center; width: 2rem; height: 2rem; background: var(--color-secondary-300); border-radius: 50%; color: var(--color-secondary-700); text-decoration: none; font-size: 0.75rem; }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2rem; }
+      .plan-header, .plan-features, .plan-cta { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .plan-price-row .amount { font-size: 3rem; }
+      .navbar-links { display: none; }
+      .footer-grid { flex-direction: column; }
+      .test-grid { flex-direction: column; align-items: center; }
+      .stack-total { flex-direction: column; text-align: center; gap: 0.5rem; }
+    }
+
+    .check-svg { width: 1.25rem; height: 1.25rem; flex-shrink: 0; margin-top: 0.1rem; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="container-lg navbar-inner">
+    <a href="homepage.html">
+      <svg viewBox="0 0 105 24" fill="none" xmlns="http://www.w3.org/2000/svg" height="24">
+        <path d="M10.02 18.66c-1.68 0-3.15-.33-4.41-.99a7.35 7.35 0 01-2.97-2.76l2.52-2.16c.54.9 1.26 1.59 2.16 2.07.9.48 1.86.72 2.88.72.84 0 1.5-.15 1.98-.45.48-.3.72-.72.72-1.26 0-.48-.21-.87-.63-1.17-.42-.3-1.17-.57-2.25-.81l-1.68-.36c-1.74-.36-3.03-.96-3.87-1.8-.84-.84-1.26-1.89-1.26-3.15 0-.9.24-1.71.72-2.43a4.98 4.98 0 012.07-1.71c.9-.42 1.95-.63 3.15-.63 1.5 0 2.82.33 3.96.99 1.14.66 2.01 1.53 2.61 2.61l-2.52 2.07a4.82 4.82 0 00-1.74-1.8c-.72-.48-1.53-.72-2.43-.72-.72 0-1.29.15-1.71.45-.42.3-.63.69-.63 1.17 0 .48.21.87.63 1.17.42.3 1.14.54 2.16.72l1.68.36c1.86.36 3.21.99 4.05 1.89.84.9 1.26 1.98 1.26 3.24 0 .9-.24 1.71-.72 2.43a5.16 5.16 0 01-2.1 1.71c-.9.42-1.98.63-3.24.63zM23.88 18.66c-1.44 0-2.73-.33-3.87-.99a7.05 7.05 0 01-2.67-2.73c-.66-1.14-.99-2.46-.99-3.96s.33-2.82.99-3.96a7.05 7.05 0 012.67-2.73c1.14-.66 2.43-.99 3.87-.99s2.73.33 3.87.99a7.05 7.05 0 012.67 2.73c.66 1.14.99 2.46.99 3.96s-.33 2.82-.99 3.96a7.05 7.05 0 01-2.67 2.73c-1.14.66-2.43.99-3.87.99zm0-3.24c.78 0 1.47-.18 2.07-.54.6-.36 1.08-.87 1.44-1.53.36-.66.54-1.44.54-2.34 0-.9-.18-1.68-.54-2.34a3.76 3.76 0 00-1.44-1.53c-.6-.36-1.29-.54-2.07-.54-.78 0-1.47.18-2.07.54-.6.36-1.08.87-1.44 1.53-.36.66-.54 1.44-.54 2.34 0 .9.18 1.68.54 2.34.36.66.84 1.17 1.44 1.53.6.36 1.29.54 2.07.54zM33.3 18.36V4.56h3.42v2.16c.36-.72.9-1.29 1.62-1.71.72-.42 1.53-.63 2.43-.63v3.6h-.9c-.84 0-1.56.18-2.16.54-.6.36-.9 1.02-.9 1.98v7.86H33.3zM47.28 18.36c-1.08 0-1.92-.3-2.52-.9-.6-.6-.9-1.44-.9-2.52V7.68h-2.1V4.56h2.1V1.2h3.48v3.36h3.18v3.12h-3.18v6.72c0 .42.12.72.36.9.24.18.57.27.99.27h1.56v2.79h-2.97zM53.16 18.36V0h3.48v18.36h-3.48zM59.94 3.24c-.66 0-1.2-.21-1.62-.63-.42-.42-.63-.93-.63-1.53s.21-1.11.63-1.53c.42-.42.96-.63 1.62-.63.66 0 1.2.21 1.62.63.42.42.63.93.63 1.53s-.21 1.11-.63 1.53c-.42.42-.96.63-1.62.63zm-1.74 15.12V4.56h3.48v13.8h-3.48zM68.76 18.66c-1.68 0-3.15-.33-4.41-.99a7.35 7.35 0 01-2.97-2.76l2.52-2.16c.54.9 1.26 1.59 2.16 2.07.9.48 1.86.72 2.88.72.84 0 1.5-.15 1.98-.45.48-.3.72-.72.72-1.26 0-.48-.21-.87-.63-1.17-.42-.3-1.17-.57-2.25-.81l-1.68-.36c-1.74-.36-3.03-.96-3.87-1.8-.84-.84-1.26-1.89-1.26-3.15 0-.9.24-1.71.72-2.43a4.98 4.98 0 012.07-1.71c.9-.42 1.95-.63 3.15-.63 1.5 0 2.82.33 3.96.99 1.14.66 2.01 1.53 2.61 2.61l-2.52 2.07a4.82 4.82 0 00-1.74-1.8c-.72-.48-1.53-.72-2.43-.72-.72 0-1.29.15-1.71.45-.42.3-.63.69-.63 1.17 0 .48.21.87.63 1.17.42.3 1.14.54 2.16.72l1.68.36c1.86.36 3.21.99 4.05 1.89.84.9 1.26 1.98 1.26 3.24 0 .9-.24 1.71-.72 2.43a5.16 5.16 0 01-2.1 1.71c-.9.42-1.98.63-3.24.63zM80.64 18.36c-1.08 0-1.92-.3-2.52-.9-.6-.6-.9-1.44-.9-2.52V7.68h-2.1V4.56h2.1V1.2h3.48v3.36h3.18v3.12h-3.18v6.72c0 .42.12.72.36.9.24.18.57.27.99.27h1.56v2.79h-2.97z" fill="#0f0d0a"/>
+      </svg>
+    </a>
+    <div class="navbar-links">
+      <a href="homepage.html">Find providers</a>
+      <a href="providers.html">Get clients</a>
+      <a href="#">Resources</a>
+      <a href="#" class="btn-primary" style="text-decoration:none;">Book a demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container-md">
+    <h1>One plan. Credits included. Pay as you grow.</h1>
+    <p class="subtitle">Start at &euro;199/month with 200 credits included to identify visitors, access opportunities, and run outbound. Use more? Buy more. Most agencies stay within the base plan.</p>
+  </div>
+</section>
+<div class="hero-curve"></div>
+
+<!-- PLAN CARD -->
+<section class="plan-section">
+  <div class="container-lg">
+    <div class="plan-card">
+
+      <div class="plan-header">
+        <span class="plan-badge">Credits included</span>
+        <div class="plan-name">Sortlist+</div>
+        <p class="plan-tagline">Marketplace leads, AI outbound, visitor identification, SEO visibility, and intent signals. Credits included in your plan. Need more? Buy as you go.</p>
+        <div class="plan-price-row">
+          <span class="currency">&euro;</span>
+          <span class="amount">199</span>
+          <span class="period">/month</span>
+        </div>
+        <p class="plan-annual-note">Billed annually. <strong>200 credits included every month.</strong></p>
+        <div class="plan-roi">One new client = 10-50x return on your annual investment</div>
+      </div>
+
+      <div class="plan-features">
+        <p class="plan-features-label">Everything included</p>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>Marketplace leads</strong>
+            <span>Get introduced to companies actively searching for your services. 600,000+ searches/month.</span>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>Radar: Website visitor identification</strong>
+            <span>See which companies visit your site. Average: 47 companies identified per month.</span>
+          </div>
+          <span class="feature-value">Worth 150+/mo</span>
+        </div>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>AI outbound sequences</strong>
+            <span>Email + LinkedIn campaigns. Pre-built blueprints for agencies. First campaign configured in 48 hours. You review and approve every message before it sends.</span>
+          </div>
+          <span class="feature-value">Worth 99+/mo</span>
+        </div>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>Visibility module</strong>
+            <span>Get listed on top of directories. Stand out from competitors. Drive traffic to your profile.</span>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>AEO/GEO package</strong>
+            <span>Answer Engine Optimization. Get recommended by AI assistants when prospects ask for agencies like yours.</span>
+          </div>
+          <span class="feature-value">Worth 500+/mo</span>
+        </div>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>SEO backlinks from Sortlist</strong>
+            <span>High-authority backlinks to boost your domain ranking. Backlink services charge 200+ per link.</span>
+          </div>
+          <span class="feature-value">Worth 200+/link</span>
+        </div>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>Verified badge + remove competitors</strong>
+            <span>Build trust instantly. Remove competitor suggestions from your profile page.</span>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>CRM integrations</strong> <span style="background:var(--color-primary-200); color:var(--color-primary-500); font-size:0.6875rem; font-weight:700; padding:0.15rem 0.5rem; border-radius:1rem; margin-left:0.375rem; vertical-align:middle;">Popular</span>
+            <span>Push leads directly to HubSpot, Pipedrive, or Teamleader. No copy-pasting. Your pipeline stays updated automatically.</span>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>Intent signals</strong>
+            <span>Hiring signals, funding alerts, marketplace search intent. Know who needs you before they post a brief.</span>
+          </div>
+        </div>
+
+        <div class="feature-item">
+          <svg class="check-svg" viewBox="0 0 24 24" fill="none" stroke="#337055" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          <div class="feature-text">
+            <strong>Market insights</strong>
+            <span>See which companies are actively searching for the services you provide. Updated weekly.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="plan-cta">
+        <a href="#" class="btn-primary" style="text-decoration:none;">Book a demo</a>
+        <a href="#" class="demo-link">or start your free trial</a>
+        <p class="no-risk">No long-term lock-in. Cancel anytime. Most agencies stay within the base plan.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW CREDITS WORK -->
+<section class="credits-section">
+  <div class="container-lg">
+    <h2>How credits work</h2>
+    <p class="credits-sub">Your plan includes credits. Every action in Sortlist costs a small number of credits. Most agencies never need to buy more.</p>
+
+    <div class="credits-grid">
+      <div class="credit-card">
+        <div class="credit-icon" style="background: var(--color-primary-100); color: var(--color-primary-500);">&#128065;</div>
+        <h3>Identify a company visiting your site</h3>
+        <p class="credit-desc">A SaaS company from Munich lands on your portfolio page. You see their name, pages visited, and time spent.</p>
+        <span class="credit-cost">~20 credits</span>
+      </div>
+
+      <div class="credit-card">
+        <div class="credit-icon" style="background: #fff3d6; color: #b8860b;">&#128196;</div>
+        <h3>View an opportunity brief</h3>
+        <p class="credit-desc">A company posts a brief looking for a branding agency. You open the brief to see budget, timeline, and requirements.</p>
+        <span class="credit-cost">~20 credits</span>
+      </div>
+
+      <div class="credit-card">
+        <div class="credit-icon" style="background: var(--color-success-200); color: var(--color-success-500);">&#129309;</div>
+        <h3>Get introduced to a hot lead</h3>
+        <p class="credit-desc">A qualified prospect is ready to talk. Sortlist makes the introduction. You pitch directly to a decision-maker.</p>
+        <span class="credit-cost">Up to 600 credits</span>
+      </div>
+    </div>
+
+    <p class="credits-note">Your plan includes 200 credits/month to cover typical usage. If you want to go further, additional credits are available on demand. No surprises, no hidden fees.</p>
+  </div>
+</section>
+
+<!-- VALUE STACK -->
+<section class="value-stack">
+  <div class="container-md">
+    <h2>What your credits unlock</h2>
+    <p class="sub">One subscription replaces your entire acquisition tool stack. Here's what it would cost elsewhere.</p>
+
+    <div class="stack-grid">
+      <div class="stack-item">
+        <div class="stack-item-left">
+          <div class="stack-icon" style="background: var(--color-primary-200); color: var(--color-primary-500);">&#128200;</div>
+          <div>
+            <strong>Visitor identification (Radar)</strong>
+            <span class="stack-desc">Visitor identification tools</span>
+          </div>
+        </div>
+        <span class="stack-value">150+/mo</span>
+      </div>
+      <div class="stack-item">
+        <div class="stack-item-left">
+          <div class="stack-icon" style="background: #fde8e8; color: #d32f2f;">&#128231;</div>
+          <div>
+            <strong>Outbound sequences</strong>
+            <span class="stack-desc">Outbound sequence platforms</span>
+          </div>
+        </div>
+        <span class="stack-value">99+/mo</span>
+      </div>
+      <div class="stack-item">
+        <div class="stack-item-left">
+          <div class="stack-icon" style="background: var(--color-success-200); color: var(--color-success-500);">&#128161;</div>
+          <div>
+            <strong>Intent signals</strong>
+            <span class="stack-desc">Intent data platforms</span>
+          </div>
+        </div>
+        <span class="stack-value">200+/mo</span>
+      </div>
+      <div class="stack-item">
+        <div class="stack-item-left">
+          <div class="stack-icon" style="background: #fff3d6; color: #b8860b;">&#128269;</div>
+          <div>
+            <strong>AEO/GEO optimization</strong>
+            <span class="stack-desc">SEO agencies, consultants</span>
+          </div>
+        </div>
+        <span class="stack-value">500+/mo</span>
+      </div>
+      <div class="stack-item">
+        <div class="stack-item-left">
+          <div class="stack-icon" style="background: var(--color-primary-200); color: var(--color-primary-500);">&#128279;</div>
+          <div>
+            <strong>Backlinks + directory listings</strong>
+            <span class="stack-desc">Directory listings &amp; backlink services</span>
+          </div>
+        </div>
+        <span class="stack-value">200+/mo</span>
+      </div>
+      <div class="stack-item">
+        <div class="stack-item-left">
+          <div class="stack-icon" style="background: var(--color-supply-200); color: var(--color-supply-900);">&#128188;</div>
+          <div>
+            <strong>Marketplace access + leads</strong>
+            <span class="stack-desc">Sortlist marketplace (600K searches/mo)</span>
+          </div>
+        </div>
+        <span class="stack-value">Priceless</span>
+      </div>
+    </div>
+
+    <div class="stack-total">
+      <div>
+        <span class="total-label">Total if bought separately</span><br>
+        <span class="total-old">&euro;1,200+/month</span>
+      </div>
+      <div style="text-align:right;">
+        <span class="total-new">&euro;199/mo</span><br>
+        <span class="total-period">Everything. Credits included. One bill.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="container-lg">
+    <h2>Agencies that stopped guessing and started closing</h2>
+
+    <div class="test-grid">
+      <div class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span class="test-result">4 new clients in 90 days</span>
+        <p class="test-quote">"We launched our first outbound campaign on a Tuesday. By Friday we had 3 replies. Two months later, 4 signed clients. The ROI paid for 3 years of Sortlist."</p>
+        <p class="test-author">Anne-Mie Vansteelant</p>
+        <p class="test-role">Managing Partner, Living Stone</p>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span class="test-result">Pipeline never empty since joining</span>
+        <p class="test-quote">"Before Sortlist, our pipeline was feast or famine. Now we have a steady flow of inbound leads plus outbound running in the background. We finally sleep at night."</p>
+        <p class="test-author">Alexandra Leunen</p>
+        <p class="test-role">New Business, Anais Digital</p>
+      </div>
+      <div class="test-card">
+        <div class="test-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+        <span class="test-result">12 qualified meetings in first month</span>
+        <p class="test-quote">"The intent signals told us a prospect was hiring a marketing manager. We reached out that same day. Signed a 25K project two weeks later. That one signal paid for the year."</p>
+        <p class="test-author">Marc Wellens</p>
+        <p class="test-role">MD &amp; Founder, Duval Branding</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="container-md">
+    <h2>Common questions</h2>
+
+    <div class="faq-card">
+      <div class="faq-item open">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>How fast will I see results?</span>
+          <span class="faq-arrow">&#9662;</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Most agencies launch their first campaign within 48 hours and see qualified responses within the first two weeks. Marketplace leads can come in from day one since your profile is immediately live. The average time to first qualified lead is 11 days.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>I already use Sortlist. What changes?</span>
+          <span class="faq-arrow">&#9662;</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Everything you already have stays. Here's how it breaks down:<br><br>
+            <strong>You keep:</strong> Your profile, your reviews, your ranking, your marketplace leads.<br><br>
+            <strong>You gain:</strong> Outbound prospecting, Radar visitor identification, buyer intelligence (intent signals), AEO/GEO optimization, CRM integrations (HubSpot, Pipedrive, Teamleader).<br><br>
+            <strong>What changes:</strong> You go from a passive listing to an active client acquisition engine. Same platform, same login, much more pipeline.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Why is this cheaper than buying separate tools?</span>
+          <span class="faq-arrow">&#9662;</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Because generic sales tools are built for any industry and sold separately. Sortlist is built specifically for agencies and bundles everything into one system. No integration headaches, no duplicate data, no paying 4 vendors. One tool, one bill, one login.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>How do credits work?</span>
+          <span class="faq-arrow">&#9662;</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Your Sortlist+ plan includes 200 credits every month. Credits are consumed when you take actions like identifying website visitors (~20 credits), viewing opportunity briefs (~20 credits), or getting introduced to a qualified lead (up to 600 credits). Most agencies stay comfortably within their 200 included credits. If you need more, you can buy additional credits on demand with no commitment.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="this.parentElement.classList.toggle('open')">
+          <span>Is my data safe? Are you GDPR compliant?</span>
+          <span class="faq-arrow">&#9662;</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            100%. Sortlist is fully GDPR compliant with infrastructure hosted in Europe. All data processing follows strict privacy standards. Visitor identification works at the company level, not at the individual level, in full compliance with European privacy regulations.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISK REVERSAL CTA -->
+<section class="risk-cta">
+  <div class="container-md">
+    <div class="risk-card">
+      <h2>See it in action before you commit</h2>
+      <p>Book a 15-minute demo. We'll show you live signals for your agency: who's visiting your site, who's searching for your services, and where your next client is hiding.</p>
+      <p class="risk-sub">No commitment. No credit card. Just proof that it works for you.</p>
+      <a href="#" class="btn-primary btn-lg" style="text-decoration:none;">Book a demo</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container-lg">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <svg viewBox="0 0 105 24" fill="none" xmlns="http://www.w3.org/2000/svg" height="22">
+          <path d="M10.02 18.66c-1.68 0-3.15-.33-4.41-.99a7.35 7.35 0 01-2.97-2.76l2.52-2.16c.54.9 1.26 1.59 2.16 2.07.9.48 1.86.72 2.88.72.84 0 1.5-.15 1.98-.45.48-.3.72-.72.72-1.26 0-.48-.21-.87-.63-1.17-.42-.3-1.17-.57-2.25-.81l-1.68-.36c-1.74-.36-3.03-.96-3.87-1.8-.84-.84-1.26-1.89-1.26-3.15 0-.9.24-1.71.72-2.43a4.98 4.98 0 012.07-1.71c.9-.42 1.95-.63 3.15-.63 1.5 0 2.82.33 3.96.99 1.14.66 2.01 1.53 2.61 2.61l-2.52 2.07a4.82 4.82 0 00-1.74-1.8c-.72-.48-1.53-.72-2.43-.72-.72 0-1.29.15-1.71.45-.42.3-.63.69-.63 1.17 0 .48.21.87.63 1.17.42.3 1.14.54 2.16.72l1.68.36c1.86.36 3.21.99 4.05 1.89.84.9 1.26 1.98 1.26 3.24 0 .9-.24 1.71-.72 2.43a5.16 5.16 0 01-2.1 1.71c-.9.42-1.98.63-3.24.63zM23.88 18.66c-1.44 0-2.73-.33-3.87-.99a7.05 7.05 0 01-2.67-2.73c-.66-1.14-.99-2.46-.99-3.96s.33-2.82.99-3.96a7.05 7.05 0 012.67-2.73c1.14-.66 2.43-.99 3.87-.99s2.73.33 3.87.99a7.05 7.05 0 012.67 2.73c.66 1.14.99 2.46.99 3.96s-.33 2.82-.99 3.96a7.05 7.05 0 01-2.67 2.73c-1.14.66-2.43.99-3.87.99zm0-3.24c.78 0 1.47-.18 2.07-.54.6-.36 1.08-.87 1.44-1.53.36-.66.54-1.44.54-2.34 0-.9-.18-1.68-.54-2.34a3.76 3.76 0 00-1.44-1.53c-.6-.36-1.29-.54-2.07-.54-.78 0-1.47.18-2.07.54-.6.36-1.08.87-1.44 1.53-.36.66-.54 1.44-.54 2.34 0 .9.18 1.68.54 2.34.36.66.84 1.17 1.44 1.53.6.36 1.29.54 2.07.54zM33.3 18.36V4.56h3.42v2.16c.36-.72.9-1.29 1.62-1.71.72-.42 1.53-.63 2.43-.63v3.6h-.9c-.84 0-1.56.18-2.16.54-.6.36-.9 1.02-.9 1.98v7.86H33.3zM47.28 18.36c-1.08 0-1.92-.3-2.52-.9-.6-.6-.9-1.44-.9-2.52V7.68h-2.1V4.56h2.1V1.2h3.48v3.36h3.18v3.12h-3.18v6.72c0 .42.12.72.36.9.24.18.57.27.99.27h1.56v2.79h-2.97zM53.16 18.36V0h3.48v18.36h-3.48zM59.94 3.24c-.66 0-1.2-.21-1.62-.63-.42-.42-.63-.93-.63-1.53s.21-1.11.63-1.53c.42-.42.96-.63 1.62-.63.66 0 1.2.21 1.62.63.42.42.63.93.63 1.53s-.21 1.11-.63 1.53c-.42.42-.96.63-1.62.63zm-1.74 15.12V4.56h3.48v13.8h-3.48zM68.76 18.66c-1.68 0-3.15-.33-4.41-.99a7.35 7.35 0 01-2.97-2.76l2.52-2.16c.54.9 1.26 1.59 2.16 2.07.9.48 1.86.72 2.88.72.84 0 1.5-.15 1.98-.45.48-.3.72-.72.72-1.26 0-.48-.21-.87-.63-1.17-.42-.3-1.17-.57-2.25-.81l-1.68-.36c-1.74-.36-3.03-.96-3.87-1.8-.84-.84-1.26-1.89-1.26-3.15 0-.9.24-1.71.72-2.43a4.98 4.98 0 012.07-1.71c.9-.42 1.95-.63 3.15-.63 1.5 0 2.82.33 3.96.99 1.14.66 2.01 1.53 2.61 2.61l-2.52 2.07a4.82 4.82 0 00-1.74-1.8c-.72-.48-1.53-.72-2.43-.72-.72 0-1.29.15-1.71.45-.42.3-.63.69-.63 1.17 0 .48.21.87.63 1.17.42.3 1.14.54 2.16.72l1.68.36c1.86.36 3.21.99 4.05 1.89.84.9 1.26 1.98 1.26 3.24 0 .9-.24 1.71-.72 2.43a5.16 5.16 0 01-2.1 1.71c-.9.42-1.98.63-3.24.63zM80.64 18.36c-1.08 0-1.92-.3-2.52-.9-.6-.6-.9-1.44-.9-2.52V7.68h-2.1V4.56h2.1V1.2h3.48v3.36h3.18v3.12h-3.18v6.72c0 .42.12.72.36.9.24.18.57.27.99.27h1.56v2.79h-2.97z" fill="#0f0d0a"/>
+        </svg>
+        <p class="tagline">The client acquisition engine for agencies.</p>
+        <p class="desc">Marketplace demand, outbound prospecting, and intent signals in one system. Built for agencies. GDPR compliant.</p>
+        <div class="social-icons">
+          <a href="#">X</a><a href="#">f</a><a href="#">in</a><a href="#">ig</a><a href="#">yt</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>For clients</h4>
+        <a href="#">Post a project</a>
+        <a href="#">Explore agencies</a>
+      </div>
+      <div class="footer-col">
+        <h4>For agencies</h4>
+        <a href="providers.html">How it works</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="#">Get started</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="#">Blog</a>
+        <a href="#">Data Hub</a>
+        <a href="#">Help &amp; Support</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+        <a href="#">Jobs</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>2026 &copy; Sortlist. All rights reserved.</span>
+      <span>Terms of Use &middot; Privacy Policy &middot; Manage cookies</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
