@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Builder for Marketing | Sortlist</title>
+    <meta name="description" content="Build custom AI prompts for marketing, SEO, branding, ads and more. Fill in your details, get a ready-to-use prompt for ChatGPT, Claude or Gemini. 100% free.">
+    <link rel="canonical" href="https://www.sortlist.com/ai-prompts/">
+    <meta property="og:title" content="AI Prompt Builder for Marketing | Sortlist">
+    <meta property="og:description" content="Build custom AI prompts for SEO, branding, ads, content and more. Free, no signup.">
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebApplication","name":"Sortlist AI Prompt Builder","description":"Build custom AI prompts for marketing.","url":"https://www.sortlist.com/ai-prompts/","applicationCategory":"Marketing","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Sortlist","url":"https://www.sortlist.com"}}
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-500: #200DF2;
+            --primary-600: #1A0BC4;
+            --primary-700: #150996;
+            --primary-800: #100768;
+            --primary-900: #020219;
+            --primary-100: #DCDAFD;
+            --primary-200: #B9B5FB;
+            --primary-50: #EDECFE;
+            --secondary-100: #FBFAF9;
+            --secondary-200: #F1EDEA;
+            --secondary-300: #E7DFDA;
+            --secondary-400: #B8AFA8;
+            --secondary-500: #7E7367;
+            --secondary-600: #5C534A;
+            --secondary-700: #463F39;
+            --secondary-800: #2A2521;
+            --secondary-900: #1B1917;
+            --secondary-950: #0F0D0A;
+            --success-500: #5C9550;
+            --success-200: #E2F0DB;
+            --danger-500: #BD0F58;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--secondary-950);
+            line-height: 1.6;
+            background: var(--white);
+        }
+
+        .serif { font-family: 'Playfair Display', Georgia, serif; }
+        .container { max-width: 1152px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── Nav ── */
+        .navbar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: var(--white);
+            height: 80px;
+            display: flex; align-items: center;
+            border-bottom: 1px solid var(--secondary-300);
+        }
+        .navbar .container {
+            display: flex; align-items: center; justify-content: space-between; height: 100%;
+        }
+        .nav-logo {
+            font-size: 22px; font-weight: 800; color: var(--secondary-950); text-decoration: none;
+            letter-spacing: -0.5px;
+        }
+        .nav-links { display: flex; gap: 32px; }
+        .nav-links a {
+            color: var(--secondary-500); text-decoration: none; font-size: 14px;
+            font-weight: 500; transition: color 0.2s;
+        }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary-500); }
+        .nav-cta-btn {
+            background: var(--primary-500); color: var(--white); border: none;
+            padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
+            cursor: pointer; font-family: inherit; transition: background 0.2s;
+            text-decoration: none;
+            box-shadow: 0 1px 2px rgba(32,13,242,.18), 0 0 8px rgba(32,13,242,.12);
+        }
+        .nav-cta-btn:hover { background: var(--primary-600); }
+
+        /* ── Hero (dark) ── */
+        .hero {
+            background: var(--primary-900);
+            padding: 160px 0 100px;
+            text-align: center;
+        }
+        .hero-badge {
+            display: inline-block;
+            background: var(--primary-50); color: var(--primary-500);
+            padding: 5px 14px; border-radius: 40px;
+            font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+            text-transform: uppercase; margin-bottom: 24px;
+        }
+        .hero h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(36px, 5vw, 52px); font-weight: 700; line-height: 1.1;
+            color: var(--white); max-width: 700px; margin: 0 auto 24px;
+            letter-spacing: -1px;
+        }
+        .hero h1 .dot {
+            color: var(--primary-500);
+            font-family: 'Playfair Display', Georgia, serif;
+        }
+        .hero p {
+            font-size: 17px; color: rgba(255,255,255,0.6);
+            max-width: 560px; margin: 0 auto; line-height: 1.7;
+        }
+        .hero-stats {
+            display: flex; justify-content: center; gap: 48px;
+            margin-top: 40px;
+        }
+        .hero-stat-number {
+            font-size: 28px; font-weight: 800; color: var(--white);
+        }
+        .hero-stat-label {
+            font-size: 13px; color: rgba(255,255,255,0.5); font-weight: 500;
+        }
+
+        /* ── Builder Section ── */
+        .builder-section {
+            background: var(--secondary-100);
+            padding: 80px 24px;
+        }
+        .builder-header {
+            text-align: center; margin-bottom: 48px;
+        }
+        .builder-header h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 40px; font-weight: 700; letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+        .builder-header p {
+            font-size: 16px; color: var(--secondary-500); max-width: 500px; margin: 0 auto;
+        }
+
+        /* Step indicators */
+        .steps-indicator {
+            display: flex; justify-content: center; gap: 0; margin-bottom: 40px;
+        }
+        .step-item {
+            display: flex; align-items: center; gap: 10px;
+        }
+        .step-number {
+            width: 36px; height: 36px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; font-weight: 700;
+            background: var(--secondary-200); color: var(--secondary-500);
+            transition: all 0.3s;
+        }
+        .step-item.active .step-number {
+            background: var(--primary-500); color: var(--white);
+            box-shadow: 0 1px 2px rgba(32,13,242,.18), 0 0 8px rgba(32,13,242,.12);
+        }
+        .step-item.done .step-number {
+            background: var(--success-500); color: var(--white);
+        }
+        .step-label {
+            font-size: 14px; font-weight: 600; color: var(--secondary-400);
+        }
+        .step-item.active .step-label { color: var(--secondary-950); }
+        .step-item.done .step-label { color: var(--success-500); }
+        .step-connector {
+            width: 48px; height: 2px; background: var(--secondary-300);
+            margin: 0 16px; align-self: center;
+        }
+
+        /* Builder card */
+        .builder-card {
+            background: var(--white);
+            border: 2px solid var(--secondary-200);
+            border-radius: 16px;
+            max-width: 720px; margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(15,13,10,.06), 0 0 25px rgba(15,13,10,.04);
+            overflow: hidden;
+        }
+        .builder-card-header {
+            padding: 28px 32px 0;
+        }
+        .builder-card-header h3 {
+            font-size: 18px; font-weight: 700; margin-bottom: 4px;
+        }
+        .builder-card-header p {
+            font-size: 14px; color: var(--secondary-500);
+        }
+        .builder-card-body {
+            padding: 24px 32px 32px;
+        }
+
+        /* Goal picker grid */
+        .goal-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+        }
+        .goal-card {
+            border: 2px solid var(--secondary-200);
+            border-radius: 12px; padding: 20px 16px;
+            text-align: center; cursor: pointer;
+            transition: all 0.2s; background: var(--white);
+        }
+        .goal-card:hover {
+            border-color: var(--primary-200);
+            background: var(--primary-50);
+        }
+        .goal-card.selected {
+            border-color: var(--primary-500);
+            background: var(--primary-50);
+            box-shadow: 0 0 0 2px var(--primary-200);
+        }
+        .goal-icon { font-size: 28px; margin-bottom: 8px; }
+        .goal-label { font-size: 13px; font-weight: 600; color: var(--secondary-800); }
+        .goal-sub { font-size: 11px; color: var(--secondary-500); margin-top: 2px; }
+
+        /* Form fields */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            display: block; font-size: 13px; font-weight: 600;
+            color: var(--secondary-800); margin-bottom: 6px;
+        }
+        .form-hint {
+            font-size: 12px; color: var(--secondary-400); margin-bottom: 6px;
+        }
+        .form-input, .form-select, .form-textarea {
+            width: 100%; padding: 13px 16px;
+            border: 1.5px solid var(--secondary-300);
+            border-radius: 10px; font-size: 15px;
+            font-family: inherit; color: var(--secondary-950);
+            background: var(--white); transition: all 0.2s;
+            min-height: 48px;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none; border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px rgba(32,13,242,0.08);
+        }
+        .form-input::placeholder, .form-textarea::placeholder {
+            color: var(--secondary-400);
+        }
+        .form-textarea { resize: vertical; min-height: 80px; }
+
+        /* Pill selectors (click-based form fields) */
+        .pill-grid {
+            display: flex; flex-wrap: wrap; gap: 8px;
+        }
+        .pill-option {
+            padding: 9px 16px; border-radius: 40px;
+            font-size: 13px; font-weight: 500; cursor: pointer;
+            border: 1.5px solid var(--secondary-300);
+            background: var(--white); color: var(--secondary-700);
+            transition: all 0.15s; user-select: none;
+        }
+        .pill-option:hover {
+            border-color: var(--primary-200); color: var(--primary-500);
+            background: var(--primary-50);
+        }
+        .pill-option.selected {
+            border-color: var(--primary-500); color: var(--white);
+            background: var(--primary-500);
+        }
+        .form-select {
+            appearance: none; cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%237E7367' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 44px;
+        }
+        .form-row {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--primary-500); color: var(--white);
+            border: none; padding: 13px 20px; border-radius: 10px;
+            font-size: 15px; font-weight: 500; cursor: pointer;
+            font-family: inherit; transition: all 0.2s; min-height: 52px;
+            box-shadow: 0 1px 2px 0 rgba(32,13,242,.18), 0 0 8px 0 rgba(32,13,242,.12);
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none;
+        }
+        .btn-primary:hover { background: var(--primary-600); }
+        .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .btn-secondary {
+            background: var(--white); color: var(--secondary-950);
+            border: 1px solid var(--secondary-300); padding: 13px 20px;
+            border-radius: 10px; font-size: 15px; font-weight: 500;
+            cursor: pointer; font-family: inherit; transition: all 0.2s;
+            min-height: 52px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 1px 2px 0 hsla(31,10%,45%,.18), 0 0 8px 0 hsla(31,10%,45%,.12);
+        }
+        .btn-secondary:hover { border-color: var(--secondary-500); }
+
+        .btn-success {
+            background: var(--success-500); color: var(--white);
+            border: none; padding: 13px 24px; border-radius: 10px;
+            font-size: 15px; font-weight: 600; cursor: pointer;
+            font-family: inherit; transition: all 0.2s; min-height: 52px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-success:hover { background: #4d8043; }
+
+        .btn-ghost {
+            background: transparent; color: var(--secondary-500);
+            border: none; padding: 13px 16px; border-radius: 10px;
+            font-size: 14px; font-weight: 600; cursor: pointer;
+            font-family: inherit; transition: all 0.2s;
+        }
+        .btn-ghost:hover { color: var(--primary-500); }
+
+        .builder-actions {
+            display: flex; gap: 12px; justify-content: space-between;
+            margin-top: 24px; padding-top: 24px;
+            border-top: 1px solid var(--secondary-200);
+        }
+        .builder-actions-right { display: flex; gap: 12px; }
+
+        /* Output section */
+        .output-area {
+            background: var(--secondary-100);
+            border: 1.5px solid var(--secondary-200);
+            border-radius: 12px; padding: 24px;
+            font-size: 14px; line-height: 1.7;
+            white-space: pre-wrap; max-height: 400px;
+            overflow-y: auto; position: relative;
+        }
+        .output-area code {
+            font-family: 'Inter', monospace; font-size: 14px;
+        }
+        .output-actions {
+            display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;
+        }
+        .copied-toast {
+            background: var(--success-500); color: white;
+            padding: 8px 16px; border-radius: 8px;
+            font-size: 13px; font-weight: 600;
+            position: fixed; bottom: 24px; left: 50%;
+            transform: translateX(-50%); z-index: 1000;
+            opacity: 0; transition: opacity 0.3s;
+            pointer-events: none;
+        }
+        .copied-toast.show { opacity: 1; }
+
+        /* ── Library Section ── */
+        .library-section {
+            background: var(--white);
+            padding: 80px 24px;
+        }
+        .library-header {
+            text-align: center; margin-bottom: 16px;
+        }
+        .library-header h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 40px; font-weight: 700; letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+        .library-header p {
+            font-size: 16px; color: var(--secondary-500);
+            max-width: 500px; margin: 0 auto;
+        }
+
+        /* Search bar */
+        .search-bar {
+            max-width: 520px; margin: 24px auto 32px; position: relative;
+        }
+        .search-bar input {
+            width: 100%; padding: 13px 16px 13px 48px;
+            border: 1.5px solid var(--secondary-300); border-radius: 10px;
+            font-size: 15px; font-family: inherit; background: var(--white);
+            transition: all 0.2s; min-height: 52px;
+        }
+        .search-bar input:focus {
+            outline: none; border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px rgba(32,13,242,0.08);
+        }
+        .search-bar .search-icon {
+            position: absolute; left: 16px; top: 50%;
+            transform: translateY(-50%); color: var(--secondary-400);
+            font-size: 18px; pointer-events: none;
+        }
+
+        /* Category pills */
+        .cat-pills {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 8px; margin-bottom: 40px;
+        }
+        .cat-pill {
+            padding: 8px 16px; border-radius: 40px;
+            font-size: 13px; font-weight: 600; cursor: pointer;
+            border: 1.5px solid var(--secondary-300);
+            background: var(--white); color: var(--secondary-600);
+            transition: all 0.2s;
+        }
+        .cat-pill:hover { border-color: var(--primary-200); color: var(--primary-500); }
+        .cat-pill.active {
+            background: var(--primary-500); color: var(--white);
+            border-color: var(--primary-500);
+        }
+
+        /* Prompt cards grid */
+        .prompts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 16px;
+        }
+        .prompt-card {
+            background: var(--white);
+            border: 1.5px solid var(--secondary-200);
+            border-radius: 16px; padding: 24px;
+            transition: all 0.2s; display: flex;
+            flex-direction: column; cursor: pointer;
+        }
+        .prompt-card:hover {
+            border-color: var(--primary-200);
+            box-shadow: 0 4px 8px rgba(15,13,10,.08), 0 0 25px rgba(15,13,10,.04);
+            transform: translateY(-2px);
+        }
+        .prompt-card-top {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .prompt-card-badge {
+            font-size: 12px; font-weight: 700; letter-spacing: 0.05em;
+            text-transform: uppercase; padding: 4px 10px; border-radius: 40px;
+            background: var(--primary-50); color: var(--primary-500);
+        }
+        .prompt-card-diff {
+            font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px;
+        }
+        .diff-b { background: var(--success-200); color: var(--success-500); }
+        .diff-i { background: #FEF3C7; color: #D97706; }
+        .diff-a { background: #FEE2E2; color: #DC2626; }
+        .prompt-card h3 {
+            font-size: 16px; font-weight: 700; margin-bottom: 6px; line-height: 1.3;
+        }
+        .prompt-card-desc {
+            font-size: 14px; color: var(--secondary-500); margin-bottom: 16px;
+            flex-grow: 1;
+        }
+        .prompt-card-footer {
+            display: flex; gap: 8px; margin-top: auto;
+        }
+        .prompt-card-btn {
+            padding: 8px 14px; border-radius: 8px; font-size: 12px;
+            font-weight: 600; cursor: pointer; font-family: inherit;
+            transition: all 0.2s; border: none;
+        }
+        .prompt-card-btn-primary {
+            background: var(--primary-500); color: var(--white);
+        }
+        .prompt-card-btn-primary:hover { background: var(--primary-600); }
+        .prompt-card-btn-outline {
+            background: var(--white); color: var(--secondary-700);
+            border: 1.5px solid var(--secondary-300);
+        }
+        .prompt-card-btn-outline:hover { border-color: var(--primary-500); color: var(--primary-500); }
+
+        /* Inline CTA */
+        .inline-cta {
+            background: var(--primary-50); border: 2px solid var(--primary-100);
+            border-radius: 16px; padding: 32px; text-align: center;
+            grid-column: 1 / -1;
+        }
+        .inline-cta h3 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 22px; font-weight: 700; margin-bottom: 8px;
+        }
+        .inline-cta p {
+            color: var(--secondary-500); margin-bottom: 16px; font-size: 14px;
+        }
+
+        /* ── CTA Banner ── */
+        .cta-section {
+            background: var(--success-200); padding: 80px 24px; text-align: center;
+        }
+        .cta-section h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 40px; font-weight: 700; letter-spacing: -1px;
+            margin-bottom: 12px;
+        }
+        .cta-section p {
+            font-size: 16px; color: var(--secondary-600);
+            max-width: 500px; margin: 0 auto 32px;
+        }
+        .cta-buttons {
+            display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+        }
+        .cta-trust {
+            display: flex; justify-content: center; gap: 24px;
+            margin-top: 24px; font-size: 13px; color: var(--secondary-500); font-weight: 500;
+        }
+
+        /* ── FAQ ── */
+        .faq-section {
+            background: var(--secondary-100); padding: 80px 24px;
+        }
+        .faq-header {
+            text-align: center; margin-bottom: 40px;
+        }
+        .faq-header h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 40px; font-weight: 700; letter-spacing: -1px;
+        }
+        .faq-card {
+            max-width: 720px; margin: 0 auto;
+            background: var(--white); border-radius: 16px;
+            border: 1.5px solid var(--secondary-200);
+            overflow: hidden;
+        }
+        .faq-item { border-bottom: 1px solid var(--secondary-200); }
+        .faq-item:last-child { border-bottom: none; }
+        .faq-question {
+            width: 100%; padding: 20px 24px;
+            display: flex; align-items: center; justify-content: space-between;
+            background: none; border: none; font-size: 15px; font-weight: 600;
+            color: var(--secondary-950); cursor: pointer; font-family: inherit;
+            text-align: left; gap: 16px;
+        }
+        .faq-question:hover { background: var(--secondary-100); }
+        .faq-arrow {
+            font-size: 12px; color: var(--secondary-400);
+            transition: transform 0.2s; flex-shrink: 0;
+        }
+        .faq-item.open .faq-arrow { transform: rotate(180deg); }
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease;
+        }
+        .faq-item.open .faq-answer { max-height: 500px; }
+        .faq-answer-inner {
+            padding: 0 24px 20px; font-size: 14px;
+            color: var(--secondary-600); line-height: 1.7;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            background: var(--white); padding: 60px 24px 32px;
+            color: var(--secondary-500); font-size: 13px;
+            border-top: 1px solid var(--secondary-300);
+        }
+        .footer .container {
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .footer a { color: var(--primary-500); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
+        .footer-brand {
+            font-size: 18px; font-weight: 800; color: var(--secondary-950);
+            margin-bottom: 4px;
+        }
+
+        /* ── Modal ── */
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(2,2,25,0.7); z-index: 1000;
+            align-items: center; justify-content: center; padding: 24px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal {
+            background: var(--white); border-radius: 16px;
+            max-width: 720px; width: 100%; max-height: 85vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 24px 28px; border-bottom: 1px solid var(--secondary-200);
+            position: sticky; top: 0; background: var(--white);
+            border-radius: 16px 16px 0 0; z-index: 1;
+        }
+        .modal-header h3 { font-size: 17px; font-weight: 700; }
+        .modal-close {
+            width: 36px; height: 36px; border-radius: 8px;
+            border: 1px solid var(--secondary-300); background: var(--white);
+            cursor: pointer; font-size: 18px; display: flex;
+            align-items: center; justify-content: center;
+            color: var(--secondary-500); transition: all 0.2s;
+        }
+        .modal-close:hover { background: var(--secondary-100); }
+        .modal-body { padding: 24px 28px; }
+        .modal-prompt {
+            background: var(--secondary-100);
+            border: 1px solid var(--secondary-200);
+            border-radius: 12px; padding: 20px;
+            font-size: 14px; line-height: 1.7;
+            white-space: pre-wrap; margin-bottom: 20px;
+        }
+        .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .modal-form-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+        }
+        .modal-form-group { display: flex; flex-direction: column; gap: 4px; }
+        .modal-form-group.full { grid-column: 1 / -1; }
+        .modal-form-label {
+            font-size: 12px; font-weight: 600; color: var(--secondary-600);
+            text-transform: uppercase; letter-spacing: 0.04em;
+        }
+        .modal-form-input {
+            padding: 10px 14px; border: 1.5px solid var(--secondary-300);
+            border-radius: 8px; font-size: 14px; font-family: inherit;
+            color: var(--secondary-950); background: var(--white);
+            transition: border-color 0.2s;
+        }
+        .modal-form-input:focus {
+            outline: none; border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px rgba(32,13,242,0.08);
+        }
+        .modal-form-input::placeholder { color: var(--secondary-400); }
+        .modal-form-hint {
+            font-size: 11px; color: var(--secondary-400);
+            padding: 8px 0 0; text-align: center;
+        }
+        @media (max-width: 768px) {
+            .modal-form-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .nav-links, .nav-cta-btn { display: none; }
+            .hero { padding: 120px 24px 60px; }
+            .hero h1 { font-size: clamp(28px, 7vw, 40px); }
+            .goal-grid { grid-template-columns: repeat(2, 1fr); }
+            .form-row { grid-template-columns: 1fr; }
+            .prompts-grid { grid-template-columns: 1fr; }
+            .hero-stats { gap: 24px; }
+            .builder-card-body { padding: 20px; }
+            .builder-card-header { padding: 20px 20px 0; }
+            .steps-indicator { flex-wrap: wrap; gap: 4px; }
+            .step-connector { width: 24px; margin: 0 8px; }
+            .footer .container { flex-direction: column; text-align: center; gap: 12px; }
+        }
+
+        /* Utility */
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+    </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav class="navbar">
+    <div class="container">
+        <a href="https://www.sortlist.com" class="nav-logo">sortlist</a>
+        <div class="nav-links">
+            <a href="https://www.sortlist.com">Find providers</a>
+            <a href="#" class="active">AI Prompts</a>
+            <a href="#library">Prompt Library</a>
+        </div>
+        <a href="https://www.sortlist.com" class="nav-cta-btn">Find an Agency &rarr;</a>
+    </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+    <div class="container">
+        <span class="hero-badge">Free tool - no signup</span>
+        <h1>Build the perfect AI prompt<span class="dot">.</span></h1>
+        <p>Pick a goal, fill in your details, get a prompt ready for ChatGPT, Claude or Gemini. Or browse 50+ templates.</p>
+        <div class="hero-stats">
+            <div><div class="hero-stat-number">54</div><div class="hero-stat-label">Prompts</div></div>
+            <div><div class="hero-stat-number">9</div><div class="hero-stat-label">Categories</div></div>
+            <div><div class="hero-stat-number">0&euro;</div><div class="hero-stat-label">Forever</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- Builder -->
+<section class="builder-section" id="builder">
+    <div class="container">
+        <div class="builder-header">
+            <h2>Prompt Builder</h2>
+            <p>Three steps. One custom prompt. Ready to paste.</p>
+        </div>
+
+        <div class="steps-indicator" id="stepsIndicator">
+            <div class="step-item active" data-step="1">
+                <div class="step-number">1</div>
+                <span class="step-label">Pick a goal</span>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-item" data-step="2">
+                <div class="step-number">2</div>
+                <span class="step-label">Your details</span>
+            </div>
+            <div class="step-connector"></div>
+            <div class="step-item" data-step="3">
+                <div class="step-number">3</div>
+                <span class="step-label">Get your prompt</span>
+            </div>
+        </div>
+
+        <div class="builder-card">
+            <!-- Step 1: Pick a goal -->
+            <div id="step1" class="builder-step">
+                <div class="builder-card-header">
+                    <h3>What do you need help with?</h3>
+                    <p>Choose a task and we'll build the perfect prompt for you.</p>
+                </div>
+                <div class="builder-card-body">
+                    <div class="goal-grid" id="goalGrid"></div>
+                </div>
+            </div>
+
+            <!-- Step 2: Fill details -->
+            <div id="step2" class="builder-step hidden">
+                <div class="builder-card-header">
+                    <h3 id="step2Title">Your details</h3>
+                    <p id="step2Desc">Fill in your specifics. The more detail, the better the output.</p>
+                </div>
+                <div class="builder-card-body">
+                    <div id="dynamicForm"></div>
+                    <div class="builder-actions">
+                        <button class="btn-ghost" onclick="goToStep(1)">&larr; Back</button>
+                        <div class="builder-actions-right">
+                            <button class="btn-primary" onclick="generatePrompt()">Generate my prompt &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Output -->
+            <div id="step3" class="builder-step hidden">
+                <div class="builder-card-header">
+                    <h3>Your prompt is ready</h3>
+                    <p>Copy it and paste into Claude, ChatGPT, or Gemini.</p>
+                </div>
+                <div class="builder-card-body">
+                    <div class="output-area" id="outputArea"></div>
+                    <div class="output-actions">
+                        <button class="btn-primary" onclick="copyOutput()">Copy prompt</button>
+                        <a href="https://claude.ai" target="_blank" class="btn-secondary">Open Claude &rarr;</a>
+                        <a href="https://chat.openai.com" target="_blank" class="btn-secondary">Open ChatGPT &rarr;</a>
+                    </div>
+                    <div style="margin-top:24px; padding:20px; background:var(--primary-50); border-radius:12px; text-align:center;">
+                        <p style="font-size:14px; color:var(--secondary-700); margin-bottom:12px; font-weight:600;">Want a specialist to handle this instead?</p>
+                        <a href="https://www.sortlist.com" target="_blank" class="btn-primary">Find an agency on Sortlist &rarr;</a>
+                    </div>
+                    <div class="builder-actions" style="border:none; padding-top:16px;">
+                        <button class="btn-ghost" onclick="goToStep(2)">&larr; Edit details</button>
+                        <button class="btn-ghost" onclick="goToStep(1)">Start over</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Library -->
+<section class="library-section" id="library">
+    <div class="container">
+        <div class="library-header">
+            <h2>Prompt Library</h2>
+            <p>Browse all prompts. Copy any one in a click.</p>
+        </div>
+
+        <div class="search-bar">
+            <span class="search-icon">&#128269;</span>
+            <input type="text" placeholder="Search prompts..." id="searchInput">
+        </div>
+
+        <div class="cat-pills" id="catPills"></div>
+        <div class="prompts-grid" id="promptsGrid"></div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container">
+        <h2>AI gets you started. An agency gets you there<span class="dot">.</span></h2>
+        <p>Prompts give you the plan. A specialist agency executes it at scale. Find yours on Sortlist.</p>
+        <div class="cta-buttons">
+            <a href="https://www.sortlist.com" class="btn-primary">Find an Agency &rarr;</a>
+            <button class="btn-secondary" onclick="document.getElementById('builder').scrollIntoView({behavior:'smooth'})">Build another prompt</button>
+        </div>
+        <div class="cta-trust">
+            <span>&#10003; Free for clients</span>
+            <span>&#10003; 30,000+ agencies</span>
+            <span>&#10003; 150+ countries</span>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+    <div class="container">
+        <div class="faq-header"><h2>Questions &amp; answers<span class="dot">.</span></h2></div>
+        <div class="faq-card">
+            <div class="faq-item">
+                <button class="faq-question">Is this really free?<span class="faq-arrow">&#9660;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes, 100% free, no signup, no email gate. Build as many prompts as you want. We built this because we believe better prompts lead to better marketing decisions - and when you need more than a prompt, Sortlist is here to connect you with the right agency.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Which AI tools do these prompts work with?<span class="faq-arrow">&#9660;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">All of them. Every prompt is designed to work with ChatGPT (GPT-4), Claude, Gemini, and any other large language model. The prompts use clear structure and instructions that any modern AI can follow.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">How is the prompt builder different from the library?<span class="faq-arrow">&#9660;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">The builder creates a prompt customized with your specific details - your company, audience, goals. The library gives you ready-made templates you can copy and customize yourself. Both are useful, just different starting points.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Can AI replace a marketing agency?<span class="faq-arrow">&#9660;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">AI is great for first drafts, research, and brainstorming. But strategy, execution, creative direction, and experience - that's where agencies shine. Think of AI prompts as a starting point that helps you brief an agency better, or handle the small stuff yourself so the agency can focus on high-impact work.</div></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-question">Will you add more prompts?<span class="faq-arrow">&#9660;</span></button>
+                <div class="faq-answer"><div class="faq-answer-inner">Yes. We add new prompts regularly based on what marketers actually need. If you have a suggestion, reach out to us through Sortlist.</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div>
+            <div class="footer-brand">sortlist</div>
+            <span>The marketplace for agencies &amp; clients.</span>
+        </div>
+        <div>
+            <a href="https://www.sortlist.com">Marketplace</a> &middot;
+            <a href="https://www.sortlist.com/pricing">Pricing</a> &middot;
+            <a href="https://www.sortlist.com/blog">Blog</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Copied toast -->
+<div class="copied-toast" id="copiedToast">Copied to clipboard</div>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <div class="modal-header">
+            <h3 id="modalTitle">Prompt</h3>
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <div class="modal-body">
+            <div id="modalForm" style="margin-bottom:20px;"></div>
+            <div class="modal-prompt" id="modalPrompt"></div>
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="copyModal()">Copy prompt</button>
+                <a href="https://claude.ai" target="_blank" class="btn-secondary">Open Claude &rarr;</a>
+                <a href="https://www.sortlist.com" target="_blank" class="btn-success">Find an agency &rarr;</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════
+// BUILDER GOALS (template-based)
+// ═══════════════════════════════════
+
+const GOALS = [
+    {
+        id: "seo-audit", icon: "&#128270;", label: "SEO Audit", sub: "Analyze any website",
+        fields: [
+            { key: "url", label: "Website URL", placeholder: "https://www.example.com", type: "text" },
+            { key: "focus", label: "Main concern", type: "pills", multi: true, options: ["Low organic traffic","Bad mobile experience","Slow page speed","Poor rankings","Technical issues","Thin content","Lost rankings recently","New website"] },
+            { key: "competitor", label: "Main competitor (optional)", placeholder: "https://www.competitor.com", type: "text" }
+        ],
+        template: `#CONTEXT
+You are performing a comprehensive SEO audit for {{url}}.
+Main concerns: {{focus}}.
+{{competitor ? 'Benchmark competitor: ' + competitor : ''}}
+
+#ROLE
+You are a senior SEO consultant with 15 years of experience who has audited 500+ websites. You charge $3,000 per audit. This output must justify that price.
+
+#CHAIN OF THOUGHT
+Work through these 5 phases sequentially. For each finding, use this format:
+FINDING: [what's wrong]
+SEVERITY: Critical / High / Medium / Low
+IMPACT: [what it's costing in traffic or revenue]
+FIX: [exact steps, not vague advice]
+EFFORT: Quick win (< 1 hour) / Medium (1-5 hours) / Major (5+ hours)
+
+#PHASE 1: Technical Foundation
+- Crawlability and indexability (robots.txt, sitemap, canonical tags)
+- Page speed and Core Web Vitals (LCP, FID, CLS)
+- Mobile usability
+- HTTPS, security headers
+- Structured data / schema markup
+- International SEO (hreflang if applicable)
+
+#PHASE 2: On-Page Optimization
+- Title tags (length, keyword placement, click-through appeal)
+- Meta descriptions (length, CTA, keyword usage)
+- H1-H6 hierarchy (proper nesting, keyword optimization)
+- Content depth vs. top-ranking competitors
+- Image optimization (alt text, file size, lazy loading, WebP)
+- Internal linking architecture
+
+#PHASE 3: Content & E-E-A-T
+- Thin content pages (under 300 words with no purpose)
+- Duplicate or near-duplicate content
+- Content freshness signals
+- Author credentials and expertise signals
+- First-hand experience signals
+- Trust indicators (citations, sources, data)
+
+#PHASE 4: AI Search Readiness (2026-specific)
+- Is content structured for AI citation in Google AI Overviews?
+- Are there clear definitions AI can extract?
+- Does the site have FAQ schema for conversational queries?
+- How well would this content perform in ChatGPT / Perplexity / Claude search?
+
+#PHASE 5: Prioritized Action Plan
+Create a 90-day execution plan:
+- Week 1-2: Critical fixes (quick wins with highest impact)
+- Week 3-4: High-priority optimizations
+- Month 2: Content improvements
+- Month 3: Authority building and monitoring
+
+#RESPONSE FORMAT
+Start with a 1-paragraph executive summary and overall health score (0-100).
+Then deliver each phase with specific findings.
+End with the 90-day action plan as a numbered checklist.
+Be brutally honest. No filler. Every recommendation must be specific and actionable.`
+    },
+    {
+        id: "marketing-plan", icon: "&#128200;", label: "Marketing Plan", sub: "Full strategy",
+        fields: [
+            { key: "company", label: "Company name", placeholder: "Acme Corp", type: "text" },
+            { key: "industry", label: "Industry", type: "radio", options: ["SaaS","E-commerce","Agency","Healthcare","Finance","Real Estate","Education","Professional Services","Retail","Manufacturing","Other"] },
+            { key: "audience", label: "Target audience", type: "radio", options: ["Marketing managers","CEOs / Founders","Small business owners","Freelancers","Enterprise buyers","Product managers","Sales leaders","HR directors"] },
+            { key: "budget", label: "Monthly marketing budget", type: "radio", options: ["Under $1K","$1K - $5K","$5K - $20K","$20K - $50K","$50K+"] },
+            { key: "goal", label: "Primary goal", type: "radio", options: ["Generate more leads","Increase brand awareness","Improve conversion rate","Drive more traffic","Grow revenue","Launch a new product","Enter a new market"] },
+            { key: "channels", label: "Channels you're open to", type: "pills", multi: true, options: ["SEO","Google Ads","Facebook / Instagram Ads","LinkedIn","Email marketing","Content marketing","TikTok","YouTube","PR","Influencer marketing","Partnerships"] }
+        ],
+        template: `#CONTEXT
+Company: {{company}}
+Industry: {{industry}}
+Target audience: {{audience}}
+Monthly budget: {{budget}}
+Primary goal: {{goal}}
+Channels open to: {{channels}}
+
+#ROLE
+You are a Head of Growth who has scaled 3 startups from $0 to $10M ARR. You think in systems, not tactics. Every recommendation must include the expected outcome and how to measure it. You hate generic marketing advice.
+
+#CONSTRAINTS
+- Every tactic must be executable by a team of 1-2 people
+- Budget: {{budget}} per month. Allocate every dollar.
+- No tactic without a measurable KPI attached
+- Be specific to {{industry}}. If you say "create content," specify WHAT content, WHERE to publish, and HOW OFTEN.
+
+#RESPONSE STRUCTURE
+
+**1. Strategic Assessment** (max 200 words)
+What's realistic with this budget in {{industry}}. What most companies get wrong. The one thing that will make the biggest difference.
+
+**2. Channel Strategy**
+For each recommended channel, deliver as a table:
+| Channel | Why | Tactic (specific) | Budget % | Expected result (month 3) | Key metric |
+
+Rank channels by expected ROI. Cut channels that won't work at this budget.
+
+**3. 90-Day Phased Roadmap**
+
+PHASE 1 - Foundation (Weeks 1-4):
+- Goal: [specific]
+- Actions: [numbered list, each with owner and deadline]
+- Cost: [$ breakdown]
+- Success signal: [what tells you it's working]
+
+PHASE 2 - Amplification (Weeks 5-8):
+- Same structure. Double down on what Phase 1 validated.
+
+PHASE 3 - Optimization (Weeks 9-12):
+- Same structure. Cut what doesn't work. Scale what does.
+
+**4. Content Engine**
+- 3 content pillars (each tied to a buying stage)
+- Weekly cadence with exact content types
+- Distribution playbook per piece
+
+**5. Week 1 Quick Wins**
+5 things to do in the first 5 days that cost $0 and move the needle.
+
+**6. KPI Dashboard**
+The 5 numbers to check every Monday. For each: metric name, target, tool to track it, red flag threshold.
+
+#ANTI-PATTERNS
+Do NOT include: vague advice like "leverage social media," tactics that require a big team, anything that takes 6+ months to show results, buzzwords like "synergy" or "omnichannel." Be tactical, not theoretical.`
+    },
+    {
+        id: "brand-name", icon: "&#10024;", label: "Brand Name", sub: "Generate names",
+        fields: [
+            { key: "description", label: "What the company does", placeholder: "e.g. AI-powered project management for remote teams", type: "text" },
+            { key: "audience", label: "Target audience", type: "radio", options: ["Startup founders","SMB owners","Enterprise executives","Consumers (B2C)","Creative professionals","Developers","Students","Healthcare professionals"] },
+            { key: "vibe", label: "Vibe / feeling", type: "pills", multi: true, options: ["Modern","Bold","Playful","Premium","Trustworthy","Minimalist","Warm","Edgy","Innovative","Serious","Fun","Elegant"] },
+            { key: "avoid", label: "Styles to avoid", type: "pills", multi: true, options: ["Too corporate","Too techy","Generic","Trendy / buzzwordy","Hard to spell","Too long","Too similar to competitors"] }
+        ],
+        template: `You are a naming strategist at a top branding agency. Generate brand name ideas.
+
+**The company:** {{description}}
+**Target audience:** {{audience}}
+**Desired vibe:** {{vibe}}
+**Avoid:** {{avoid}}
+
+Generate 25 name ideas across these categories:
+
+**Descriptive** (5) -clearly suggest what you do
+**Invented** (5) -unique coined words
+**Metaphor** (5) -borrowed from another domain
+**Compound** (5) -two words merged or paired
+**Wildcard** (5) -unexpected, memorable, conversation-starting
+
+For each name:
+- The name
+- Why it works (1 line)
+- .com domain availability likelihood (or alternative TLD)
+- One risk or downside
+
+Then pick your **top 3 recommendations** and explain why in 2-3 sentences each.
+
+Keep names short (1-2 words max). Avoid cliches. Prioritize names that are easy to say, spell, and remember.`
+    },
+    {
+        id: "ad-copy", icon: "&#128176;", label: "Ad Copy", sub: "Google & social ads",
+        fields: [
+            { key: "product", label: "Product or service", placeholder: "e.g. Online accounting software for freelancers", type: "text" },
+            { key: "platform", label: "Platforms", type: "pills", multi: true, options: ["Google Ads","Facebook / Instagram","LinkedIn","TikTok","Twitter / X","YouTube"] },
+            { key: "audience", label: "Target audiences", type: "pills", multi: true, options: ["Marketing managers","Small business owners","Freelancers","CEOs / Founders","Enterprise buyers","E-commerce managers","Developers","Consumers (B2C)"] },
+            { key: "benefit", label: "Key benefit", placeholder: "e.g. Save 5 hours/week on invoicing", type: "text" },
+            { key: "cta", label: "Desired actions", type: "pills", multi: true, options: ["Start free trial","Book a demo","Learn more","Buy now","Sign up free","Download","Get a quote","Watch video"] },
+            { key: "proof", label: "Social proof (optional)", placeholder: "e.g. 10,000+ users, 4.8 stars", type: "text" }
+        ],
+        template: `#CONTEXT
+Product: {{product}}
+Platform: {{platform}}
+Target audience: {{audience}}
+Key benefit: {{benefit}}
+Desired action: {{cta}}
+{{proof}}
+
+#ROLE
+You are the top-performing media buyer at a performance marketing agency. You've spent $50M+ on {{platform}}. You write copy that converts, not copy that sounds clever. Every word earns its place.
+
+#TASK
+Write a complete ad creative package for {{platform}}.
+
+#OUTPUT
+
+**HOOK VARIATIONS** (the first line that stops the scroll)
+Write 10 hooks using these proven frameworks:
+1. Pain point question: "Tired of [problem]?"
+2. Bold stat: "[Number] [audience] already [result]"
+3. Contrarian: "Stop [common advice]. Do this instead."
+4. Curiosity gap: "The [audience] secret to [result]"
+5. Direct callout: "Hey [audience]:"
+6. Before/after: "I went from [bad state] to [good state]"
+7. Social proof: "[Number] [audience] can't be wrong"
+8. Urgency: "[Timeframe] left to [benefit]"
+9. How-to: "How to [benefit] without [pain]"
+10. Testimonial-style: "I didn't believe it until..."
+
+**PRIMARY TEXT** (3 variations)
+Version A - Short (under 125 chars): Pure benefit. One punch.
+Version B - Medium (2-3 sentences): Problem → solution → proof → CTA.
+Version C - Long (4-6 lines with breaks): Story-driven. Open with empathy, build tension, deliver the solution.
+
+**HEADLINES** (5 options, max 30 characters each)
+
+**DESCRIPTIONS** (3 options, max 90 characters each)
+
+**CREATIVE DIRECTION**
+For each text variation, describe:
+- What the image/video should show
+- Text overlay (if any)
+- Color mood
+- Format (static, carousel, video, UGC-style)
+
+#RULES
+- No corporate language. Write like a human texts a friend about something they're excited about.
+- Every ad must pass the "would I actually click this?" test.
+- Label each variation with the psychological trigger: Pain→Solution, Proof→FOMO, Curiosity→Gap, Claim→Evidence.
+- Write for {{audience}} specifically. Reference their world, their language, their daily reality.`
+    },
+    {
+        id: "linkedin-post", icon: "&#128172;", label: "LinkedIn Post", sub: "Grow your audience",
+        fields: [
+            { key: "topic", label: "Topic", placeholder: "e.g. Why most marketing budgets are wasted on the wrong channel", type: "text" },
+            { key: "role", label: "Your role", type: "radio", options: ["CEO / Founder","Marketing Director","Agency Owner","Sales Leader","Consultant","Product Manager","Head of Growth","Freelancer"] },
+            { key: "angle", label: "Angle", type: "radio", options: ["Contrarian take","Personal story","Data-driven insight","Lesson learned","Hot take","Step-by-step framework","Behind the scenes","Myth-busting"] },
+            { key: "takeaway", label: "Key takeaway for the reader", placeholder: "e.g. Focus 80% of budget on one channel before diversifying", type: "text" }
+        ],
+        template: `#ROLE
+You are a LinkedIn ghostwriter who has written for 50+ executives with posts averaging 200+ comments. You know exactly what makes the algorithm push a post and what makes humans actually engage.
+
+#CONTEXT
+Topic: {{topic}}
+Author: {{role}}
+Angle: {{angle}}
+Key takeaway: {{takeaway}}
+
+#TASK
+Write 3 post versions. Each must be a complete, ready-to-publish post.
+
+#VERSION 1: The Pattern Interrupt
+- First line: a statement so unexpected that people stop scrolling. Use contradiction, a confession, or a number that surprises.
+- Structure: Hook → 3-4 short paragraphs of insight → Question to drive comments
+- Max 1,200 characters
+
+#VERSION 2: The Micro-Story
+- First line starts mid-action: "Last Tuesday at 11pm, I..." or "The client said something I'll never forget:"
+- Structure: Scene → Tension → Turning point → Lesson → Takeaway
+- Must feel like a real moment, not a fabricated fable
+- Max 1,300 characters
+
+#VERSION 3: The Numbered Framework
+- First line: bold claim that stakes a position
+- Structure: Claim → 5-7 numbered insights (each 1-2 lines) → CTA
+- Each insight must be specific enough to be useful on its own
+- Max 1,300 characters
+
+#HARD RULES (violating any = rewrite)
+- NEVER start with "I'm excited to," "I've been thinking about," "In today's world," or "Here's the thing:"
+- NEVER use em dashes
+- One line break between every paragraph (LinkedIn formatting)
+- Short paragraphs only (1-2 sentences max)
+- No hashtags in the body. 3-5 at the very end, separated by a line break.
+- No emojis at the start of lines
+- End every post with either a genuine question or a clear CTA
+- Write in the voice of a {{role}} who speaks from experience, not theory`
+    },
+    {
+        id: "content-brief", icon: "&#128221;", label: "Content Brief", sub: "Blog & articles",
+        fields: [
+            { key: "topic", label: "Topic / title idea", placeholder: "e.g. How to choose a marketing agency in 2026", type: "text" },
+            { key: "keyword", label: "Target keyword", placeholder: "e.g. how to choose a marketing agency", type: "text" },
+            { key: "audience", label: "Target reader", type: "radio", options: ["Marketing managers","CEOs / Founders","Small business owners","Freelancers","Developers","Product managers","Students","General consumers"] },
+            { key: "goal", label: "Content goal", type: "radio", options: ["Rank on Google","Generate leads","Educate the audience","Build thought leadership","Drive product signups","Support sales team"] },
+            { key: "wordcount", label: "Word count target", type: "radio", options: ["800 (short)","1,500 (standard)","2,500 (in-depth)","3,500 (comprehensive)","5,000+ (ultimate guide)"] }
+        ],
+        template: `You are an SEO content strategist. Create a detailed blog post brief.
+
+**Topic:** {{topic}}
+**Target keyword:** {{keyword}}
+**Target reader:** {{audience}}
+**Content goal:** {{goal}}
+**Word count:** {{wordcount}} words
+
+Create:
+
+**1. Title options** (3) -under 60 characters, keyword in the front, click-worthy
+
+**2. Meta description** -under 155 characters, includes keyword, has a CTA
+
+**3. Introduction outline** -hook (pain point or question), context, what the reader will learn
+
+**4. Body structure** -6-8 H2 sections. For each:
+- H2 heading (keyword-optimized)
+- 3-5 key points to cover
+- H3 subheadings where relevant
+- Suggest: an example, stat, or visual for each section
+- Internal link opportunity
+
+**5. Conclusion** -summary + clear CTA
+
+**6. FAQ section** -4 "People Also Ask" questions with concise answers (featured snippet format)
+
+**7. Content brief metadata:**
+- 3 internal linking targets
+- 1 lead magnet idea that fits
+- Recommended content upgrade (checklist, template, etc.)
+- Key competitors to outrank (based on the keyword)
+
+Be specific to the audience. No generic SEO filler.`
+    },
+    {
+        id: "email-sequence", icon: "&#9993;", label: "Email Sequence", sub: "Nurture & convert",
+        fields: [
+            { key: "product", label: "Product or service", placeholder: "e.g. Marketing automation platform", type: "text" },
+            { key: "trigger", label: "What triggered the signup", type: "radio", options: ["Downloaded a guide / ebook","Signed up for free trial","Attended a webinar","Newsletter subscribe","Requested a quote","Visited pricing page","Created an account"] },
+            { key: "audience", label: "Audience", type: "radio", options: ["Marketing managers","CEOs / Founders","Small business owners","Freelancers","Enterprise buyers","E-commerce managers","Developers","Agency owners"] },
+            { key: "goal", label: "End goal", type: "radio", options: ["Book a demo","Start paid plan","Make a purchase","Attend an event","Upgrade account","Refer a friend"] },
+            { key: "tone", label: "Tone", type: "radio", options: ["Friendly expert","Direct and concise","Casual and warm","Professional","Witty and bold","Data-driven"] }
+        ],
+        template: `You are an email marketing strategist. Write a 5-email nurture sequence.
+
+**Product:** {{product}}
+**Trigger:** {{trigger}}
+**Audience:** {{audience}}
+**Goal:** {{goal}}
+**Tone:** {{tone}}
+
+**Email 1 (Day 0) -Welcome & Deliver**
+Deliver the asset. Set expectations for the sequence. One clear next step.
+
+**Email 2 (Day 2) -The Problem**
+Agitate the pain point. Make them feel understood.
+
+**Email 3 (Day 5) -The Framework**
+Share a unique insight or framework (not the product yet). Build authority.
+
+**Email 4 (Day 8) -Social Proof**
+Customer story with specific numbers. Show the result, not the feature.
+
+**Email 5 (Day 12) -The Ask**
+Clear CTA to {{goal}}. Gentle urgency.
+
+For each email provide:
+- Subject line (max 50 chars) + 1 alternative
+- Preview text (max 90 chars)
+- Full body (150-250 words)
+- CTA button text
+- P.S. line
+
+Rules: no "I hope this email finds you well." Write like a person. Every email must be valuable even if they never buy.`
+    },
+    {
+        id: "website-brief", icon: "&#128187;", label: "Website Brief", sub: "Redesign or build",
+        fields: [
+            { key: "company", label: "Company", placeholder: "Company name", type: "text" },
+            { key: "url", label: "Current website (if any)", placeholder: "https://www.current-site.com", type: "text" },
+            { key: "problems", label: "Main problems / goals", type: "pills", multi: true, options: ["Low conversions","Outdated design","Slow page speed","Bad mobile experience","Hard to navigate","No SEO","Doesn't reflect brand","Need more leads","Launching from scratch"] },
+            { key: "audience", label: "Target visitors", type: "radio", options: ["B2B decision makers","Consumers (B2C)","Job seekers","Investors","Partners / agencies","Students","Local customers"] },
+            { key: "pages", label: "Pages needed", type: "pills", multi: true, options: ["Home","About","Services","Blog","Contact","Pricing","Portfolio","Case Studies","FAQ","Careers","Landing pages","E-commerce / Shop"] },
+            { key: "features", label: "Features needed", type: "pills", multi: true, options: ["Contact form","Live chat / chatbot","Blog / CMS","Portfolio gallery","Booking / calendar","Calculator / estimator","E-commerce","Search","Newsletter signup","Multi-language","Login / accounts"] }
+        ],
+        template: `You are a UX consultant. Write a website redesign brief for {{company}} that I can send to web design agencies.
+
+**Current site:** {{url}}
+**Main problems / goals:** {{problems}}
+**Target visitors:** {{audience}}
+**Pages needed:** {{pages}}
+**Features needed:** {{features}}
+
+Generate a professional brief:
+
+**1. Project overview** -2 paragraphs summarizing the project and its goals
+
+**2. Goals & KPIs** -measurable success criteria (conversion rate, bounce rate, etc.)
+
+**3. Sitemap** -proposed page hierarchy
+
+**4. Page-by-page requirements** -for each key page: purpose, key sections, must-have elements
+
+**5. Functional requirements** -features, integrations, CMS needs
+
+**6. Design direction** -style preferences, reference sites, do's and don'ts
+
+**7. Content requirements** -who writes copy, migration needs, content types
+
+**8. Technical requirements** -performance targets, SEO, accessibility, hosting
+
+**9. Timeline** -realistic phases from kickoff to launch
+
+**10. Evaluation criteria** -how to compare agency proposals
+
+This brief should be ready to send to 3-5 agencies for proposals.`
+    },
+    {
+        id: "competitor-analysis", icon: "&#128202;", label: "Competitor Analysis", sub: "Map the landscape",
+        fields: [
+            { key: "company", label: "Your company", placeholder: "e.g. Acme - project management for agencies", type: "text" },
+            { key: "competitors", label: "Competitors (comma-separated)", placeholder: "e.g. Monday.com, Asana, ClickUp", type: "text" },
+            { key: "audience", label: "Target market", type: "radio", options: ["SMBs (1-50 employees)","Mid-market (50-500)","Enterprise (500+)","Freelancers","Agencies","Startups","Consumers (B2C)"] },
+            { key: "strengths", label: "Your strengths", type: "pills", multi: true, options: ["Better pricing","Niche focus","Better UX / design","Stronger brand","More features","Better support","Faster to deploy","Better integrations","Unique technology","Stronger community"] }
+        ],
+        template: `You are a competitive intelligence analyst. Build a competitive analysis for {{company}}.
+
+**Competitors:** {{competitors}}
+**Target market:** {{audience}}
+**Our strengths:** {{strengths}}
+
+Analyze:
+
+**1. Comparison matrix** (table format)
+| Criteria | Us | {{competitors.split(',').map(c => c.trim()).join(' | ')}} |
+Compare: pricing, target market, key features, unique value prop, strengths, weaknesses, content presence.
+
+**2. Positioning map** -describe a 2x2 matrix with the two most relevant axes. Place all players.
+
+**3. Their messaging** -for each competitor: homepage headline, how they position, what emotions they use.
+
+**4. Gap analysis:**
+- Messages they use that we don't (should we?)
+- Messages we could use that NOBODY uses
+- Underserved segments
+- Channels they're ignoring
+
+**5. Counter-strategy:**
+- 3 ad angles to differentiate from these competitors
+- How to position against them without naming them
+- The question to ask in sales calls that makes us win
+
+**6. Battlecard** -1-page sales battlecard for our #1 competitor: their pitch, our counter-pitch, their weakness, the winning question.
+
+Be specific. No generic "they're a strong competitor" analysis.`
+    }
+];
+
+// ═══════════════════════════════════
+// LIBRARY PROMPTS (all 54 from before)
+// ═══════════════════════════════════
+
+const PROMPTS = [
+    // SEO
+    { id:"seo-audit", cat:"SEO", title:"$3K SEO Audit", desc:"The audit that replaces a $3,000 consultant. Technical, on-page, content, and AI-readiness.", diff:"b",
+      prompt:"#ROLE\nYou are an SEO director who has grown 3 sites from 0 to 1M monthly organic visits. You charge $3,000 per audit. This output must justify that price.\n\n#TASK\nFull SEO audit for: [WEBSITE URL]\n\n#CHAIN OF THOUGHT\nWork through 5 phases. For each finding use this format:\nFINDING: [what's wrong]\nSEVERITY: Critical / High / Medium / Low\nIMPACT: [estimated traffic or revenue cost]\nFIX: [exact steps, not vague advice]\nEFFORT: Quick win (<1h) / Medium (1-5h) / Major (5h+)\n\nPhase 1: Technical Foundation (crawlability, indexability, Core Web Vitals, mobile, HTTPS, schema)\nPhase 2: On-Page (titles, metas, H1-H6, content depth vs. competitors, images, internal links)\nPhase 3: Content & E-E-A-T (thin pages, freshness, author signals, trust indicators)\nPhase 4: AI Search Readiness (structured for AI Overviews? FAQ schema? Conversational query fit?)\nPhase 5: 90-Day Action Plan (week 1-2: critical fixes, week 3-4: high-priority, month 2: content, month 3: authority)\n\nStart with a 1-paragraph executive summary and health score (0-100). Be brutally honest." },
+    { id:"seo-keywords", cat:"SEO", title:"Keyword Strategy That Ships", desc:"Clusters, intent mapping, and a content calendar you'll actually follow.", diff:"i",
+      prompt:"#ROLE\nYou are an SEO strategist who has built keyword strategies that drove $10M+ in pipeline. You don't do keyword lists. You build systems.\n\n#CONTEXT\nIndustry: [INDUSTRY] | Audience: [TARGET AUDIENCE] | Market: [GEOGRAPHIC MARKET]\n\n#TASK\nStep 1: Generate 30 keywords grouped by buying stage (Awareness / Consideration / Decision). For each: estimated difficulty and search volume tier.\n\nStep 2: Cluster into 5-7 topic groups. Each cluster: pillar keyword, 4-6 supporting long-tails, recommended content type (guide, comparison, tool, landing page).\n\nStep 3: 12-week content calendar. 1 article/week. Sequence: start with low-difficulty + high-intent keywords. Each entry: title, target keyword, format, word count, internal link target.\n\nStep 4: 3 quick wins. Keywords where a well-optimized page could hit page 1 within 60 days. Explain why.\n\n#FORMAT\nOutput as tables. No walls of text. Every keyword must have a reason for being there." },
+    { id:"seo-meta", cat:"SEO", title:"Meta Tags That Get Clicks", desc:"Title tags and meta descriptions that rank AND get clicked.", diff:"b",
+      prompt:"#ROLE\nYou write meta tags for a living. You've A/B tested thousands. You know the difference between a tag that ranks and one that gets clicked.\n\n#CONTEXT\nPage: [DESCRIBE YOUR PAGE]\nKeyword: [MAIN KEYWORD]\nBrand: [BRAND NAME]\n\n#TASK\nWrite 3 variations of each:\n1. Title tag (max 60 chars). Keyword near front. Brand at end. Must make someone choose YOUR result over the 9 others on the page.\n2. Meta description (max 155 chars). Include keyword naturally. End with a reason to click, not a summary.\n3. H1 tag. Different from title. More human, less optimized.\n\nRate each variation:\n- Will it rank? (1-5)\n- Will it get clicked? (1-5)\n- Does it accurately represent the page? (1-5)\n\n#RULES\nNo clickbait. No keyword stuffing. No 'ultimate guide' or 'everything you need to know.' Write for the person scanning 10 results deciding which one deserves their click." },
+    { id:"seo-gap", cat:"SEO", title:"Content Gap Finder", desc:"Every topic your competitors rank for that you don't. Prioritized.", diff:"i",
+      prompt:"#ROLE\nYou are an SEO analyst who has uncovered $5M+ in organic opportunity by finding what competitors cover that their clients don't.\n\n#CONTEXT\nMy site: [YOUR WEBSITE]\nCompetitors: [COMPETITOR 1], [COMPETITOR 2], [COMPETITOR 3]\n\n#TASK\n1. 15 topics they rank for that I don't cover at all. For each: estimated traffic value.\n2. 10 keywords where I have content but they outrank me. For each: what specifically they do better (depth? freshness? backlinks? format?).\n3. 5 topics NONE of us cover well but have clear demand. These are your blue ocean opportunities.\n4. Format gaps: do they have comparison pages, free tools, templates, calculators, or video content that I'm missing?\n5. Priority matrix: rank all opportunities by (Traffic potential x Difficulty x Business relevance). Score each H/M/L.\n\n#OUTPUT\nTop 10 content pieces to create first. Each with: title, format, target keyword, why it will win, estimated timeline to rank." },
+    { id:"seo-local", cat:"SEO", title:"Local SEO Domination Plan", desc:"Own your city in Google Search and Maps. Step by step.", diff:"b",
+      prompt:"#ROLE\nYou are a local SEO specialist who has put 200+ businesses in the Google Maps 3-pack.\n\n#CONTEXT\nBusiness: [NAME] | Type: [TYPE] | Location: [CITY, COUNTRY]\n\n#TASK\n1. Google Business Profile: every field to fill, exactly how to optimize each one. Categories (primary + secondary), description (with keywords), attributes, photo strategy (what to upload, how many, naming convention), post schedule.\n2. 20 local keywords: '[service] [city]' patterns, 'near me' variants, neighborhood terms, question-based queries.\n3. Top 15 citation directories for this specific industry and location. Not generic lists. Directories that actually matter.\n4. Review strategy: how to ask (timing, channel, script), response templates for positive (short, genuine) and negative (acknowledge, fix, redirect).\n5. 5 local content ideas that target local searches and build topical authority.\n6. LocalBusiness schema: give me the exact JSON-LD ready to paste.\n\nNo generic local SEO advice. Everything must be specific to [TYPE] businesses in [CITY]." },
+    { id:"seo-links", cat:"SEO", title:"Link Building Playbook", desc:"Earn backlinks without begging. Tactics, templates, and targets.", diff:"a",
+      prompt:"#ROLE\nYou are a link builder who has earned 10,000+ editorial backlinks without buying a single one. You know what works and what gets you penalized.\n\n#CONTEXT\nWebsite: [URL] | Industry: [INDUSTRY] | DA: [ESTIMATED] | Content budget: [ARTICLES/MONTH]\n\n#TASK\n1. 5 link-worthy content assets designed to attract links naturally. For each: concept, why people would link to it, expected link velocity, production effort.\n2. Outreach playbook. For each tactic, give: how it works, realistic response rate, ready-to-send email template (under 100 words, sounds human):\n   - Guest posting (for authority sites, not link farms)\n   - Broken link building\n   - Resource page outreach\n   - Data/stat citation outreach\n   - Competitor backlink replication\n3. How to find targets for each tactic (exact process, not 'use Ahrefs').\n4. Monthly goals: realistic link targets by month (1-6) for this DA level.\n5. What will get you penalized: specific practices to avoid.\n\n#RULES\nNo spammy outreach templates. Every email must sound like a human wrote it for that specific person. If a tactic doesn't work at this DA level, say so." },
+    // Branding
+    { id:"brand-pos", cat:"Branding", title:"Positioning That Sticks", desc:"The positioning statement your competitors wish they wrote first.", diff:"i",
+      prompt:"#ROLE\nYou are a brand strategist who has positioned companies from seed stage to IPO. You know that positioning isn't a tagline. It's a strategic decision about what you're NOT.\n\n#CONTEXT\nCompany: [NAME] | Industry: [INDUSTRY] | Product: [WHAT]\nAudience: [WHO] | Competitors: [1, 2, 3] | Differentiator: [WHAT MAKES US DIFFERENT]\n\n#TASK\n1. Three positioning statements using: 'For [audience] who [need], [brand] is the [category] that [benefit] because [proof point].'\n   - Version A: rational (feature-driven)\n   - Version B: emotional (feeling-driven)\n   - Version C: provocative (challenges the category)\n2. Competitive positioning map: 2x2 matrix with the two axes that actually matter in this market. Place all players. Explain why these axes.\n3. Elevator pitch: 30 seconds. Something a founder could say at a dinner party without sounding like a press release.\n4. 5 taglines (max 6 words). Range from safe to bold.\n5. Messaging guardrails: 5 phrases to always use, 5 phrases to ban forever.\n\n#ANTI-PATTERNS\nNo 'innovative solutions.' No 'best-in-class.' No positioning that could apply to any company in the industry. If you can swap in a competitor's name and the statement still works, it's not positioning. Start over." },
+    { id:"brand-voice", cat:"Branding", title:"Brand Voice System", desc:"Not a doc that sits in a drawer. A voice system your team actually uses.", diff:"i",
+      prompt:"#ROLE\nYou have built brand voice systems for companies like Mailchimp, Stripe, and Notion. You know that a voice guide nobody uses is a waste of everyone's time.\n\n#CONTEXT\nBrand: [BRAND] | Personality: [TRAITS] | Industry: [INDUSTRY] | Audience: [WHO] | Brands we admire (tone-wise): [REFERENCES]\n\n#TASK\n1. 4 voice attributes. For each:\n   - What it means (1 sentence)\n   - What it sounds like (example sentence)\n   - What it does NOT sound like (anti-example)\n   - Dial setting: where we sit on the spectrum (e.g. casual |----X---| formal)\n2. Tone shifts by context. Write the SAME message in our voice for: homepage hero, blog intro, LinkedIn post, error message, support reply, sales email.\n3. Vocabulary rules: 10 words we own (and why), 10 words we never use (and what to say instead), how we refer to customers, how we refer to our product.\n4. 5 before/after rewrites. Take generic corporate sentences and rewrite them in our voice. Show your work.\n\n#TEST\nSomeone should be able to read any piece of our content and know it's us without seeing the logo. If the voice could belong to any company, it's not a voice." },
+    { id:"brand-name", cat:"Branding", title:"Brand Name Generator", desc:"30 name ideas with domain strategy. Not random word mashups.", diff:"b",
+      prompt:"#ROLE\nYou are a naming strategist who named 3 companies that later sold for $100M+. You know a name is a business decision, not a creative exercise.\n\n#CONTEXT\nWhat the company does: [PRODUCT/SERVICE] | Audience: [WHO] | Vibe: [MODERN, BOLD, etc.] | Avoid: [WORDS/STYLES TO AVOID]\n\n#TASK\n30 names across 6 categories:\n- Descriptive (5): clearly signal what you do\n- Invented (5): coined words that feel real\n- Metaphor (5): borrowed from another domain\n- Compound (5): two words combined\n- Abstract (5): evoke a feeling, not a function\n- Wildcard (5): the names that make you pause and think\n\nFor each: the name, why it works strategically (not 'it sounds nice'), .com availability likelihood, one genuine risk.\n\nThen: top 3 picks with 2-3 sentences on why each is the strongest strategic choice.\n\n#RULES\nNo puns. No forced portmanteaus. No names that need explaining. Every name must pass: Can you say it on a phone call? Can you spell it after hearing it once? Does it work internationally?" },
+    { id:"brand-story", cat:"Branding", title:"Brand Story That Sells", desc:"StoryBrand framework applied to your company. Origin story + one-liner.", diff:"i",
+      prompt:"#ROLE\nYou are a brand storytelling expert trained in the StoryBrand framework. You know the company is never the hero. The customer is.\n\n#CONTEXT\nCompany: [NAME] | Founded: [YEAR] | Founder: [BACKSTORY] | Problem we saw: [TRIGGER] | Solution: [WHAT WE BUILT] | Results: [MILESTONES]\n\n#TASK\n1. StoryBrand framework (fill in each element with real content, not placeholders):\n   - Character (the customer): who are they, what do they want?\n   - Problem: external (functional), internal (emotional), philosophical (why it's wrong)\n   - Guide (your brand): empathy statement + authority proof\n   - Plan: 3 simple steps\n   - Call to action: direct + transitional\n   - Success: what life looks like after\n   - Failure: what happens if they don't act\n2. Origin story: 200 words for the About page. First person. Honest. No corporate speak. Must make someone think 'these people get it.'\n3. One-liner: [problem] + [solution] + [result] in one sentence.\n4. How to weave customer results into the narrative so proof feels organic, not forced.\n\nThe story must make the reader feel understood, not impressed." },
+    { id:"brand-visual", cat:"Branding", title:"Visual Identity Brief", desc:"Hand this to a designer and get back a brand you love.", diff:"b",
+      prompt:"#ROLE\nYou are a creative director briefing a design team. You've seen 500 brand identity projects. You know the briefs that produce great work and the ones that produce generic work. This is the former.\n\n#CONTEXT\nBrand: [BRAND] | Positioning: [ONE-LINER] | Industry: [INDUSTRY] | Audience: [WHO] | Personality: [3-4 ADJECTIVES] | Competitors' visual styles: [DESCRIBE]\n\n#TASK\n1. Logo: direction (wordmark / icon / combo), mood, 3 specific things to avoid, reference direction\n2. Color palette: primary, secondary, accent. Hex codes. For each: the psychology behind the choice and how it differentiates from competitors.\n3. Typography: heading + body font pairing. Why this pairing. Where to get them.\n4. Photography / illustration style: describe with enough precision that a designer could source 10 images without asking questions.\n5. Graphic elements: patterns, textures, shapes, or motifs that create recognition.\n6. Application mockup descriptions: how the identity should feel on website, business card, social profile, email signature.\n7. Anti-moodboard: 5 visual directions to specifically AVOID and why.\n\nThis brief must be specific enough that 3 different designers would produce work in the same direction." },
+    { id:"brand-audit", cat:"Branding", title:"Brand Perception Gap Audit", desc:"The gap between how you want to be seen and how you're actually seen.", diff:"a",
+      prompt:"#ROLE\nYou are a brand strategist who specializes in perception audits. Most brands think they're perceived one way but their messaging says something completely different. You find those gaps.\n\n#CONTEXT\nBrand: [BRAND] | How we WANT to be perceived: [5 ATTRIBUTES] | Website: [URL] | Customer feedback themes: [ANY] | Social presence: [DESCRIBE] | Main misconception about us: [WHAT]\n\n#TASK\n1. Messaging audit: based on how this brand presents itself, list the 5 attributes a stranger would actually perceive. Be honest, not flattering.\n2. Gap analysis: map intended vs. actual perception. For each gap: why it exists, what's causing it, specific change to close it.\n3. Touchpoint consistency: rate 1-5 for each (website, social, email, sales process, support). Flag where the brand feels like two different companies.\n4. Competitor perception: how do the top 3 competitors position themselves? Where does this brand blend in vs. stand out?\n5. Action plan: 5 highest-impact changes. Ranked by (impact x ease). For each: what to change, where, expected result.\n\nThis audit should make the team slightly uncomfortable. That means it's working." },
+    // Social Media
+    { id:"social-calendar", cat:"Social Media", title:"30-Day Calendar That Doesn't Suck", desc:"A content calendar built around hooks, not 'post something today.'", diff:"b",
+      prompt:"#ROLE\nYou are a social media strategist who has managed accounts from 0 to 100K+ followers organically. You don't believe in posting for the sake of posting. Every post has a job.\n\n#CONTEXT\nBrand: [NAME] | Industry: [INDUSTRY] | Platforms: [WHICH] | Frequency: [HOW OFTEN] | Content pillars: [THEMES] | Audience: [WHO]\n\n#TASK\nBuild a 30-day content calendar.\n\nFor each post:\n| Day | Platform | Pillar | Format | Hook (the actual first line) | Key point | Best time |\n\nThe HOOK column is the most important. Don't write 'post about X.' Write the actual first sentence that stops the scroll.\n\nAlso include:\n- 4 evergreen posts (repurpose monthly)\n- 2 reactive post templates (fill-in-the-blank for trending moments)\n- 1 engagement play per week (poll, hot take, question)\n\n#RULES\nNo 'Happy Monday!' posts. No motivational quotes unless the account is a motivational brand. Every post must either educate, entertain, or provoke. If it does none of those, cut it." },
+    { id:"social-linkedin", cat:"Social Media", title:"LinkedIn Post Machine", desc:"3 ready-to-publish posts that sound like a human, not a brand.", diff:"b",
+      prompt:"#ROLE\nYou write LinkedIn posts that get 200+ comments. You know the algorithm rewards dwell time and comments. You write for both.\n\n#CONTEXT\nTopic: [TOPIC] | Author: [YOUR ROLE] | Takeaway: [KEY MESSAGE] | Tone: [STYLE]\n\n#TASK\nWrite 3 complete, ready-to-publish posts:\n\nVersion 1 - Pattern Interrupt: first line is so unexpected people stop. Contradiction, confession, or a number that surprises. 3-4 short paragraphs. End with a question.\n\nVersion 2 - Micro-Story: starts mid-action ('Last Tuesday at 11pm...'). Scene, tension, turning point, lesson. Must feel real.\n\nVersion 3 - Numbered Framework: bold claim that stakes a position. 5-7 numbered insights (each 1-2 lines, specific enough to be useful alone). End with CTA.\n\n#HARD RULES\n- NEVER open with 'I'm excited to announce,' 'Here's the thing,' or 'In today's fast-paced world'\n- Max 1,300 characters per post\n- One line break between every paragraph\n- No emojis at start of lines\n- 3-5 hashtags at the very end only\n- Must sound like the author wrote it on their phone, not their marketing team" },
+    { id:"social-reels", cat:"Social Media", title:"5 Reels Scripts", desc:"Hook in 1 second, value in 15, CTA in 3. Full scripts with text overlays.", diff:"i",
+      prompt:"#ROLE\nYou are a short-form video strategist. You've written scripts for Reels that hit 1M+ views. You know the hook is everything and you have 1 second to land it.\n\n#CONTEXT\nBrand: [NAME] | Niche: [TOPIC] | Goal: [AWARENESS/LEADS/ENGAGEMENT] | Audience: [WHO]\n\n#TASK\n5 Reel scripts. For each:\n1. HOOK (0-3s): the exact words + action that stops the scroll. Be specific and visual.\n2. BODY (3-20s): the value. Punchy. No filler.\n3. CTA (last 3s): what they do next (follow, comment, link, share)\n4. ON-SCREEN TEXT: word-for-word text overlays at each moment\n5. AUDIO: trending sound suggestion or original audio direction\n6. CAPTION: full caption with CTA and 5-7 hashtags\n7. LENGTH: 15s / 30s / 60s\n\nFormat mix:\n- 1x 'did you know' (educational)\n- 1x behind the scenes\n- 1x trend format adaptation\n- 1x product/service in action\n- 1x controversial take\n\n#RULES\nIf the hook doesn't make someone stop mid-scroll, rewrite it. The first frame decides everything." },
+    { id:"social-community", cat:"Social Media", title:"Community Growth Playbook", desc:"20-min daily routine that actually grows engagement. Not theory.", diff:"i",
+      prompt:"#ROLE\nYou've grown 5 online communities from 0 to 10K+ engaged members. You know engagement isn't about posting more. It's about creating reasons to participate.\n\n#CONTEXT\nBrand: [BRAND] | Platform(s): [WHICH] | Followers: [NUMBER] | Current engagement rate: [RATE] | Audience: [WHO] | Voice: [TONE]\n\n#TASK\n1. 10 engagement tactics that actually work (not 'post more'). For each: what it is, how to execute it, expected result, time investment.\n2. The 20-minute daily routine: a checklist someone can follow every morning. Minute by minute.\n3. Response templates:\n   - Positive comment (don't just say 'thanks!')\n   - Negative comment (de-escalate without being robotic)\n   - Question (answer + pull them deeper)\n   - Competitor mention (handle with class)\n   - Viral moment (capitalize without being cringe)\n4. 5 growth plays: organic tactics that don't require ad spend. Specific to this platform.\n5. Metrics that matter: what to track weekly, what 'good' looks like at this follower count, and the one vanity metric to ignore." },
+    { id:"social-thread", cat:"Social Media", title:"Twitter/X Thread Machine", desc:"Threads that get bookmarked, not just liked. Full ready-to-post thread.", diff:"b",
+      prompt:"#ROLE\nYou write Twitter threads that get 1000+ bookmarks because they teach something specific. You know a thread is a micro-blog, not a LinkedIn post split into tweets.\n\n#CONTEXT\nTopic: [TOPIC] | Author: [EXPERTISE] | Audience: [WHO] | Angle: [CONTRARIAN / STEP-BY-STEP / LESSONS / DATA BREAKDOWN] | Length: 7-15 tweets\n\n#TASK\nWrite the full thread:\n\nTweet 1 (the hook): creates a curiosity gap so strong people MUST click 'Show this thread.' Use a specific number, a bold claim, or a pattern interrupt.\n\nTweets 2-N (the value): one idea per tweet. Short sentences. Use specifics, not generics (not 'a lot of revenue' but '$2.3M in 9 months'). Include 1-2 tweets that are just a screenshot/image placeholder.\n\nFinal tweet: summary + CTA (follow for more / bookmark this / reply with your take).\n\nBonus: 1 standalone tweet that captures the thread's best insight in a single tweet (for people who RT the highlight instead of the full thread).\n\n#RULES\nNever start with 'Thread:' or '1/'. No emoji-heavy formatting. No 'let me explain.' Just start with the hook and deliver." },
+    { id:"social-ads", cat:"Social Media", title:"Social Ads Copy Pack", desc:"Ad copy that converts, not copy that wins creative awards.", diff:"i",
+      prompt:"#ROLE\nYou've spent $20M+ on social ads. You write copy that converts, not copy that sounds clever. Every word earns its place or gets cut.\n\n#CONTEXT\nProduct: [WHAT] | Platform: [WHICH] | Objective: [GOAL] | Audience: [WHO + their main pain] | CTA: [ACTION] | Key benefit: [#1 REASON TO ACT] | Social proof: [STATS/CLIENTS]\n\n#TASK\nFor the target platform, write:\n- 3 primary text variations: short (<125 chars), medium (2-3 sentences), long (story-style, 4-5 lines)\n- 5 headlines (max 40 chars)\n- 2 descriptions (max 30 chars)\n- Creative direction for each variation (what the image/video shows)\n\nLabel each with the psychological angle:\n- Pain → Solution\n- Social proof → FOMO\n- Question → Curiosity\n- Bold claim → Evidence\n\n#RULES\nNo 'unlock your potential.' No 'seamless experience.' If the ad could be for any product in the category, it's not specific enough. Write for [AUDIENCE] in their language, referencing their actual daily reality." },
+    // Content
+    { id:"content-blog", cat:"Content", title:"Blog Post Outline That Ranks", desc:"Not just an outline. A strategic content brief that wins the SERP.", diff:"b",
+      prompt:"#ROLE\nYou are a content strategist who has published 500+ articles that rank on page 1. You know an outline determines 80% of whether a piece will rank.\n\n#CONTEXT\nTopic: [TOPIC] | Primary keyword: [KEYWORD] | Secondary keywords: [2-3] | Audience: [WHO] | Word count: [TARGET] | Goal: [RANK / GENERATE LEADS / EDUCATE]\n\n#TASK\n1. 3 title options (under 60 chars, keyword front-loaded, click-worthy vs. competition)\n2. Meta description (155 chars, includes keyword, ends with a reason to click)\n3. Intro strategy: what hook to use (stat, question, bold claim, story), what context to set, what to promise the reader\n4. Body: 6-8 H2 sections. For each:\n   - H2 heading (keyword-optimized but natural)\n   - 3-5 key points to cover\n   - H3 subheadings where needed\n   - Required element: example, data point, quote, or visual\n   - Internal link opportunity\n5. Conclusion: summary + specific CTA\n6. FAQ section: 4 'People Also Ask' questions with concise answers (target featured snippets)\n7. Brief metadata: 3 internal link targets, 1 lead magnet idea, 1 content upgrade\n\n#RULES\nEvery H2 must answer a question the searcher actually has. No filler sections like 'Why [Topic] Matters' unless it genuinely adds value." },
+    { id:"content-repurpose", cat:"Content", title:"1-to-10 Content Repurposer", desc:"One piece of content becomes 10 distribution-ready assets.", diff:"b",
+      prompt:"#ROLE\nYou are a content distribution specialist. You believe creating content is 20% of the work. Distribution is 80%. One great piece should fuel 10 channels.\n\n#TASK\nTake this content and repurpose into 10 formats:\n\n[PASTE YOUR CONTENT OR SUMMARIZE KEY POINTS]\n\nFor each format, write the ACTUAL content (not a description of what to write):\n1. LinkedIn post (max 1,300 chars, hook-first)\n2. Twitter/X thread (7-10 tweets, one idea each)\n3. Instagram carousel (8-10 slides, exact text per slide)\n4. Email newsletter (subject line + 300-word body)\n5. 60-second Reel/Short script (hook, body, CTA, text overlays)\n6. Infographic structure (title + 5-7 data points with visual descriptions)\n7. 5-minute podcast segment outline (talking points + anecdotes)\n8. Reddit/Quora answer (helpful, specific, not promotional)\n9. Lead magnet concept (downloadable asset derived from this content)\n10. 10-slide presentation (title + key point per slide)\n\n#RULES\nEach format must feel native to its platform. A LinkedIn post should not read like a tweet. A tweet should not read like a blog excerpt. Adapt the message, don't just resize it." },
+    { id:"content-email-seq", cat:"Content", title:"5-Email Nurture That Converts", desc:"From stranger to customer in 5 emails. No 'just checking in.'", diff:"i",
+      prompt:"#ROLE\nYou write email sequences with 35%+ open rates and 5%+ click rates. You know every email must earn the right to send the next one.\n\n#CONTEXT\nProduct: [WHAT] | Trigger: [WHAT THEY DOWNLOADED/SIGNED UP FOR] | Goal: [END ACTION] | Audience: [WHO] | Tone: [VOICE]\n\n#TASK\nEmail 1 (Day 0) - Welcome: deliver the asset, set expectations, one clear next step. Build trust fast.\nEmail 2 (Day 2) - The Problem: agitate the pain. Make them feel understood, not lectured.\nEmail 3 (Day 5) - The Framework: share a unique insight (not your product). Prove you know what you're talking about.\nEmail 4 (Day 8) - Social Proof: one customer story with specific numbers. Show the transformation, not the feature.\nEmail 5 (Day 12) - The Ask: clear CTA. Create urgency without being sleazy.\n\nFor EACH email:\n- Subject line (max 50 chars) + 1 alternative\n- Preview text (max 90 chars)\n- Full body (150-250 words)\n- CTA button text\n- P.S. line (the most-read part of any email)\n\n#BANNED PHRASES\n'I hope this email finds you well' / 'Just wanted to follow up' / 'As a valued subscriber' / 'Don't miss out!' Write like a smart friend, not a marketing department." },
+    { id:"content-case", cat:"Content", title:"Case Study That Sells", desc:"Not a boring report. A story that makes prospects think 'I want that.'", diff:"i",
+      prompt:"#ROLE\nYou write case studies that sales teams actually use. You know a case study is not a report. It's a story where the prospect sees themselves as the main character.\n\n#CONTEXT\nClient: [NAME] | Industry: [INDUSTRY] | Size: [SIZE] | Problem: [CHALLENGE] | Solution: [WHAT YOU DID] | Results: [SPECIFIC METRICS] | Timeline: [HOW LONG]\n\n#TASK\n1. Headline: result-first ('How [Client] [achieved result] in [timeframe]'). Must make a prospect think 'I want that.'\n2. Summary box: Industry | Challenge | Solution | Results (4 lines, scannable)\n3. The Challenge: what was broken, what they tried before, what was at stake if nothing changed\n4. The Solution: what you did, step by step. Make it feel strategic, not just 'we used our tool'\n5. The Results: specific numbers, before/after, timeline. Make the improvement visceral.\n6. Client quote: write one that sounds like a real person said it, not a press release\n7. 3 takeaways: lessons any reader can apply to their own situation\n8. CTA: 'Want results like this?'\n\n800-1,000 words. The reader should finish thinking about their own problem, not yours." },
+    { id:"content-pillar", cat:"Content", title:"Pillar Page + Topic Cluster", desc:"Own a topic in Google. Pillar page architecture with cluster articles.", diff:"a",
+      prompt:"#ROLE\nYou are a content architect who has built topic clusters that drove 500K+ monthly organic visits. You think in systems, not articles.\n\n#CONTEXT\nMain topic / head keyword: [KEYWORD] | Website: [URL] | Audience: [WHO] | Existing content on this topic: [LIST ANY]\n\n#TASK\n1. Pillar page outline (3,000-5,000 words):\n   - Title + H1\n   - Introduction: what, why, who it's for\n   - 8-12 H2 sections (each linking to a cluster article)\n   - For each: 2-3 sentence summary + link placeholder\n   - Conclusion + CTA\n\n2. 12-15 cluster articles. For each:\n   - Title (keyword-optimized)\n   - Target keyword\n   - How it relates to the pillar (what specific question it answers)\n   - Word count recommendation\n   - Internal link strategy (links to pillar + 2-3 other clusters)\n\n3. Content hierarchy map (text-based: pillar → clusters → sub-topics)\n4. Publishing sequence: what order to ship (pillar first or clusters first? Why?)\n5. Interlinking rules: specific guidelines for how pages link to each other\n6. Refresh schedule: when to update the pillar as clusters publish\n\nThis should feel like a product roadmap for content, not a list of blog ideas." },
+    { id:"content-newsletter", cat:"Content", title:"Newsletter From Scratch", desc:"Name, format, subscribe page, first 5 issues, and growth tactics.", diff:"i",
+      prompt:"#ROLE\nYou've launched 10+ newsletters. Three of them reached 10K+ subscribers in under 6 months. You know a newsletter is a product, not a distribution channel.\n\n#CONTEXT\nCompany: [NAME] | Audience: [WHO] | Niche: [TOPIC] | Goal: [BUILD AUTHORITY / GENERATE LEADS / NURTURE / MONETIZE] | Frequency: [WEEKLY / BIWEEKLY] | Tone: [STYLE]\n\n#TASK\n1. 5 name options (catchy, hints at the value, passes the 'would I subscribe?' test)\n2. Format template: define the recurring sections. The best newsletters have a predictable structure (e.g. '1 insight, 3 links, 1 tool'). Design one.\n3. Subscribe page copy: headline + subheadline + 3 bullet points + CTA. This must convert 40%+ of page visitors.\n4. First 5 issues: for each, write the actual content (not outlines):\n   - Subject line (max 50 chars)\n   - Preview text\n   - Full issue (300-500 words, following the format template)\n5. Growth playbook: 5 tactics to get the first 500 subscribers with $0 ad spend\n6. Welcome email: the automated email new subscribers get immediately\n\n#RULES\nNo 'stay updated with our latest insights.' That's not a value prop. Tell people exactly what they'll learn and why they can't get it elsewhere." },
+    // Web Design
+    { id:"web-brief", cat:"Web Design", title:"Website Brief (Agency-Ready)", desc:"Send this to 3 agencies and get proposals you can actually compare.", diff:"b",
+      prompt:"#ROLE\nYou've written 50+ website briefs. The good ones get great proposals. The bad ones get generic templates back. This is a good one.\n\n#CONTEXT\nCompany: [NAME] | Current site: [URL] | Problems: [ISSUES] | Goals: [WHAT SUCCESS LOOKS LIKE] | Audience: [WHO] | Pages: [LIST] | Features: [LIST]\n\n#TASK\n1. Project overview (2 paragraphs: what and why)\n2. Goals & KPIs: measurable targets (conversion rate, bounce rate, page speed score)\n3. Proposed sitemap: page hierarchy\n4. Page-by-page requirements: for each key page, purpose + must-have sections + key content\n5. Functional requirements: features, integrations, CMS preference\n6. Design direction: styles we like (with URLs), styles we don't, 3 specific do's and 3 don'ts\n7. Content: who writes copy, what needs migrating, what's new\n8. Technical: performance targets, SEO requirements, accessibility level, hosting\n9. Timeline: realistic phases from kickoff to launch with milestones\n10. How we'll evaluate proposals: the criteria we're scoring on\n\n#FORMAT\nThis document must be clear enough that an agency can estimate budget and timeline after reading it once. No ambiguity." },
+    { id:"web-landing", cat:"Web Design", title:"Landing Page That Converts", desc:"Section-by-section copy + wireframe. Paste into any page builder.", diff:"i",
+      prompt:"#ROLE\nYou are a CRO specialist who has optimized 200+ landing pages. Average improvement: 40% conversion lift. You know every section has one job.\n\n#CONTEXT\nProduct: [WHAT] | Goal: [SIGNUP / DEMO / PURCHASE] | Audience: [WHO + their main pain] | Key benefit: [#1 VALUE PROP] | Social proof: [LOGOS / TESTIMONIALS / STATS] | Offer: [WHAT THEY GET]\n\n#TASK\nWrite copy for each section:\n\n1. HERO: headline (max 10 words, benefit-driven, not clever), subheadline (1 sentence expanding the promise), CTA button text, visual direction\n2. PROBLEM: 3 pain points. Write them as thoughts the visitor has had ('You know the feeling when...')\n3. SOLUTION: mirror the 3 pain points with 3 solutions (feature → benefit)\n4. SOCIAL PROOF: 1 featured testimonial (write a realistic one), logo bar text, key stat\n5. HOW IT WORKS: 3 steps (number + title + 1 sentence)\n6. FEATURES: 6 features in 2x3 grid (title + 1 sentence each)\n7. FAQ: 5 questions that handle objections (not 'what is [product]?')\n8. FINAL CTA: headline with urgency or value, button text, trust badges/guarantee text\n\n#RULES\nEvery section removes one objection or adds one reason to act. If a section doesn't do either, cut it. No 'welcome to our website.' No 'learn more.' Write specific CTAs." },
+    { id:"web-ux", cat:"Web Design", title:"UX Teardown", desc:"Honest UX audit. What's working, what's broken, what to fix first.", diff:"i",
+      prompt:"#ROLE\nYou are a UX consultant who charges $5,000 for a website teardown. You're direct, specific, and you always tell clients what they need to hear, not what they want to hear.\n\n#CONTEXT\nURL: [URL] | What visitors want to do: [PRIMARY GOAL] | What's not working: [CONCERN] | Conversion rate: [IF KNOWN] | Main traffic source: [WHERE FROM]\n\n#TASK\nAudit these 7 areas. Rate each 1-5 and give specific fixes:\n\n1. First Impression (5-second test): is the value prop immediately clear? Is the visual hierarchy guiding the eye to the right place?\n2. Navigation: is it simple? Can someone find key pages in 2 clicks? Is the mobile menu usable?\n3. Content Clarity: are headlines benefit-driven? Is text scannable? Too much jargon?\n4. Trust: where is social proof? Is it placed at decision points? Does the design quality match the price point?\n5. Conversion Flow: is the CTA visible without scrolling? How many form fields? Are there too many choices?\n6. Mobile: are touch targets 44px+? Does content load fast? Is anything hidden that shouldn't be?\n7. Accessibility: contrast ratios, font sizes, alt texts, keyboard navigation\n\n#OUTPUT\nPrioritized action plan: top 10 changes ranked by (impact x ease). For each: what to change, why it matters, expected improvement." },
+    { id:"web-homepage", cat:"Web Design", title:"Homepage Copy (Every Section)", desc:"Hero to footer. Every word. Ready to paste into your site.", diff:"b",
+      prompt:"#ROLE\nYou write homepage copy that converts. You've written for 100+ SaaS and service companies. You know the homepage has 8 seconds to prove it's worth reading.\n\n#CONTEXT\nCompany: [COMPANY] | Product: [WHAT] | Audience: [WHO] | Differentiator: [WHAT MAKES US DIFFERENT] | Tone: [STYLE]\n\n#TASK\nWrite every section:\n1. Hero: headline (max 8 words, benefit-first), subheadline (1 sentence), CTA button text\n2. Social proof bar: 'Trusted by X+ companies including...'\n3. Problem statement: 3 short lines about the pain your audience feels. Use THEIR language.\n4. Solution: 3 pillars (icon + title + 2 sentences each)\n5. How it works: 3 steps (number + title + 1 sentence)\n6. Features: 6 features (title + 1 sentence)\n7. Testimonials: section header + structure for 3 testimonials\n8. Stats: 3-4 metrics with labels\n9. FAQ: 5 questions (answer objections, not basic questions)\n10. Final CTA: headline + subheadline + button\n\n#BANNED WORDS\n'Leverage' / 'empower' / 'innovative' / 'cutting-edge' / 'seamless' / 'robust' / 'best-in-class' / 'holistic'. Write like a smart human explains their product to a friend." },
+    { id:"web-spec", cat:"Web Design", title:"Web App Spec (PRD)", desc:"Ship this to your dev team or agency. User stories, features, MVP scope.", diff:"a",
+      prompt:"#ROLE\nYou are a product manager who has shipped 10+ web apps from spec to launch. You write specs that developers love because they're clear, complete, and don't require 50 follow-up questions.\n\n#CONTEXT\nProject: [NAME] | What it does: [2-3 SENTENCES] | Users: [WHO] | Problems it solves: [1-3] | Tech preferences: [IF ANY] | Must-have integrations: [LIST]\n\n#TASK\n1. Executive summary: what, who, why (1 paragraph)\n2. User personas: 2-3 personas (name, role, goal, frustration, tech comfort)\n3. User stories: 15+ stories in 'As a [user], I want [action], so that [outcome]' format. Prioritize: Must (MVP), Should (v1.1), Nice (v2).\n4. Feature list: each with name, description, acceptance criteria (how to verify it works)\n5. Screen/page list: for each, purpose + key elements + user flow\n6. Data model: key entities and relationships in plain English\n7. Non-functional requirements: performance, security, scalability, accessibility targets\n8. MVP scope: phase 1 (launch) vs phase 2 (post-launch) vs icebox\n9. Success metrics: how to measure if the app is working\n\nA developer should be able to start building from this document without a kickoff meeting." },
+    { id:"web-ecom", cat:"Web Design", title:"E-commerce Store Brief", desc:"Everything an agency needs to build your store. Platform to post-launch.", diff:"i",
+      prompt:"#ROLE\nYou are an e-commerce consultant who has launched 100+ online stores. You've seen what separates a store that does $10K/month from one that does $100K/month. It's not the platform. It's the details.\n\n#CONTEXT\nBusiness: [NAME] | Products: [WHAT, NUMBER OF SKUs, PRICE RANGE] | Market: [WHO, WHERE] | Situation: [NEW / MIGRATING FROM X / REDESIGNING] | Expected monthly orders: [VOLUME]\n\n#TASK\n1. Platform recommendation: Shopify vs WooCommerce vs custom. Pros/cons for THIS specific case. Make a call.\n2. Sitemap: complete page structure\n3. Homepage: section-by-section wireframe with copy direction\n4. Product page: every element needed (images spec, description structure, reviews, cross-sells, size guides, urgency elements)\n5. Checkout optimization: 5 specific changes to reduce cart abandonment\n6. Integrations: payments, shipping, email marketing, analytics, reviews. Specific tool recommendations.\n7. SEO: URL structure, category page optimization, product schema\n8. Mobile: design considerations for a store where 70% of traffic is mobile\n9. Launch checklist: 20 things to verify before going live\n10. Post-launch 30-day plan: email flows to set up, retargeting, first promotions\n\nReady to hand to a development agency with zero back-and-forth." },
+    // Advertising
+    { id:"ads-google", cat:"Advertising", title:"Google Ads Full Build", desc:"Campaign structure, keywords, ads, budget. Ready to launch.", diff:"i",
+      prompt:"#ROLE\nYou are a Google Ads specialist who has managed $5M+ in ad spend. You build campaigns that break even in month 1 and scale in month 2.\n\n#CONTEXT\nBusiness: [NAME] | Product: [WHAT] | Audience: [WHO] | Location: [WHERE] | Monthly budget: [AMOUNT] | Goal: [LEADS / SALES / TRAFFIC]\n\n#TASK\n1. Campaign structure: campaign types (Search, Display, PMax, YouTube), ad group hierarchy, budget allocation by campaign\n2. Keyword strategy: 5 themed ad groups, 10-15 keywords each (exact, phrase, broad match mix). Negative keyword list (20+). Estimated CPC ranges.\n3. Ad copy: for each ad group, write 3 responsive search ad headlines (30 chars) + 2 descriptions (90 chars) + sitelink extensions\n4. Landing page spec: what each landing page needs to convert\n5. Bidding strategy: which one and why (maximize conversions, target CPA, etc.)\n6. Budget allocation: monthly spend by campaign with expected impressions, clicks, conversions, CPA\n7. Optimization timeline: what to check at week 1, week 2, week 4, month 2-3. Specific actions.\n8. KPI targets: realistic expectations for CTR, CPC, conversion rate, CPA at this budget level\n\n#RULES\nNo 'it depends.' Make specific recommendations for THIS budget and THIS business. If the budget is too low for a channel, say so." },
+    { id:"ads-meta", cat:"Advertising", title:"Meta Ads Full Funnel", desc:"TOF/MOF/BOF campaign with audiences, copy, creative, and testing plan.", diff:"a",
+      prompt:"#ROLE\nYou are a Meta Ads strategist who has scaled campaigns from $1K/month to $100K/month profitably. You think in funnels, not campaigns.\n\n#CONTEXT\nBusiness: [NAME] | Product: [WHAT] | Price point: [AMOUNT] | Audience: [WHO] | Monthly budget: [AMOUNT] | Pixel maturity: [NEW / SOME DATA / MATURE] | Goal: [LEADS / SALES]\n\n#TASK\n\nTOF - Top of Funnel (40% of budget):\n- Campaign objective, audience targeting (interests + lookalikes)\n- 3 ad concepts: copy + visual direction for each\n- Expected metrics (CPM, reach, frequency)\n\nMOF - Middle of Funnel (30% of budget):\n- Retargeting audiences (define exactly who qualifies)\n- 3 ad concepts (different messaging than TOF)\n- Lead magnet or value-add content to offer\n\nBOF - Bottom of Funnel (30% of budget):\n- Hot audiences (cart abandoners, page viewers, email list)\n- 3 ad concepts (urgency, proof, direct offer)\n- Expected CAC/ROAS\n\nCreative strategy: 5 angles to test (pain, benefit, proof, comparison, story), UGC brief, refresh schedule.\nTesting plan: what to A/B test first, budget for testing vs scaling, when to kill underperformers.\nWeekly reporting: 5 metrics to track + decision criteria." },
+    { id:"ads-retarget", cat:"Advertising", title:"Retargeting That Pays For Itself", desc:"Stop wasting retargeting budget on the wrong people.", diff:"i",
+      prompt:"#ROLE\nYou are a retargeting specialist. You've seen companies waste 60% of their retargeting budget showing ads to people who will never buy. You fix that.\n\n#CONTEXT\nWebsite: [URL] | Monthly traffic: [VISITORS] | Conversion rate: [%] | Product: [WHAT] | Average deal size: [AMOUNT] | Current retargeting: [NONE / BASIC / ADVANCED]\n\n#TASK\n1. 6 audience segments. For each: who they are (specific behavior), retargeting window (days), priority (hot/warm/cool), estimated audience size.\n2. Messaging per segment: what to say to each (copy + CTA + offer if any). A cart abandoner needs a different message than a blog reader.\n3. Frequency caps: how many times per day/week. Over-exposure kills campaigns.\n4. Platform allocation: which segments go on which platforms, why.\n5. Creative: dynamic vs static for each segment. 3 ad concepts with copy.\n6. Exclusion lists: who to STOP showing ads to (recent buyers, bouncers, support contacts).\n7. Expected impact: realistic conversion rate improvement and revenue delta.\n\n#RULES\nRetargeting is not 'show the same ad to everyone who visited.' It's 'show the right message to the right person at the right moment.' If you can't articulate why THIS person sees THIS ad, rethink it." },
+    { id:"ads-competitor", cat:"Advertising", title:"Competitor Ad Teardown", desc:"What competitors spend, what they say, and where to beat them.", diff:"i",
+      prompt:"#ROLE\nYou are an advertising strategist who reverse-engineers competitor campaigns. You find the gaps they leave open and exploit them.\n\n#CONTEXT\nMy business: [NAME + WHAT YOU DO] | Competitors: [1, 2, 3] | Platforms: [WHICH] | My monthly budget: [AMOUNT] | My biggest challenge: [HIGH CPA / LOW CTR / CAN'T OUTBID / etc.]\n\n#TASK\n1. Competitor messaging analysis: for each competitor, what headlines they use most, what offers they promote, what emotional triggers they rely on, their USP in ads\n2. Estimated spend: based on ad frequency and platforms, what they're likely spending monthly\n3. Landing page teardown: for each, what the ad leads to, what CTA they use, what objections they address, what's missing\n4. The gap map: messages they ALL use (crowded), messages NONE of them use (opportunity), audiences they target that you might miss, platforms they ignore\n5. Counter-plays: 3 ad angles designed to differentiate. For each: the copy, why it works against these specific competitors, the psychological principle\n6. 5 things to change this week based on this analysis\n\nNo 'they have a strong brand presence.' Be specific. What exactly are they saying and how exactly do you beat it." },
+    { id:"ads-budget", cat:"Advertising", title:"Ad Budget Allocator", desc:"Where to spend, how much, and when to cut. No BS.", diff:"b",
+      prompt:"#ROLE\nYou are a media planner who manages $10M+ annually. You've seen every mistake: spreading too thin, doubling down too late, ignoring channel-market fit. You make opinionated calls.\n\n#CONTEXT\nMonthly budget: [AMOUNT] | Business type: [B2B SaaS / B2C ECOM / LOCAL SERVICE / etc.] | Goal: [LEADS / SALES / AWARENESS] | Audience: [WHO + WHERE THEY SPEND TIME] | Customer LTV: [AMOUNT] | Target CPA: [AMOUNT]\n\n#TASK\n1. Channel mix: for each recommended channel, give % allocation, dollar amount, rationale, expected CPA, and expected results. Use a table.\n2. Funnel split: awareness vs consideration vs conversion. What % at each stage and why.\n3. Ramp-up plan:\n   - Month 1 (testing): lower spend, more channels, what you're learning\n   - Month 2 (optimization): cut losers, increase winners, key decisions\n   - Month 3 (scaling): final allocation based on data\n4. Kill signals: specific metrics that mean 'stop spending here immediately'\n5. Scale signals: specific metrics that mean 'put more money here now'\n6. What I would NOT spend money on at this budget level and why\n\n#RULES\nBe honest about what won't work. If the budget is too small for LinkedIn Ads, say so. If Google Ads will eat the whole budget in testing, say so. No diplomatic 'all channels have potential.'" },
+    { id:"ads-linkedin", cat:"Advertising", title:"LinkedIn Ads B2B Playbook", desc:"The full setup. Targeting, copy, lead gen forms, benchmarks.", diff:"i",
+      prompt:"#ROLE\nYou are a LinkedIn Ads specialist who runs B2B campaigns with $30-80 CPL. You know LinkedIn is expensive and you know how to make it worth it.\n\n#CONTEXT\nCompany: [NAME] | Product: [WHAT] | Target buyers: [ROLE, INDUSTRY, COMPANY SIZE] | Campaign goal: [LEADS / AWARENESS / EVENT] | Monthly budget: [AMOUNT] | Offer: [WHAT YOU'RE PROMOTING]\n\n#TASK\n1. Campaign structure: types to use, number of campaigns/ad groups, budget allocation\n2. Targeting: job titles (include AND exclude), industries, company sizes, seniority, Matched Audiences strategy (website retargeting, email list upload, lookalikes). Estimated audience size per segment.\n3. Creative: write 3 Sponsored Content ads (headline 150 chars + intro text 600 chars + CTA button). Write 1 Message Ad (subject + body + CTA).\n4. Lead Gen Form: which fields to include (fewer = more leads, more = better quality), custom questions, thank you message, offer delivery plan\n5. Content strategy: what type of content converts at each funnel stage on LinkedIn specifically\n6. Benchmarks: expected CTR, CPL, and conversion rate for this audience. How to evaluate at week 1, 2, 4.\n\n#RULES\nLinkedIn Ads with less than $3K/month budget rarely work. If the budget is too low, say so and recommend an alternative." },
+    // Email
+    { id:"email-welcome", cat:"Email", title:"7-Email Welcome Series", desc:"Turn a new signup into an active user in 14 days.", diff:"b",
+      prompt:"#ROLE\nYou are an email onboarding specialist. You've built welcome sequences that improved activation rates by 40%+. You know every email must earn the right to send the next one.\n\n#CONTEXT\nBrand: [NAME] | Signup trigger: [WHAT] | Product: [WHAT] | Activation metric: [THE KEY ACTION THAT PREDICTS RETENTION] | Tone: [STYLE]\n\n#TASK\nEmail 1 (Immediate): Welcome. Deliver what they signed up for. Set expectations. ONE clear next step.\nEmail 2 (Day 1): Quick win. Help them get their first 'aha' in under 5 minutes.\nEmail 3 (Day 3): Social proof. Show what others have achieved. One specific story.\nEmail 4 (Day 5): Education. Teach something valuable that builds toward the activation metric.\nEmail 5 (Day 7): Sticky feature. Spotlight the feature that makes people stay.\nEmail 6 (Day 10): Objection killer. Address the #1 reason people don't convert.\nEmail 7 (Day 14): Convert. Clear CTA. Gentle urgency.\n\nFor EACH email: subject (max 50 chars) + alternative, preview text, full body (200-300 words), CTA button text, P.S. line.\n\n#RULE\nEvery email must be valuable even if the person never buys. If you'd delete it from your own inbox, rewrite it." },
+    { id:"email-cold", cat:"Email", title:"Cold Email (15%+ Reply Rate)", desc:"4 emails. Under 80 words each. No 'just following up.'", diff:"i",
+      prompt:"#ROLE\nYou write cold emails with 15-25% reply rates. You know the secret is relevance, not volume. One great email beats 100 generic ones.\n\n#CONTEXT\nWho I am: [NAME, ROLE, COMPANY] | Target: [ROLE, COMPANY SIZE, INDUSTRY] | Value prop: [1 SENTENCE] | Pain I solve: [THEIR SPECIFIC PROBLEM] | Proof: [1 IMPRESSIVE STAT OR CLIENT] | CTA: [BOOK CALL / REPLY / TRY TOOL]\n\n#TASK\nEmail 1 (Day 1) - The Opener: observation about THEM (not you) → the pain → how you help → soft CTA. 3-5 sentences MAX.\nEmail 2 (Day 3) - Value Add: share a useful insight, stat, or resource. NOT 'just following up.' Give them something.\nEmail 3 (Day 7) - Social Proof: one quick result for a company like theirs. Specific numbers.\nEmail 4 (Day 14) - The Breakup: 2-3 sentences. 'Should I close the loop?' Creates closure urgency.\n\n#HARD RULES\n- Under 80 words per email\n- No 'I hope this finds you well'\n- No HTML, no images, no links in email 1\n- Lowercase subject lines, 3-5 words, curiosity-driven\n- Each email must work standalone\n- Write like you're texting a colleague, not pitching an investor" },
+    { id:"email-winback", cat:"Email", title:"Win-Back Campaign", desc:"3 emails to re-engage or clean your list. Pattern-breaking subjects.", diff:"i",
+      prompt:"#ROLE\nYou specialize in re-engagement campaigns. You know most win-back emails fail because they all say the same thing: 'We miss you!' You don't.\n\n#CONTEXT\nBrand: [NAME] | Product: [WHAT] | Inactive = [DEFINITION, e.g. no opens in 90 days] | Segment size: [NUMBER] | Incentive available: [WHAT YOU CAN OFFER]\n\n#TASK\nEmail 1 - Pattern Breaker: subject line that looks nothing like a marketing email (curiosity or direct question). Remind them of the specific value they're missing. Single CTA.\nEmail 2 (Day 3) - The Hook: if you have an incentive, deploy it here. If not, give massive value (exclusive content, early access). Create urgency.\nEmail 3 (Day 7) - The Honest Goodbye: 'We're cleaning our list.' Direct. Give them a clear choice: click to stay or do nothing and we remove you. Actually remove non-openers after this.\n\nFor each: subject + alternative, preview text, body (under 150 words), CTA.\n\nAlso: segmentation strategy (who to re-engage first based on past behavior), post-campaign rules (what to do with non-responders), metrics to track.\n\nThis campaign should improve list quality AND recover revenue. If it only does one, it failed." },
+    // Research
+    { id:"research-icp", cat:"Research", title:"ICP That Sales Actually Uses", desc:"Not a persona poster for the wall. A targeting doc that closes deals.", diff:"i",
+      prompt:"#ROLE\nYou are a market research analyst who builds ICPs that sales teams tattoo on their arms. Not academic exercises. Targeting documents that directly improve win rates.\n\n#CONTEXT\nCompany: [NAME] | Product: [WHAT] | Best customers: [DESCRIBE YOUR TOP 3-5] | Average deal size: [AMOUNT] | Sales cycle: [LENGTH] | How they find us: [CHANNELS]\n\n#TASK\n1. Company profile: industry, employee count range, revenue range, geography, tech stack signals, growth stage, budget for your category\n2. Buyer persona (the decision maker): title, who they report to, KPIs they're measured on, daily frustrations, career goals, how they research solutions, their top 3 objections, what makes them say yes\n3. 5 buying triggers: specific events that create urgency (new funding round, key hire, competitor move, quarter-end, tool contract expiring)\n4. Disqualification criteria: 5 signs someone is NOT your customer. Save your sales team time.\n5. Where to find them: specific channels, communities, events, publications, Slack groups, LinkedIn groups\n6. Messaging that resonates: the exact words and phrases that make them lean in vs. the corporate jargon that makes them tune out. Write as if you interviewed 50 of these people.\n\nOutput as a 1-page doc that a new SDR can read on day 1 and immediately know who to target." },
+    { id:"research-competitor", cat:"Research", title:"Competitive Battlecard", desc:"Not a SWOT exercise. A weapon your sales team uses to win deals.", diff:"i",
+      prompt:"#ROLE\nYou are a competitive intelligence analyst. You build battlecards that sales teams use in live deals. Not PowerPoint decks that get filed away.\n\n#CONTEXT\nMy company: [NAME + WHAT WE DO] | Competitors: [4-6 NAMES] | Target market: [WHO] | Our strengths: [LIST] | Our weaknesses: [LIST]\n\n#TASK\n1. Comparison matrix (table): pricing model, target market, key features, unique value prop, biggest strength, biggest weakness, content/SEO presence, customer sentiment\n2. Positioning map: 2x2 matrix with the two axes that buyers actually care about. Place all players. Defend your axis choices.\n3. Messaging teardown: for each competitor, their homepage headline, how they describe themselves, the emotion they sell, their pricing strategy (transparent vs hidden, premium vs value)\n4. The gap map:\n   - What do ALL competitors do poorly? (your opportunity)\n   - What segment is underserved?\n   - What messaging angle is nobody using?\n   - What channel are they all ignoring?\n5. Sales battlecard for #1 competitor: their pitch (what they'll say in a demo), our counter-pitch, their weakness we exploit, the killer question to ask in a deal ('Have you considered how [competitor] handles [weakness]?')\n\nThis must be specific enough that a sales rep can use it mid-call." },
+    { id:"research-tam", cat:"Research", title:"Market Sizing (Investor-Ready)", desc:"TAM/SAM/SOM with real math. Not napkin estimates.", diff:"a",
+      prompt:"#ROLE\nYou are a market research consultant who has built TAM analyses for Series A through IPO. You know investors see through inflated numbers and respect honest math.\n\n#CONTEXT\nProduct: [WHAT] | Pricing: [AMOUNT] | Target customer: [WHO] | Geography: [WHERE] | Current revenue: [IF WILLING TO SHARE] | Current customers: [NUMBER]\n\n#TASK\n1. TAM (Total Addressable Market):\n   - Top-down: start from industry data, narrow down. Show every step.\n   - Bottom-up: number of potential customers x average revenue per customer. Show the math.\n   - Reconcile: if the two approaches diverge, explain why.\n2. SAM (Serviceable Addressable Market): apply your specific constraints (geography, customer type, channel reach). What % of TAM can you realistically touch?\n3. SOM (Serviceable Obtainable Market): based on current traction, competitive landscape, and GTM capacity. Realistic 3-year capture.\n4. Market dynamics: is this market growing, shrinking, or flat? Key growth drivers. Risks that could slow it.\n5. Segmentation: break the market into 3-5 segments. Size each. Rank by (size x growth x fit x competition intensity).\n6. Assumptions log: list EVERY assumption. Flag which are data-backed vs estimated. Suggest how to validate the top 3.\n\nFormat as an investor slide (in text). No inflated numbers. An investor should read this and think 'this team did their homework.'" },
+    // PR
+    { id:"pr-release", cat:"PR", title:"Press Release + Media Pitch", desc:"AP-style release + 3 pitch angles. No 'thrilled to announce.'", diff:"b",
+      prompt:"#ROLE\nYou are a PR specialist who gets coverage in tier-1 publications. You know journalists delete 95% of pitches. Yours land in the 5% because they're relevant, concise, and newsworthy.\n\n#CONTEXT\nCompany: [NAME] | News: [ANNOUNCEMENT] | Key facts: [SPECIFIC DETAILS] | Quote from: [NAME, TITLE] | Target media: [PUBLICATION TYPE] | Website: [URL]\n\n#TASK\n1. Press release (AP style):\n   - Headline: factual, not promotional, includes the news\n   - Subheadline: adds context\n   - Lead paragraph: who, what, when, where, why in 2 sentences\n   - Body: context, details, market impact (why anyone should care)\n   - Executive quote: must sound like a real human said it, not a corporate bot\n   - Supporting data points\n   - Boilerplate: 50-word company description\n   - Contact info\n\n2. Media pitch email (3 versions for different angles):\n   - Subject line: NOT the press release headline. Personalized, curiosity-driven.\n   - Body: 3-4 sentences max. Why THIS journalist's specific audience will care.\n\n3. Social announcements: Twitter/X (280 chars) + LinkedIn (5-6 sentences)\n\n#BANNED\n'Thrilled to announce' / 'Groundbreaking' / 'Revolutionary' / 'Disruptive' / 'Excited to share.' Just tell us what happened and why it matters." },
+    { id:"pr-crisis", cat:"PR", title:"Crisis Comms Playbook", desc:"Templates and protocol for when things go wrong. Prepare before you need it.", diff:"a",
+      prompt:"#ROLE\nYou are a crisis communication consultant who has managed crises for companies from startups to Fortune 500. You know the first 30 minutes determine whether a crisis becomes a story or a disaster.\n\n#CONTEXT\nCompany: [NAME] | Industry: [INDUSTRY] | Size: [EMPLOYEES] | Scenarios to plan for: [2-3 SPECIFIC SCENARIOS] | Designated spokesperson: [WHO] | Active channels: [WHERE]\n\n#TASK\n1. Crisis classification:\n   - Level 1 (minor): examples, response window, who handles, approval chain\n   - Level 2 (moderate): examples, response window, who handles, who gets notified\n   - Level 3 (severe): examples, response window, war room protocol, board notification\n\n2. Response protocol:\n   - First 30 minutes: what to do before you know all the facts\n   - First 2 hours: assess, draft, legal review, approve\n   - First 24 hours: external communications rollout\n   - First week: follow-up, updates, recovery\n\n3. Template responses for EACH scenario:\n   - Holding statement (before facts are confirmed)\n   - Full statement (when facts are known)\n   - Social media response\n   - Customer email\n   - Internal team message\n   - Media inquiry response\n\n4. The 10 rules: what to always do and never do in a crisis\n5. Stakeholder notification order: team → board → customers → media → partners. What each group hears differently.\n6. Recovery plan: how to rebuild trust in the weeks after\n\nThis playbook should sit in a shared drive. When a crisis hits, someone opens it and follows the steps. No thinking required in the moment." }
+];
+
+const CATEGORIES = [
+    { id:"all", label:"All" },
+    { id:"SEO", label:"SEO" },
+    { id:"Branding", label:"Branding" },
+    { id:"Social Media", label:"Social" },
+    { id:"Content", label:"Content" },
+    { id:"Web Design", label:"Web" },
+    { id:"Advertising", label:"Ads" },
+    { id:"Email", label:"Email" },
+    { id:"Research", label:"Research" },
+    { id:"PR", label:"PR" }
+];
+
+// ═══════════════════════════════════
+// STATE
+// ═══════════════════════════════════
+let currentStep = 1;
+let selectedGoal = null;
+let activeCat = "all";
+let searchQ = "";
+
+// ═══════════════════════════════════
+// BUILDER
+// ═══════════════════════════════════
+
+function renderGoals() {
+    document.getElementById("goalGrid").innerHTML = GOALS.map(g =>
+        `<div class="goal-card ${selectedGoal?.id === g.id ? 'selected' : ''}" onclick="selectGoal('${g.id}')">
+            <div class="goal-icon">${g.icon}</div>
+            <div class="goal-label">${g.label}</div>
+            <div class="goal-sub">${g.sub}</div>
+        </div>`
+    ).join("");
+}
+
+function selectGoal(id) {
+    selectedGoal = GOALS.find(g => g.id === id);
+    renderGoals();
+    setTimeout(() => goToStep(2), 200);
+}
+
+function goToStep(step) {
+    currentStep = step;
+    document.querySelectorAll(".builder-step").forEach(el => el.classList.add("hidden"));
+    document.getElementById("step" + step).classList.remove("hidden");
+
+    document.querySelectorAll(".step-item").forEach(el => {
+        const s = parseInt(el.dataset.step);
+        el.classList.remove("active", "done");
+        if (s === step) el.classList.add("active");
+        else if (s < step) el.classList.add("done");
+    });
+
+    if (step === 2 && selectedGoal) renderForm();
+    document.getElementById("builder").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+// Track pill/radio selections
+const pillSelections = {};
+
+function renderForm() {
+    if (!selectedGoal) return;
+    document.getElementById("step2Title").textContent = selectedGoal.label;
+    document.getElementById("step2Desc").textContent = "Click to select, fill in the rest.";
+
+    // Reset pill selections for this goal
+    selectedGoal.fields.forEach(f => {
+        if (f.type === "pills" || f.type === "radio") {
+            pillSelections[f.key] = f.multi ? [] : "";
+        }
+    });
+
+    const html = selectedGoal.fields.map(f => {
+        if (f.type === "pills" || f.type === "radio") {
+            const pills = f.options.map(opt =>
+                `<div class="pill-option" data-field="${f.key}" data-value="${opt}" data-multi="${!!f.multi}" onclick="togglePill(this)">${opt}</div>`
+            ).join("");
+            return `<div class="form-group">
+                <label class="form-label">${f.label}</label>
+                <div class="pill-grid">${pills}</div>
+            </div>`;
+        }
+        if (f.type === "textarea") {
+            return `<div class="form-group">
+                <label class="form-label">${f.label}</label>
+                <textarea class="form-textarea" id="field_${f.key}" placeholder="${f.placeholder || ''}" rows="3"></textarea>
+            </div>`;
+        }
+        return `<div class="form-group">
+            <label class="form-label">${f.label}</label>
+            <input class="form-input" type="text" id="field_${f.key}" placeholder="${f.placeholder || ''}">
+        </div>`;
+    }).join("");
+
+    document.getElementById("dynamicForm").innerHTML = html;
+}
+
+function togglePill(el) {
+    const field = el.dataset.field;
+    const value = el.dataset.value;
+    const multi = el.dataset.multi === "true";
+
+    if (multi) {
+        // Multi-select: toggle this pill
+        el.classList.toggle("selected");
+        const selected = [];
+        document.querySelectorAll(`.pill-option[data-field="${field}"].selected`).forEach(p => selected.push(p.dataset.value));
+        pillSelections[field] = selected;
+    } else {
+        // Single-select: deselect others, select this
+        document.querySelectorAll(`.pill-option[data-field="${field}"]`).forEach(p => p.classList.remove("selected"));
+        el.classList.add("selected");
+        pillSelections[field] = value;
+    }
+}
+
+function generatePrompt() {
+    if (!selectedGoal) return;
+    let output = selectedGoal.template;
+
+    selectedGoal.fields.forEach(f => {
+        let val;
+        if (f.type === "pills" || f.type === "radio") {
+            const sel = pillSelections[f.key];
+            val = Array.isArray(sel) ? sel.join(", ") : sel;
+        } else {
+            val = document.getElementById("field_" + f.key)?.value || "";
+        }
+        if (!val) val = "[" + f.label.toUpperCase() + "]";
+
+        // Handle conditional expressions
+        const condRegex = new RegExp(`\\{\\{${f.key}\\s*\\?[^}]+\\}\\}`, "g");
+        output = output.replace(condRegex, val.trim() ? val : "");
+        output = output.replace(new RegExp(`\\{\\{${f.key}\\}\\}`, "g"), val);
+    });
+
+    // Clean up any remaining template tags
+    output = output.replace(/\{\{[^}]+\}\}/g, "");
+    output = output.replace(/\n{3,}/g, "\n\n");
+
+    document.getElementById("outputArea").textContent = output;
+    goToStep(3);
+}
+
+function copyOutput() {
+    const text = document.getElementById("outputArea").textContent;
+    navigator.clipboard.writeText(text);
+    showToast();
+}
+
+// ═══════════════════════════════════
+// LIBRARY
+// ═══════════════════════════════════
+
+function renderCatPills() {
+    document.getElementById("catPills").innerHTML = CATEGORIES.map(c => {
+        const count = c.id === "all" ? PROMPTS.length : PROMPTS.filter(p => p.cat === c.id).length;
+        return `<button class="cat-pill ${activeCat === c.id ? 'active' : ''}" onclick="setCat('${c.id}')">${c.label} (${count})</button>`;
+    }).join("");
+}
+
+function setCat(id) {
+    activeCat = id;
+    renderCatPills();
+    renderLibrary();
+}
+
+function renderLibrary() {
+    let filtered = PROMPTS;
+    if (activeCat !== "all") filtered = filtered.filter(p => p.cat === activeCat);
+    if (searchQ) {
+        const q = searchQ.toLowerCase();
+        filtered = filtered.filter(p => p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || p.prompt.toLowerCase().includes(q));
+    }
+
+    let html = "";
+    filtered.forEach((p, i) => {
+        if (i > 0 && i % 8 === 0) {
+            html += `<div class="inline-cta">
+                <h3>Need more than a prompt?</h3>
+                <p>A specialist agency can execute this at scale. Find yours on Sortlist.</p>
+                <a href="https://www.sortlist.com" target="_blank" class="btn-primary" style="display:inline-flex;">Find an Agency &rarr;</a>
+            </div>`;
+        }
+        const diffMap = { b: ["Beginner", "diff-b"], i: ["Intermediate", "diff-i"], a: ["Advanced", "diff-a"] };
+        const [diffLabel, diffClass] = diffMap[p.diff];
+        html += `<div class="prompt-card" onclick="openModal('${p.id}')">
+            <div class="prompt-card-top">
+                <span class="prompt-card-badge">${p.cat}</span>
+                <span class="prompt-card-diff ${diffClass}">${diffLabel}</span>
+            </div>
+            <h3>${p.title}</h3>
+            <p class="prompt-card-desc">${p.desc}</p>
+            <div class="prompt-card-footer">
+                <button class="prompt-card-btn prompt-card-btn-primary" onclick="event.stopPropagation();openModal('${p.id}')">View</button>
+                <button class="prompt-card-btn prompt-card-btn-outline" onclick="event.stopPropagation();quickCopy('${p.id}',this)">Copy</button>
+            </div>
+        </div>`;
+    });
+
+    if (!filtered.length) {
+        html = `<div style="grid-column:1/-1;text-align:center;padding:60px 0;">
+            <p style="font-size:40px;margin-bottom:12px;">&#128269;</p>
+            <h3 style="margin-bottom:6px;">No prompts found</h3>
+            <p style="color:var(--secondary-500);font-size:14px;">Try a different search or category.</p>
+        </div>`;
+    }
+    document.getElementById("promptsGrid").innerHTML = html;
+}
+
+document.getElementById("searchInput").addEventListener("input", function(e) {
+    searchQ = e.target.value;
+    renderLibrary();
+});
+
+// ═══════════════════════════════════
+// MODAL
+// ═══════════════════════════════════
+
+let currentModalPrompt = null;
+
+const PH_HINTS = {
+    "WEBSITE URL":"https://www.example.com","URL":"https://www.example.com","YOUR WEBSITE":"https://www.yoursite.com",
+    "NAME":"Acme Corp","BRAND":"Acme","BRAND NAME":"Acme","COMPANY":"Acme Corp",
+    "INDUSTRY":"SaaS","TYPE":"Marketing agency","WHAT":"Project management software",
+    "PRODUCT":"Analytics platform","PRODUCT/SERVICE":"AI analytics platform",
+    "WHO":"Marketing managers at B2B companies","TARGET AUDIENCE":"Marketing directors, B2B tech",
+    "GEOGRAPHIC MARKET":"United States","CITY, COUNTRY":"London, UK",
+    "MAIN KEYWORD":"marketing automation","KEYWORD":"content marketing strategy","PRIMARY":"content marketing",
+    "TOPIC":"How AI is changing marketing","YOUR ROLE":"CEO at a SaaS startup",
+    "STYLE":"Direct and conversational","AMOUNT":"$5,000","MONTHLY":"$3,000",
+    "WHERE":"United States","WHICH":"LinkedIn, Google Ads","WHAT MAKES US DIFFERENT":"Built for agencies",
+    "TRAITS":"Bold, expert, approachable","REFERENCES":"Stripe, Notion","ADJECTIVES":"Modern, bold, trustworthy",
+    "TARGET":"VP Marketing, 200-1000 employees, SaaS","ISSUES":"Low conversions, outdated design",
+    "1, 2, 3":"Competitor A, Competitor B, Competitor C","4-6 NAMES":"Comp A, B, C, D",
+    "LIST":"SEO, content marketing, strong brand","RATE":"%","NUMBER":"5,000",
+    "TONE":"Friendly expert","VOICE":"Casual and direct","HOW OFTEN":"5x/week",
+    "THEMES":"Thought leadership, product tips, customer stories",
+    "KEY MESSAGE":"Focus 80% of budget on one channel","WHAT SUCCESS LOOKS LIKE":"2x conversion rate",
+    "WHAT SIGNUP":"Newsletter subscribe","KEY ACTION":"Complete first project",
+    "ROLE, COMPANY":"VP Marketing at Acme","ROLE, SIZE, INDUSTRY":"CMO, 50-200 employees, SaaS",
+    "1 SENTENCE":"We help B2B companies generate 3x more leads","THEIR PROBLEM":"Spending too much on ads with low ROI",
+    "STAT OR CLIENT":"Helped Nike increase leads by 240%","BOOK CALL/REPLY/TRY TOOL":"Book a 15-min call",
+    "DEFINITION":"No opens in 90 days","WHAT WE CAN OFFER":"20% discount for 3 months",
+    "DESCRIBE YOUR TOP 3-5":"Mid-market SaaS, 100-500 employees, $50K deals",
+    "LENGTH":"45 days","CHANNELS":"Google, LinkedIn, referrals",
+    "ANNOUNCEMENT":"Series A funding round","DETAILS":"$12M raised, led by Acme Ventures",
+    "NAME, TITLE":"Jane Smith, CEO","EMPLOYEES":"150",
+    "2-3 TO PLAN FOR":"Data breach, service outage, negative press","WHERE ACTIVE":"Twitter, LinkedIn, Blog",
+    "WHAT, SKUs, PRICE RANGE":"Clothing, 200 SKUs, $30-$150","WHO, WHERE":"Women 25-45, US and UK",
+    "NEW/MIGRATION/REDESIGN":"Migrating from WooCommerce","VOLUME/MONTH":"500 orders/month",
+    "2-3 SENTENCES":"A tool that helps marketing teams automate their reporting",
+    "1-3":"Manual reporting takes 10h/week, no real-time dashboards","PREFERENCES":"React, Next.js",
+    "INTEGRATIONS":"Google Analytics, HubSpot, Slack","ESTIMATED":"DA 25",
+    "ARTICLES/MONTH":"4 articles/month","DESCRIBE":"Clean and minimal, lots of whitespace",
+    "ONE-LINER":"The easiest way to find the right agency","WHAT PEOPLE GET WRONG":"They think we're only for big companies",
+    "5 ATTRIBUTES":"Innovative, approachable, expert, fast, transparent",
+    "ANY":"Customers love our support but find pricing confusing",
+    "BACKSTORY":"Ex-agency founder frustrated with how clients find agencies",
+    "TRIGGER":"Saw companies waste $50K+ on wrong agency matches","WHAT WE BUILT":"A marketplace that matches based on real data",
+    "MILESTONES":"10,000 projects matched, 30 countries, 95% satisfaction",
+    "YEAR":"2018","SIZE":"200 employees, $5M revenue",
+    "CHALLENGE":"Couldn't scale lead generation beyond referrals",
+    "WHAT YOU DID":"Built an inbound + outbound system","SPECIFIC METRICS":"340% increase in qualified leads",
+    "HOW LONG":"90 days","HEAD KEYWORD":"content marketing",
+    "EXISTING CONTENT":"5 blog posts on content marketing topics",
+    "2-3 KEYWORDS":"content strategy, content calendar","TARGET":"2,500 words",
+    "RANK/LEADS/EDUCATE":"Rank on page 1 and generate leads",
+    "NEW/SOME DATA/MATURE":"Some data (500 conversions/month)",
+    "LEADS/SALES":"Lead generation","LEADS/SALES/TRAFFIC":"Leads",
+    "LEADS/AWARENESS":"Lead generation","CTA":"Start free trial",
+    "ROLE, INDUSTRY, SIZE":"VP Marketing, SaaS, 50-500 employees",
+    "HIGH CPA/LOW CTR/etc.":"High CPA ($150+), need to get under $80",
+    "MONTHLY TOTAL":"$10,000","WHAT + WHERE ONLINE":"B2B buyers active on LinkedIn and Google",
+    "NONE/BASIC/ADVANCED":"Basic (just Facebook pixel)","VISITORS":"15,000",
+    "CURRENT":"$500K ARR","CUSTOMERS":"200",
+    "WHERE FROM":"60% Google, 25% direct, 15% referral",
+    "WHAT VISITORS WANT":"Request a demo","WHAT ISN'T WORKING":"Low form completion rate",
+    "IF KNOWN":"2.1%","EXPERTISE":"10 years in growth marketing",
+    "CONTRARIAN/GUIDE/LESSONS/DATA":"Contrarian take","WHO + PAIN":"CMOs struggling with attribution",
+    "ACTION":"Book a demo","#1 REASON":"Save 10 hours/week on reporting",
+    "STATS/CLIENTS":"Used by 500+ marketing teams","LOGOS/TESTIMONIALS/STATS":"Trusted by HubSpot, Shopify, Stripe",
+    "WHAT THEY GET":"14-day free trial, no credit card",
+    "SIGNUP/DEMO/BUY":"Start free trial","#1 VALUE PROP":"Get marketing reports in 5 minutes, not 5 hours",
+    "WHY":"Build authority and generate inbound leads","WEEKLY/BIWEEKLY":"Weekly",
+    "TRIGGER":"Downloaded our Marketing Budget Template","END ACTION":"Book a demo",
+    "NAME + WHAT":"Acme - marketing analytics for B2B","NAME + WHAT YOU DO":"Acme - marketing reporting tool"
+};
+
+function openModal(id) {
+    const p = PROMPTS.find(x => x.id === id);
+    if (!p) return;
+    currentModalPrompt = p;
+    document.getElementById("modalTitle").textContent = p.title;
+
+    // Extract unique [PLACEHOLDER] patterns
+    const regex = /\[([A-Z][A-Z0-9 /+'.,\-]*)\]/g;
+    const found = [];
+    const seen = new Set();
+    let match;
+    while ((match = regex.exec(p.prompt)) !== null) {
+        if (!seen.has(match[1])) { seen.add(match[1]); found.push(match[1]); }
+    }
+
+    // Build form
+    const formEl = document.getElementById("modalForm");
+    if (found.length > 0) {
+        const fields = found.map(ph => {
+            const label = ph.charAt(0) + ph.slice(1).toLowerCase().replace(/_/g, ' ');
+            const hint = PH_HINTS[ph] || "";
+            const wide = ph.length > 20 ? ' full' : '';
+            return `<div class="modal-form-group${wide}">
+                <label class="modal-form-label">${label}</label>
+                <input class="modal-form-input" type="text" data-ph="${ph}" placeholder="${hint}" oninput="updateModalPrompt()">
+            </div>`;
+        });
+        formEl.innerHTML = `<div class="modal-form-grid">${fields.join('')}</div>
+            <p class="modal-form-hint">Fill in your details. The prompt updates live below.</p>`;
+    } else {
+        formEl.innerHTML = '';
+    }
+
+    document.getElementById("modalPrompt").textContent = p.prompt;
+    document.getElementById("modalOverlay").classList.add("active");
+    document.body.style.overflow = "hidden";
+
+    // Focus first input
+    const firstInput = formEl.querySelector('.modal-form-input');
+    if (firstInput) setTimeout(() => firstInput.focus(), 100);
+}
+
+function updateModalPrompt() {
+    if (!currentModalPrompt) return;
+    let text = currentModalPrompt.prompt;
+    document.querySelectorAll('#modalForm .modal-form-input').forEach(input => {
+        const ph = input.dataset.ph;
+        const val = input.value.trim();
+        if (val) {
+            text = text.replace(new RegExp('\\[' + ph.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\]', 'g'), val);
+        }
+    });
+    document.getElementById("modalPrompt").textContent = text;
+}
+
+function closeModal() {
+    document.getElementById("modalOverlay").classList.remove("active");
+    document.body.style.overflow = "";
+    currentModalPrompt = null;
+}
+document.getElementById("modalOverlay").addEventListener("click", function(e) { if (e.target === this) closeModal(); });
+document.addEventListener("keydown", function(e) { if (e.key === "Escape") closeModal(); });
+
+function copyModal() {
+    navigator.clipboard.writeText(document.getElementById("modalPrompt").textContent);
+    showToast();
+}
+
+function quickCopy(id, btn) {
+    const p = PROMPTS.find(x => x.id === id);
+    if (!p) return;
+    navigator.clipboard.writeText(p.prompt);
+    const orig = btn.textContent;
+    btn.textContent = "Copied";
+    btn.style.background = "var(--success-500)";
+    btn.style.color = "white";
+    btn.style.borderColor = "var(--success-500)";
+    setTimeout(() => { btn.textContent = orig; btn.style = ""; }, 1500);
+    showToast();
+}
+
+function showToast() {
+    const t = document.getElementById("copiedToast");
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+// ═══════════════════════════════════
+// FAQ
+// ═══════════════════════════════════
+document.querySelectorAll(".faq-question").forEach(btn => {
+    btn.addEventListener("click", () => btn.closest(".faq-item").classList.toggle("open"));
+});
+
+// ═══════════════════════════════════
+// INIT
+// ═══════════════════════════════════
+renderGoals();
+renderCatPills();
+renderLibrary();
+</script>
+
+</body>
+</html>
